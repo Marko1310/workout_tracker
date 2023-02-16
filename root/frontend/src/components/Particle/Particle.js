@@ -1,27 +1,22 @@
-import Particle from "react-particles";
+import Particles from "react-particles";
 import { loadFull } from "tsparticles";
+import "./Particle.css";
 
-const Particles = () => {
-  const particlesInit =
-    (async (engine) => {
-      console.log(engine);
-      await loadFull(engine);
-    },
-    []);
+const Particle = () => {
+  const particlesInit = async (main) => {
+    await loadFull(main);
+  };
 
   const particlesLoaded = (container) => {};
 
   return (
-    <Particle
+    <Particles
       id="tsparticles"
       init={particlesInit}
       loaded={particlesLoaded}
       options={{
-        background: {
-          color: {
-            value: "#0d47a1",
-          },
-        },
+        fullScreen: { enable: true, zIndex: -1 },
+
         fpsLimit: 120,
         interactivity: {
           events: {
@@ -66,7 +61,7 @@ const Particles = () => {
               default: "bounce",
             },
             random: false,
-            speed: 6,
+            speed: 3,
             straight: false,
           },
           number: {
@@ -92,4 +87,4 @@ const Particles = () => {
   );
 };
 
-export default Particles;
+export default Particle;

@@ -1,9 +1,9 @@
-import Particles from "./components/Particles/Particles.js";
+import Particle from "./components/Particle/Particle.js";
 
 function App() {
   return (
     <div className="App">
-      <Particles />
+      <Particle />
     </div>
   );
 }
