@@ -1,5 +1,5 @@
 .navigation-container {
-  height: 4rem;
+  height: 5rem;
   background: linear-gradient(90deg, #1ed875 0%, #080909 100%);
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   display: flex;
@@ -15,5 +15,4 @@
 
 .navigation-user {
   color: white;
-  font-family: "Montserrat", sans-serif;
 }
