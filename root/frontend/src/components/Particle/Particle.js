@@ -5,10 +5,6 @@ import "./Particle.css";
 const Particle = () => {
   const particlesInit = async (main) => {
     console.log(main);
-
-    // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
-    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-    // starting from v2 you can add only the features you need reducing the bundle size
     await loadFull(main);
   };
 
@@ -18,32 +14,32 @@ const Particle = () => {
     <Particles
       id="tsparticles"
       init={particlesInit}
-      // loaded={particlesLoaded}
+      loaded={particlesLoaded}
       options={{
         fullScreen: { enable: true, zIndex: 1 },
 
         fpsLimit: 120,
         interactivity: {
-          // events: {
-          //   onClick: {
-          //     enable: true,
-          //     mode: "push",
-          //   },
-          //   onHover: {
-          //     enable: true,
-          //     mode: "repulse",
-          //   },
-          //   resize: true,
-          // },
-          // modes: {
-          //   push: {
-          //     quantity: 4,
-          //   },
-          //   repulse: {
-          //     distance: 200,
-          //     duration: 0.4,
-          //   },
-          // },
+          events: {
+            onClick: {
+              enable: true,
+              mode: "push",
+            },
+            onHover: {
+              enable: false,
+              mode: "repulse",
+            },
+            resize: true,
+          },
+          modes: {
+            push: {
+              quantity: 4,
+            },
+            repulse: {
+              distance: 200,
+              duration: 0.4,
+            },
+          },
         },
         particles: {
           color: {
@@ -51,10 +47,10 @@ const Particle = () => {
           },
           links: {
             color: "#ffffff",
-            distance: 150,
+            distance: 200,
             enable: true,
             opacity: 0.5,
-            width: 1,
+            width: 0.5,
           },
           collisions: {
             enable: true,
@@ -66,15 +62,15 @@ const Particle = () => {
               default: "bounce",
             },
             random: false,
-            speed: 3,
+            speed: 2,
             straight: false,
           },
           number: {
             density: {
               enable: true,
-              area: 800,
+              area: 600,
             },
-            value: 80,
+            value: 70,
           },
           opacity: {
             value: 0.5,
