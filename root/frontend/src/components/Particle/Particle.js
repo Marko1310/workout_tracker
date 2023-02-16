@@ -1,9 +1,14 @@
-import Particles from "react-particles";
+import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import "./Particle.css";
 
 const Particle = () => {
   const particlesInit = async (main) => {
+    console.log(main);
+
+    // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
+    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
+    // starting from v2 you can add only the features you need reducing the bundle size
     await loadFull(main);
   };
 
@@ -13,32 +18,32 @@ const Particle = () => {
     <Particles
       id="tsparticles"
       init={particlesInit}
-      loaded={particlesLoaded}
+      // loaded={particlesLoaded}
       options={{
-        fullScreen: { enable: true, zIndex: -1 },
+        fullScreen: { enable: true, zIndex: 1 },
 
         fpsLimit: 120,
         interactivity: {
-          events: {
-            onClick: {
-              enable: true,
-              mode: "push",
-            },
-            onHover: {
-              enable: true,
-              mode: "repulse",
-            },
-            resize: true,
-          },
-          modes: {
-            push: {
-              quantity: 4,
-            },
-            repulse: {
-              distance: 200,
-              duration: 0.4,
-            },
-          },
+          // events: {
+          //   onClick: {
+          //     enable: true,
+          //     mode: "push",
+          //   },
+          //   onHover: {
+          //     enable: true,
+          //     mode: "repulse",
+          //   },
+          //   resize: true,
+          // },
+          // modes: {
+          //   push: {
+          //     quantity: 4,
+          //   },
+          //   repulse: {
+          //     distance: 200,
+          //     duration: 0.4,
+          //   },
+          // },
         },
         particles: {
           color: {
