@@ -16,7 +16,7 @@ const Particle = () => {
       init={particlesInit}
       loaded={particlesLoaded}
       options={{
-        fullScreen: { enable: true, zIndex: 1 },
+        fullScreen: { enable: true, zIndex: -1 },
 
         fpsLimit: 120,
         interactivity: {
