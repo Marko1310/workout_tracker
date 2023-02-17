@@ -37,7 +37,7 @@ function Login() {
         {alert.email && <p className="register-alert">Wrong credentials</p>}
 
         <label htmlFor="password"></label>
-        <input className="forms" type="text" placeholder="Password"></input>
+        <input className="forms" type="password" placeholder="Password"></input>
 
         <button className="login-button">Login</button>
         <div className="login-footer">
