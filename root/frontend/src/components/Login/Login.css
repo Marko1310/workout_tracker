@@ -28,6 +28,30 @@
   text-decoration: underline;
 }
 
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 2.5rem;
+  height: 3rem;
+  font-size: 18px;
+}
+
+.buttons {
+  background-color: var(--clr-grey-9);
+  border-radius: 5px;
+  outline: #fff;
+  border: #fff;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+}
+
+.login {
+  background-color: #071d12;
+  color: var(--clr-grey-9);
+}
+
 .forms {
   margin-bottom: 1.5rem;
   display: flex;
@@ -39,6 +63,7 @@
   height: 3rem;
   font-size: 18px;
   padding-left: 2rem;
+  font-family: "Montserrat", sans-serif;
 }
 
 ::placeholder {
@@ -58,6 +83,7 @@
   border: none;
   transition: all 0.4s;
   margin-top: 2rem;
+  font-family: "Montserrat", sans-serif;
 }
 
 .login-button:hover {

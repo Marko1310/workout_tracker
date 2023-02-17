@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import "./Login.css";
 
 function Login() {
-  const [form, setForm] = useState("login");
+  const [form, setForm] = useState("signup");
 
   return (
     <div className="login-container">
       <form className="form-validate">
         <p className="title">{form === "login" ? `Login Form` : `Signup`}</p>
+        <div className="buttons-container">
+          <button className="buttons login">Login</button>
+          <button className="buttons signup">Signup</button>
+        </div>
+
         {form === "signup" && (
           <>
             <label htmlFor="name"></label>
