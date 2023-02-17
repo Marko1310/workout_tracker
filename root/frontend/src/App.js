@@ -9,8 +9,8 @@ function App() {
   return (
     <div className="App">
       <Navigation />
-      <Particle />
       <Login />
+      <Particle />
     </div>
   );
 }
