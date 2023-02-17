@@ -1,16 +1,32 @@
+import React, { useState } from "react";
 import "./Login.css";
 
-const Login = () => {
+function Login() {
+  const [form, setForm] = useState("login");
+
   return (
     <div className="login-container">
       <form className="form-validate">
-        <p className="title">Login Form</p>
+        <p className="title">{form === "login" ? `Login Form` : `Signup`}</p>
+        {form === "signup" && (
+          <>
+            <label htmlFor="name"></label>
+            <input
+              className="forms"
+              type="text"
+              id="fname"
+              name="fname"
+              placeholder="Name"
+            ></input>
+          </>
+        )}
+
         <label htmlFor="email"></label>
         <input
           className="forms"
           type="text"
-          id="fname"
-          name="fname"
+          id="email"
+          name="email"
           placeholder="Email"
         ></input>
         {alert.email && <p className="register-alert">Wrong credentials</p>}
@@ -26,6 +42,6 @@ const Login = () => {
       </form>
     </div>
   );
-};
+}
 
 export default Login;
