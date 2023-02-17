@@ -1,8 +1,10 @@
+import "./Login.css";
+
 const Login = () => {
   return (
     <div className="login-container">
       <form className="form-validate">
-        <p className="title">LOGIN</p>
+        <p className="title">Login Form</p>
         <label htmlFor="email"></label>
         <input
           className="forms"
