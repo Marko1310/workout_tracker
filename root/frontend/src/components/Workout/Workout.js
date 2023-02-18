@@ -1,5 +1,6 @@
 import React from "react";
 import Exercise from "../Exercise/Exercise";
+import "./Workout.css";
 
 const Workout = () => {
   return (
