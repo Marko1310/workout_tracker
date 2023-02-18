@@ -1,5 +1,6 @@
 import React from "react";
 import Exercise from "../Exercise/Exercise";
+import Scroll from "../Scroll/Scroll";
 import "./Workout.css";
 
 const Workout = () => {
@@ -8,7 +9,15 @@ const Workout = () => {
       <p>Title</p>
       <p>Time</p>
       <div>Notes</div>
-      <Exercise />
+      <div className="exercise-slider">
+        <Scroll>
+          <Exercise />
+          <Exercise />
+          <Exercise />
+          <Exercise />
+        </Scroll>
+      </div>
+
       <button>Add exercise</button>
       <button>Save exercise</button>
     </div>
