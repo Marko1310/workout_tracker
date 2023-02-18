@@ -39,11 +39,15 @@ function Login() {
         <label htmlFor="password"></label>
         <input className="forms" type="password" placeholder="Password"></input>
 
-        <button className="login-button">Login</button>
-        <div className="login-footer">
-          <p>Not a member? </p>
-          <a className="sign-up">Sign up now</a>
-        </div>
+        <button className="login-button">
+          {form === "login" ? "Login" : "Register"}
+        </button>
+        {form === "login" && (
+          <div className="login-footer">
+            <p>Not a member? </p>
+            <a className="sign-up">Sign up now</a>
+          </div>
+        )}
       </form>
     </div>
   );
