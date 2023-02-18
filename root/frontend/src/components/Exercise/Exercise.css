@@ -1,15 +1,17 @@
 .exercise-container {
+  width: 100%;
   padding: 1rem 1rem 1.5rem 1rem;
   display: grid;
   border-radius: 3px;
-  width: 25rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 6px 50px;
   background: rgba(9, 20, 9, 0.2);
   margin-bottom: 1rem;
   border-style: solid;
   border-color: white;
-  grid-template-columns: repeat(4, 1fr);
-  /* grid-auto-rows: 100px; */
+  grid-template-columns: 0.5fr 2fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .title-container {
@@ -22,7 +24,9 @@
   display: flex;
 }
 
-/* form {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  /* grid-auto-rows: 100px; */
+.forms {
+  height: 2rem;
+  width: 4rem;
+  font-size: small;
+  padding: 0.5rem;
+}

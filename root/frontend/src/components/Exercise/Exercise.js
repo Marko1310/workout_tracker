@@ -13,14 +13,14 @@ const Exercise = () => {
       <p className="previous">100kg x 5</p>
       {/* <label htmlFor="name"></label> */}
       <input
-        //   className="forms"
+        className="forms"
         type="text"
         id="kg"
         name="kg"
         placeholder="kg"
       ></input>
       <input
-        //   className="forms"
+        className="forms"
         type="text"
         id="reps"
         name="reps"
@@ -31,14 +31,32 @@ const Exercise = () => {
       <p className="previous">100kg x 5</p>
       {/* <label htmlFor="name"></label> */}
       <input
-        //   className="forms"
+        className="forms"
         type="text"
         id="kg"
         name="kg"
         placeholder="kg"
       ></input>
       <input
-        //   className="forms"
+        className="forms"
+        type="text"
+        id="reps"
+        name="reps"
+        placeholder="reps"
+      ></input>
+
+      <p className="sets">1</p>
+      <p className="previous">100kg x 5</p>
+      {/* <label htmlFor="name"></label> */}
+      <input
+        className="forms"
+        type="text"
+        id="kg"
+        name="kg"
+        placeholder="kg"
+      ></input>
+      <input
+        className="forms"
         type="text"
         id="reps"
         name="reps"
