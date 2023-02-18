@@ -163,3 +163,19 @@ main {
   height: 100vh;
   position: relative;
 }
+
+.addNewWorkout-container {
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.addLogo {
+  height: 7rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.addLogo:hover {
+  height: 8rem;
+}

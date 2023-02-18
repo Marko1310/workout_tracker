@@ -1,4 +1,5 @@
 import "./index.css";
+import addLogo from "./images/plus-circle.png";
 
 import Particle from "./components/Particle/Particle.js";
 
@@ -12,8 +13,12 @@ function App() {
       <Navigation />
       <div className="content">
         {/* <Login /> */}
-        <Workout />
+        {/* <Workout /> */}
         <Particle />
+      </div>
+      <div className="addNewWorkout-container">
+        <img className="addLogo" alt="addLogo" src={addLogo} />
+        <p>Add new workout</p>
       </div>
     </div>
   );
