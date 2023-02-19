@@ -165,22 +165,6 @@ main {
   align-items: center;
 }
 
-.addNewWorkout-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.addLogo {
-  height: 8.5rem;
-  transition: all 0.2s ease-in-out;
-  margin-bottom: 1rem;
-}
-
-.addLogo:hover {
-  transform: scale(1.2);
-}
-
 .blur {
   height: 100%;
   width: 100%;
