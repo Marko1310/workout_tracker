@@ -19,22 +19,17 @@ function App() {
       <Navigation />
       <ModalProvider>
         <div className="content">
-          <div
-            className="blur"
-            style={blur === true ? { filter: "blur(5px)" } : {}}
-          >
-            {/* <Login /> */}
-            <Workout />
-            {/* <div className="workout-grid">
+          {/* <Login /> */}
+          <Workout />
+          {/* <div className="workout-grid">
             <CardWorkout />
             <CardWorkout />
             <CardWorkout />
           </div> */}
 
-            <AddNewWorkout />
+          <AddNewWorkout />
 
-            <Particle />
-          </div>
+          <Particle />
           {/* <NewWorkout /> */}
         </div>
       </ModalProvider>
