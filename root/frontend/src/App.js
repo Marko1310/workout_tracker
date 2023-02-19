@@ -8,6 +8,7 @@ import Login from "./components/Login/Login";
 import Workout from "./components/Workout/Workout";
 import NewWorkout from "./components/NewWorkout/NewWorkout";
 import AddNewWorkout from "./components/AddNewWorkout/AddNewWorkout";
+import CardWorkout from "./components/CardWorkout/CardWorkout";
 
 function App() {
   const [blur, setBlur] = useState(false);
@@ -22,6 +23,10 @@ function App() {
         >
           {/* <Login />
           <Workout /> */}
+          <div className="workout-grid">
+            <CardWorkout />
+            <CardWorkout />
+          </div>
 
           <AddNewWorkout />
 
