@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ModalProvider } from "./components/ModalContext/ModalContext";
 import "./index.css";
 
 import Particle from "./components/Particle/Particle.js";
@@ -16,25 +17,27 @@ function App() {
   return (
     <div className="App">
       <Navigation />
-      <div className="content">
-        <div
-          className="blur"
-          style={blur === true ? { filter: "blur(5px)" } : {}}
-        >
-          {/* <Login /> */}
-          <Workout />
-          {/* <div className="workout-grid">
+      <ModalProvider>
+        <div className="content">
+          <div
+            className="blur"
+            style={blur === true ? { filter: "blur(5px)" } : {}}
+          >
+            {/* <Login /> */}
+            <Workout />
+            {/* <div className="workout-grid">
             <CardWorkout />
             <CardWorkout />
             <CardWorkout />
           </div> */}
 
-          <AddNewWorkout />
+            <AddNewWorkout />
 
-          <Particle />
+            <Particle />
+          </div>
+          {/* <NewWorkout /> */}
         </div>
-        {/* <NewWorkout /> */}
-      </div>
+      </ModalProvider>
     </div>
   );
 }
