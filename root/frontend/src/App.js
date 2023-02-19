@@ -13,25 +13,25 @@ function App() {
   const [blur, setBlur] = useState(true);
 
   return (
-    <div>
-      <div className="App">
-        <Navigation />
-        <div className="content">
-          <div
-            className="blur"
-            style={blur === true ? { filter: "blur(5px)" } : {}}
-          >
-            {/* <Login /> */}
-            {/* <Workout /> */}
-            <div className="addNewWorkout-container">
-              <img className="addLogo" alt="addLogo" src={addLogo} />
-              <p>Add new workout</p>
-            </div>
-            <Particle />
+    <div className="App">
+      <Navigation />
+      <div className="content">
+        <div
+          className="blur"
+          style={blur === true ? { filter: "blur(5px)" } : {}}
+        >
+          <Login />
+          <Workout />
+
+          <div className="addNewWorkout-container">
+            <img className="addLogo" alt="addLogo" src={addLogo} />
+            <p>Add new workout</p>
           </div>
+
+          <Particle />
         </div>
+        <NewWorkout />
       </div>
-      <NewWorkout />
     </div>
   );
 }
