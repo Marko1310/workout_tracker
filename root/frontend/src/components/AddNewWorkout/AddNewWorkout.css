@@ -5,12 +5,12 @@
 }
 
 .addLogo {
-  height: 8.5rem;
-  width: 8.5rem;
+  height: 6rem;
+  width: 6rem;
   transition: all 0.2s ease-in-out;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .addLogo:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }

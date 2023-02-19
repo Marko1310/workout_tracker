@@ -21,12 +21,13 @@ function App() {
           className="blur"
           style={blur === true ? { filter: "blur(5px)" } : {}}
         >
-          {/* <Login />
-          <Workout /> */}
-          <div className="workout-grid">
+          {/* <Login /> */}
+          <Workout />
+          {/* <div className="workout-grid">
             <CardWorkout />
             <CardWorkout />
-          </div>
+            <CardWorkout />
+          </div> */}
 
           <AddNewWorkout />
 

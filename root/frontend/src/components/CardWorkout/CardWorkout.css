@@ -19,6 +19,15 @@
   border-style: solid;
   border-width: 1px;
   font-size: large;
+  border-style: solid;
+  border-color: white;
+  border-radius: 0.8rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 6px 50px;
+  transition: 0.5s;
+}
+
+.carDB--list--container:hover {
+  scale: 1.05;
 }
 
 .carDB--list--image {
@@ -36,4 +45,5 @@
   font-weight: 800;
   font-size: large;
   margin-bottom: 10px;
+  align-self: center;
 }

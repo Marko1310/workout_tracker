@@ -15,6 +15,7 @@ const CardWorkout = () => {
             <li> - Upper day</li>
             <li> - Lower day</li>
             <li> - Upper day</li>
+            <li>--------------------------------</li>
             <li>Date created: 2022-12-20</li>
           </div>
         </ul>
