@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import Exercise from "../Exercise/Exercise";
 import Scroll from "../Scroll/Scroll";
 import "./Workout.css";
-import { useModal } from "../ModalContext/ModalContext";
+import { ModalContext } from "../ModalContext/ModalContext";
 
 const Workout = () => {
-  const { isModalOpen } = useModal();
+  const [isModalOpen] = useContext(ModalContext);
   return (
     <div className={`workout-container ${isModalOpen ? "blurred" : ""}`}>
       <p>Title</p>

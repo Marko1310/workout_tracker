@@ -1,9 +1,11 @@
+import { useContext } from "react";
+
 import addLogo from "../../images/plus-circle.png";
-import { useModal } from "../ModalContext/ModalContext";
+import { ModalContext } from "../ModalContext/ModalContext";
 import "./AddNewWorkout.css";
 
 const AddNewWorkout = () => {
-  const { isModalOpen } = useModal();
+  const { isModalOpen } = useContext(ModalContext);
 
   return (
     <div className={`addNewWorkout-container ${isModalOpen ? `blurred` : ""}`}>
