@@ -14,7 +14,7 @@
 
 .exercise-grid {
   width: 100%;
-  padding: 1rem 1rem 1.5rem 1rem;
+  padding: 1rem 1rem 1rem 1rem;
   display: grid;
   margin-bottom: 1rem;
   grid-template-columns: 0.5fr 2fr 1fr 1fr;
@@ -33,9 +33,17 @@
   display: flex;
 }
 
-.forms {
-  height: 2rem;
+.exercise-forms {
+  /* height: 2rem; */
   width: 4rem;
   font-size: small;
   padding: 0.5rem;
+}
+
+.previous {
+  margin: 0;
+}
+
+.set {
+  margin: 0;
 }
