@@ -21,12 +21,12 @@ function App() {
       <div className="content">
         <Navigation />
         {/* <Login /> */}
-        {/* <Workout /> */}
+        <Workout />
         {/* {isModalOpen && <NewWorkout />} */}
-        <NewWorkout />
-        <CardWorkout />
+        {/* <NewWorkout /> */}
+        {/* <CardWorkout /> */}
 
-        {<AddNewWorkout />}
+        {/* {<AddNewWorkout />} */}
 
         <Particle />
         {/* <NewWorkout /> */}
