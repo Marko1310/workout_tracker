@@ -169,13 +169,11 @@ main {
 }
 
 .workout-grid {
-  height: 100%;
-  /* margin-top: 6rem; */
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 3rem;
   display: grid;
-  /* grid-template-columns: 1fr 1fr; */
   gap: 3rem;
   /* grid-template-areas: "sidebar carDB"; */
-  grid-template-columns: repeat(auto-fill minmax(20rem, 1fr));
-  /* margin: 1rem; */
-  /* justify-items: center; */
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
 }

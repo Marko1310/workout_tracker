@@ -18,12 +18,12 @@ function App() {
         <Navigation />
         <ModalProvider>
           {/* <Login /> */}
-          <Workout />
-          {/* <div className="workout-grid">
+          {/* <Workout /> */}
+          <div className="workout-grid">
             <CardWorkout />
             <CardWorkout />
             <CardWorkout />
-          </div> */}
+          </div>
 
           <AddNewWorkout />
 
