@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { ModalProvider } from "./components/ModalContext/ModalContext";
+import React, { useContext, useState } from "react";
 
 import "./index.css";
 
@@ -12,24 +11,27 @@ import NewWorkout from "./components/NewWorkout/NewWorkout";
 import AddNewWorkout from "./components/AddNewWorkout/AddNewWorkout";
 import CardWorkout from "./components/CardWorkout/CardWorkout";
 
+import { ModalContext } from "./components/ModalContext/ModalContext";
+
 function App() {
+  const [isModalOpen] = useContext(ModalContext);
+
   return (
-    <ModalProvider>
-      <div className="App">
-        <div className="content">
-          <Navigation />
-          {/* <Login /> */}
-          {/* <Workout /> */}
+    <div className="App">
+      <div className="content">
+        <Navigation />
+        {/* <Login /> */}
+        {/* <Workout /> */}
+        {/* {isModalOpen && <NewWorkout />} */}
+        <NewWorkout />
+        <CardWorkout />
 
-          <CardWorkout />
+        {<AddNewWorkout />}
 
-          <AddNewWorkout />
-
-          <Particle />
-          {/* <NewWorkout /> */}
-        </div>
+        <Particle />
+        {/* <NewWorkout /> */}
       </div>
-    </ModalProvider>
+    </div>
   );
 }
 
