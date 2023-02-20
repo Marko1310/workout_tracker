@@ -158,8 +158,6 @@ main {
 }
 
 .content {
-  margin-top: 7rem;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -168,4 +166,16 @@ main {
 
 .blurred {
   filter: blur(5px);
+}
+
+.workout-grid {
+  height: 100%;
+  /* margin-top: 6rem; */
+  display: grid;
+  /* grid-template-columns: 1fr 1fr; */
+  gap: 3rem;
+  /* grid-template-areas: "sidebar carDB"; */
+  grid-template-columns: repeat(auto-fill minmax(20rem, 1fr));
+  /* margin: 1rem; */
+  /* justify-items: center; */
 }

@@ -1,13 +1,3 @@
-.workout-grid {
-  display: grid;
-  /* grid-template-columns: 1fr 1fr; */
-  gap: 3rem;
-  /* grid-template-areas: "sidebar carDB"; */
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  margin: 1rem;
-  /* justify-items: center; */
-}
-
 .carDB--list--container {
   display: flex;
   padding: 1rem;

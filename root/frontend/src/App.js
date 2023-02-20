@@ -12,13 +12,11 @@ import AddNewWorkout from "./components/AddNewWorkout/AddNewWorkout";
 import CardWorkout from "./components/CardWorkout/CardWorkout";
 
 function App() {
-  const [blur, setBlur] = useState(false);
-
   return (
     <div className="App">
-      <Navigation />
-      <ModalProvider>
-        <div className="content">
+      <div className="content">
+        <Navigation />
+        <ModalProvider>
           {/* <Login /> */}
           <Workout />
           {/* <div className="workout-grid">
@@ -31,8 +29,8 @@ function App() {
 
           <Particle />
           {/* <NewWorkout /> */}
-        </div>
-      </ModalProvider>
+        </ModalProvider>
+      </div>
     </div>
   );
 }
