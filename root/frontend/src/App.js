@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import "./index.css";
 
@@ -17,21 +18,26 @@ function App() {
   const [isModalOpen] = useContext(ModalContext);
 
   return (
-    <div className="App">
-      <div className="content">
-        <Navigation />
-        {/* <Login /> */}
-        <Workout />
-        {/* {isModalOpen && <NewWorkout />} */}
-        {/* <NewWorkout /> */}
-        {/* <CardWorkout /> */}
+    <BrowserRouter>
+      <div className="App">
+        <div className="content">
+          <Navigation />
+          <Routes>
+            <Route path="/login" element={<Login />} />
+          </Routes>
+          {/* <Login /> */}
+          <Workout />
+          {/* {isModalOpen && <NewWorkout />} */}
+          {/* <NewWorkout /> */}
+          {/* <CardWorkout /> */}
 
-        {/* {<AddNewWorkout />} */}
+          {/* {<AddNewWorkout />} */}
 
-        <Particle />
-        {/* <NewWorkout /> */}
+          <Particle />
+          {/* <NewWorkout /> */}
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 
