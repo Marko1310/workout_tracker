@@ -6,6 +6,7 @@ import { ModalContext } from "../ModalContext/ModalContext";
 
 const Workout = () => {
   const [isModalOpen] = useContext(ModalContext);
+
   return (
     <div className={`workout-container ${isModalOpen ? "blurred" : ""}`}>
       <div className="container">

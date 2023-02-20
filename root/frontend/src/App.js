@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ModalProvider } from "./components/ModalContext/ModalContext";
+
 import "./index.css";
 
 import Particle from "./components/Particle/Particle.js";
@@ -13,25 +14,22 @@ import CardWorkout from "./components/CardWorkout/CardWorkout";
 
 function App() {
   return (
-    <div className="App">
-      <div className="content">
-        <Navigation />
-        <ModalProvider>
+    <ModalProvider>
+      <div className="App">
+        <div className="content">
+          <Navigation />
           {/* <Login /> */}
           {/* <Workout /> */}
-          <div className="workout-grid">
-            <CardWorkout />
-            <CardWorkout />
-            <CardWorkout />
-          </div>
+
+          <CardWorkout />
 
           <AddNewWorkout />
 
           <Particle />
           {/* <NewWorkout /> */}
-        </ModalProvider>
+        </div>
       </div>
-    </div>
+    </ModalProvider>
   );
 }
 

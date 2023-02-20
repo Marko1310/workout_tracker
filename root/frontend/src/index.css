@@ -167,13 +167,3 @@ main {
 .blurred {
   filter: blur(5px);
 }
-
-.workout-grid {
-  width: 100%;
-  padding: 1rem;
-  margin-bottom: 3rem;
-  display: grid;
-  gap: 3rem;
-  /* grid-template-areas: "sidebar carDB"; */
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-}
