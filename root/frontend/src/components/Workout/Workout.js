@@ -3,6 +3,7 @@ import Exercise from "../Exercise/Exercise";
 import Scroll from "../Scroll/Scroll";
 import "./Workout.css";
 import { ModalContext } from "../ModalContext/ModalContext";
+import { Outlet } from "react-router-dom";
 
 const Workout = () => {
   const [isModalOpen] = useContext(ModalContext);
