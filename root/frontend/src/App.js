@@ -19,9 +19,12 @@ import CardWorkout from "./components/CardWorkout/CardWorkout";
 
 import { ModalContext } from "./components/ModalContext/ModalContext";
 
+// Layouts
+import RootLayout from "./layouts/RootlLayout";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/">
+    <Route path="/" element={<RootLayout />}>
       <Route path="login" element={<Login />} />
       <Route path="workout" element={<Workout />} />
       <Route path="newWorkout" element={<NewWorkout />} />
@@ -36,7 +39,7 @@ function App() {
   return (
     <div className="App">
       <div className="content">
-        <Navigation />
+        {/* <Navigation /> */}
         <RouterProvider router={router} />
         {/* <Login /> */}
         {/* <Workout /> */}
