@@ -1,5 +1,10 @@
 import React, { useContext, useState } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Route,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
 
 import "./index.css";
 
@@ -14,30 +19,37 @@ import CardWorkout from "./components/CardWorkout/CardWorkout";
 
 import { ModalContext } from "./components/ModalContext/ModalContext";
 
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/">
+      <Route path="login" element={<Login />} />
+      <Route path="workout" element={<Workout />} />
+      <Route path="newWorkout" element={<NewWorkout />} />
+      <Route path="cardWorkout" element={<CardWorkout />} />
+    </Route>
+  )
+);
+
 function App() {
   const [isModalOpen] = useContext(ModalContext);
 
   return (
-    <BrowserRouter>
-      <div className="App">
-        <div className="content">
-          <Navigation />
-          <Routes>
-            <Route path="/login" element={<Login />} />
-          </Routes>
-          {/* <Login /> */}
-          <Workout />
-          {/* {isModalOpen && <NewWorkout />} */}
-          {/* <NewWorkout /> */}
-          {/* <CardWorkout /> */}
+    <div className="App">
+      <div className="content">
+        <Navigation />
+        <RouterProvider router={router} />
+        {/* <Login /> */}
+        {/* <Workout /> */}
+        {/* {isModalOpen && <NewWorkout />} */}
+        {/* <NewWorkout /> */}
+        {/* <CardWorkout /> */}
 
-          {/* {<AddNewWorkout />} */}
+        {<AddNewWorkout />}
 
-          <Particle />
-          {/* <NewWorkout /> */}
-        </div>
+        <Particle />
+        {/* <NewWorkout /> */}
       </div>
-    </BrowserRouter>
+    </div>
   );
 }
 
