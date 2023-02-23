@@ -28,7 +28,6 @@ const router = createBrowserRouter(
     <Route path="/" element={<RootLayout />}>
       <Route path="login" element={<Login />} />
       <Route path="workout" element={<Workout />} />
-      <Route path="newWorkout" element={<NewWorkout />} />
       <Route path="cardWorkout" element={<CardWorkout />} />
 
       <Route path="*" element={<NotFound />} />
@@ -49,8 +48,6 @@ function App() {
         {/* {isModalOpen && <NewWorkout />} */}
         {/* <NewWorkout /> */}
         {/* <CardWorkout /> */}
-
-        {<AddNewWorkout />}
 
         <Particle />
         {/* <NewWorkout /> */}
