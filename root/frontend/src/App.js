@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import {
-  createBrowserRouter,
+  BrowserRouter as Router,
+  Routes,
   Route,
   createRoutesFromElements,
   RouterProvider,
@@ -24,37 +25,46 @@ import { ModalContext } from "./components/ModalContext/ModalContext";
 // Layouts
 import RootLayout from "./layouts/RootlLayout";
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<RootLayout />}>
-      <Route path="login" element={<Login />} />
-      <Route path="cardWorkout/:id" element={<Workout />} />
-      <Route path="cardWorkout" element={<CardWorkout />} />
-      <Route path="cardExercise" element={<CardExercise />} />
+// const router = createBrowserRouter(
+//   createRoutesFromElements(
+//     <Route path="/" element={<RootLayout />}>
+//       <Route path="login" element={<Login />} />
+//       <Route path="cardWorkout/:id" element={<Workout />} />
+//       <Route path="cardWorkout" element={<CardWorkout />} />
+//       <Route path="cardExercise" element={<CardExercise />} />
 
-      <Route path="*" element={<NotFound />} />
-    </Route>
-  )
-);
+//       <Route path="*" element={<NotFound />} />
+//     </Route>
+//   )
+// );
 
 function App() {
   const [isModalOpen] = useContext(ModalContext);
 
   return (
-    <div className="App">
-      <div className="content">
-        {/* <Navigation /> */}
-        <RouterProvider router={router} />
-        {/* <Login /> */}
-        {/* <Workout /> */}
-        {/* {isModalOpen && <NewWorkout />} */}
-        {/* <NewWorkout /> */}
-        {/* <CardWorkout /> */}
+    <Router>
+      <div className="App">
+        <div className="content">
+          <Routes>
+            <Route path="login" element={<Login />} />
+            <Route path="cardWorkout/:id" element={<Workout />} />
+            <Route path="cardWorkout" element={<CardWorkout />} />
+            <Route path="cardExercise" element={<CardExercise />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
 
-        <Particle />
-        {/* <NewWorkout /> */}
+          {/* <Navigation /> */}
+          {/* <RouterProvider router={router} /> */}
+          {/* <Login /> */}
+          {/* <Workout /> */}
+          {/* {isModalOpen && <NewWorkout />} */}
+          {/* <NewWorkout /> */}
+          {/* <CardWorkout /> */}
+          <Particle />
+          {/* <NewWorkout /> */}
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
