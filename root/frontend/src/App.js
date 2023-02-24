@@ -16,6 +16,7 @@ import Workout from "./components/Workout/Workout";
 import NewWorkout from "./components/NewWorkout/NewWorkout";
 import AddNewWorkout from "./components/AddNewWorkout/AddNewWorkout";
 import CardWorkout from "./components/CardWorkout/CardWorkout";
+import CardExercise from "./components/CardExercise/CardExercise";
 import NotFound from "./components/NotFound/NotFound";
 
 import { ModalContext } from "./components/ModalContext/ModalContext";
@@ -27,8 +28,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route path="login" element={<Login />} />
-      <Route path="workout" element={<Workout />} />
+      <Route path="cardWorkout/:id" element={<Workout />} />
       <Route path="cardWorkout" element={<CardWorkout />} />
+      <Route path="cardExercise" element={<CardExercise />} />
 
       <Route path="*" element={<NotFound />} />
     </Route>
