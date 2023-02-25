@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ModalContext } from "../ModalContext/ModalContext.js";
 import AddNewWorkout from "../AddNewWorkout/AddNewWorkout.js";
-import NewWorkout from "../NewWorkout/NewWorkout.js";
+import NewWorkout from "../Workout/NewWorkout.js";
 
 import "./CardWorkout.css";
 import logo from "../../images/workout.png";

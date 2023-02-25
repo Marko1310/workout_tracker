@@ -14,7 +14,7 @@ import Particle from "./components/Particle/Particle.js";
 import Navigation from "./components/Navigation/Navigation";
 import Login from "./components/Login/Login";
 import Workout from "./components/Workout/Workout";
-import NewWorkout from "./components/NewWorkout/NewWorkout";
+import NewWorkout from "./components/Workout/NewWorkout";
 import AddNewWorkout from "./components/AddNewWorkout/AddNewWorkout";
 import CardWorkout from "./components/CardWorkout/CardWorkout";
 import CardExercise from "./components/CardExercise/CardExercise";
@@ -45,6 +45,8 @@ function App() {
     <Router>
       <div className="App">
         <div className="content">
+          <Navigation />
+
           <Routes>
             <Route path="login" element={<Login />} />
             <Route path="cardWorkout/:id" element={<Workout />} />
