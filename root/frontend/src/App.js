@@ -11,6 +11,7 @@ import Workout from "./components/Workout/Workout";
 import WorkoutGrid from "./components/Workout/WorkoutGrid";
 import ExerciseGrid from "./components/Exercise/ExerciseGrid";
 import NotFound from "./components/NotFound/NotFound";
+import NewExercise from "./components/Exercise/NewExercise";
 
 import { ModalContext } from "./components/ModalContext/ModalContext";
 
@@ -25,7 +26,7 @@ function App() {
 
           <Routes>
             <Route path="login" element={<Login />} />
-            <Route path="exercise/:id" element={<Workout />} />
+            <Route path="exercise/:id" element={<NewExercise />} />
             <Route path="/" element={<WorkoutGrid />} />
             <Route path="workout/:id" element={<ExerciseGrid />} />
             <Route path="*" element={<NotFound />} />
