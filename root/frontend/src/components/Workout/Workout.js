@@ -9,7 +9,7 @@ const Workout = () => {
   const [isModalOpen] = useContext(ModalContext);
 
   return (
-    <div className={`workout-container ${isModalOpen ? "blurred" : ""}`}>
+    <div className={`workout ${isModalOpen ? "blurred" : ""}`}>
       <div className="container">
         <div className="description-container">
           <p>Title</p>
