@@ -4,7 +4,7 @@ const Exercise = () => {
   return (
     <div className="exercise-container">
       <p className="exercise-title">Name of the exercise</p>
-      <div className="exercise-grid">
+      <div className="exercise">
         <p>Set</p>
         <p>Previous</p>
         <p>kg</p>

@@ -28,7 +28,7 @@ const Workout = () => {
 
         <div className="button-container">
           <button className="button">Add exercise</button>
-          <button className="button">Save exercise</button>
+          <button className="button">Save workout</button>
         </div>
       </div>
     </div>
