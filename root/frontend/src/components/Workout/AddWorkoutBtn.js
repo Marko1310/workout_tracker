@@ -1,4 +1,4 @@
-import "./AddNewWorkout.css";
+import "./AddWorkoutBtn.css";
 import { useContext } from "react";
 
 import addLogo from "../../images/plus-circle.png";

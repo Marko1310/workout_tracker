@@ -15,9 +15,9 @@ import Navigation from "./components/Navigation/Navigation";
 import Login from "./components/Login/Login";
 import Workout from "./components/Workout/Workout";
 import NewWorkout from "./components/Workout/NewWorkout";
-import AddNewWorkout from "./components/AddNewWorkout/AddNewWorkout";
-import CardWorkout from "./components/CardWorkout/CardWorkout";
-import CardExercise from "./components/CardExercise/CardExercise";
+import AddWorkoutBtn from "./components/Workout/AddWorkoutBtn";
+import WorkoutGrid from "./components/Workout/WorkoutGrid";
+import ExerciseGrid from "./components/Exercise/ExerciseGrid";
 import NotFound from "./components/NotFound/NotFound";
 
 import { ModalContext } from "./components/ModalContext/ModalContext";
@@ -50,8 +50,8 @@ function App() {
           <Routes>
             <Route path="login" element={<Login />} />
             <Route path="cardWorkout/:id" element={<Workout />} />
-            <Route path="cardWorkout" element={<CardWorkout />} />
-            <Route path="cardExercise" element={<CardExercise />} />
+            <Route path="cardWorkout" element={<WorkoutGrid />} />
+            <Route path="cardExercise" element={<ExerciseGrid />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
 

@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { ModalContext } from "../ModalContext/ModalContext.js";
-import AddNewWorkout from "../AddNewWorkout/AddNewWorkout.js";
+import AddWorkoutBtn from "../Workout/AddWorkoutBtn.js";
 import NewWorkout from "../Workout/NewWorkout.js";
 
-import "./CardExercise.css";
+import "./ExerciseGrid.css";
 import logo from "../../images/workout.png";
 
 const CardExercise = () => {
@@ -64,7 +64,7 @@ const CardExercise = () => {
         </ul>
         {/* ////////////////////////////////////////////////////// */}
       </div>
-      <AddNewWorkout />
+      <AddWorkoutBtn />
       <NewWorkout />
     </>
   );
