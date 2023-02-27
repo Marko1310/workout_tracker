@@ -17,9 +17,10 @@ const WorkoutSplitGrid = () => {
           <div className="workout-card">
             <li className="workout-card-title">Workout split title</li>
             <li>4 day split:</li>
-            <li> - Upper day</li>
-            <li> - Lower day</li>
-            <li> - Upper day</li>
+            <li> - Push day</li>
+            <li> - Pull day</li>
+            <li> - Legs day</li>
+            <li> - Core day</li>
             <li>--------------------------------</li>
             <li>Date created: 2022-12-20</li>
           </div>
@@ -29,7 +30,7 @@ const WorkoutSplitGrid = () => {
           <img className="workout-image" src={logo} alt="Workout"></img>
           <div className="workout-card">
             <li className="workout-card-title">Workout split title</li>
-            <li>4 day split:</li>
+            <li>3 day split:</li>
             <li> - Upper day</li>
             <li> - Lower day</li>
             <li> - Upper day</li>
