@@ -1,5 +1,27 @@
-.newWorkout-container {
-  /* position: absolute; */
+.newExercise-container {
+  position: absolute;
+  width: 25rem;
+  z-index: 10;
+  background-color: white;
+  padding: 1.5rem;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 6px 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: auto;
+  margin-right: auto;
+  left: 50%;
+  top: 50%;
+  /* margin-top: -58.5rem; */
+  margin-left: -12.5rem; /* visibility: hidden;
+  opacity: 0; */
+  transition: opacity 0.5s ease, visibility 0s linear 0s;
+  transition: all 0.8s ease;
+  /* margin-bottom: 15rem; */
+}
+
+/* .show {
   width: 25rem;
   z-index: 1;
   background-color: white;
@@ -11,22 +33,36 @@
   flex-direction: column;
   height: auto;
   margin-top: 50rem;
-  visibility: hidden;
-  opacity: 0;
   transition: opacity 0.5s ease, visibility 0s linear 0s;
-  /* transition: all 0.8s ease; */
-}
-
-.show {
   visibility: visible;
   opacity: 1;
-}
+  margin-bottom: 5rem;
+} */
+
+/* .show {
+  position: absolute;
+  width: 25rem;
+  z-index: 1;
+  background-color: white;
+  padding: 1.5rem;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 6px 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: auto;
+  margin-top: 2rem;
+  /* visibility: hidden;
+  opacity: 0; */
+/* transition: opacity 0.5s ease, visibility 0s linear 0s; */
+/* transition: all 0.8s ease; */
+/* } */
 
 .title {
   color: var(--clr-grey-1);
   font-weight: 800;
   font-size: 2rem;
-  padding-bottom: 3rem;
+  padding-bottom: 1rem;
   text-decoration: underline;
   margin-top: 1rem;
 }
@@ -48,7 +84,7 @@
 
 .button-container {
   margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .button {

@@ -3,6 +3,10 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
+  position: absolute;
+  left: 50%;
+  margin-left: -5rem;
+  z-index: -1;
 }
 
 .addLogo {
