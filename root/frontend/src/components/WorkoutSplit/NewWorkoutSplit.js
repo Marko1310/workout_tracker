@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { ModalContext } from "../ModalContext/ModalContext";
 
-import "./NewWorkout.css";
+import "./NewWorkoutSplit.css";
 
-const NewWorkout = () => {
+const NewWorkoutSplit = () => {
   const [isModalOpen, setIsModalOpen] = useContext(ModalContext);
 
   return (
@@ -52,4 +52,4 @@ const NewWorkout = () => {
   );
 };
 
-export default NewWorkout;
+export default NewWorkoutSplit;

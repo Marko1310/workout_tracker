@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { ModalContext } from "../ModalContext/ModalContext.js";
-import AddWorkoutBtn from "../Workout/AddWorkoutBtn";
-import NewWorkout from "../Workout/NewWorkout.js";
+import AddWorkoutSplitBtn from "./AddWorkoutSplitBtn";
+import NewWorkoutSplit from "./NewWorkoutSplit.js";
 
-import "./WorkoutGrid.css";
+import "./WorkoutSplitGrid.css";
 import logo from "../../images/workout.png";
 
-const CardWorkout = () => {
+const WorkoutSplitGrid = () => {
   const [isModalOpen] = useContext(ModalContext);
 
   return (
@@ -15,7 +15,7 @@ const CardWorkout = () => {
         <ul className="workout-container">
           <img className="workout-image" src={logo} alt="Workout"></img>
           <div className="workout-card">
-            <li className="workout-card-title">Workout title</li>
+            <li className="workout-card-title">Workout split title</li>
             <li>4 day split:</li>
             <li> - Upper day</li>
             <li> - Lower day</li>
@@ -28,7 +28,7 @@ const CardWorkout = () => {
         <ul className="workout-container">
           <img className="workout-image" src={logo} alt="Workout"></img>
           <div className="workout-card">
-            <li className="workout-card-title">Workout title</li>
+            <li className="workout-card-title">Workout split title</li>
             <li>4 day split:</li>
             <li> - Upper day</li>
             <li> - Lower day</li>
@@ -41,7 +41,7 @@ const CardWorkout = () => {
         <ul className="workout-container">
           <img className="workout-image" src={logo} alt="Workout"></img>
           <div className="workout-card">
-            <li className="workout-card-title">Workout title</li>
+            <li className="workout-card-title">Workout split title</li>
             <li>4 day split:</li>
             <li> - Upper day</li>
             <li> - Lower day</li>
@@ -54,7 +54,7 @@ const CardWorkout = () => {
         <ul className="workout-container">
           <img className="workout-image" src={logo} alt="Workout"></img>
           <div className="workout-card">
-            <li className="workout-card-title">Workout title</li>
+            <li className="workout-card-title">Workout split title</li>
             <li>4 day split:</li>
             <li> - Upper day</li>
             <li> - Lower day</li>
@@ -65,10 +65,10 @@ const CardWorkout = () => {
         </ul>
         {/* ////////////////////////////////////////////////////// */}
       </div>
-      <NewWorkout />
-      <AddWorkoutBtn />
+      <NewWorkoutSplit />
+      <AddWorkoutSplitBtn />
     </div>
   );
 };
 
-export default CardWorkout;
+export default WorkoutSplitGrid;

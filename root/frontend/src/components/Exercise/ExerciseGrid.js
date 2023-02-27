@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { ModalContext } from "../ModalContext/ModalContext.js";
-import AddWorkoutBtn from "../Workout/AddWorkoutBtn.js";
+import AddWorkoutBtn from "../WorkoutSplit/AddWorkoutSplitBtn.js";
 import NewExercise from "./NewExercise.js";
 import AddExerciseBtn from "./AddExerciseBtn.js";
 

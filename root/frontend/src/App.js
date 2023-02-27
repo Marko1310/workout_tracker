@@ -7,13 +7,14 @@ import Particle from "./components/Particle/Particle.js";
 
 import Navigation from "./components/Navigation/Navigation";
 import Login from "./components/Login/Login";
-import Workout from "./components/Workout/Workout";
-import WorkoutGrid from "./components/Workout/WorkoutGrid";
+import WorkoutSplit from "./components/WorkoutSplit/WorkoutSplit";
+import WorkoutSplitGrid from "./components/WorkoutSplit/WorkoutSplitGrid";
 import ExerciseGrid from "./components/Exercise/ExerciseGrid";
 import NotFound from "./components/NotFound/NotFound";
 import NewExercise from "./components/Exercise/NewExercise";
 
 import { ModalContext } from "./components/ModalContext/ModalContext";
+import Exercise from "./components/Exercise/Exercise";
 
 function App() {
   const [isModalOpen] = useContext(ModalContext);
@@ -26,8 +27,8 @@ function App() {
 
           <Routes>
             <Route path="login" element={<Login />} />
-            <Route path="/" element={<WorkoutGrid />} />
-            <Route path="workout/:id" element={<WorkoutGrid />} />
+            <Route path="/" element={<WorkoutSplitGrid />} />
+            <Route path="workout/:id" element={<WorkoutSplit />} />
             <Route path="exercise/:id" element={<ExerciseGrid />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

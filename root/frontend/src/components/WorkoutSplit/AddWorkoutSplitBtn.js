@@ -1,10 +1,10 @@
-import "./AddWorkoutBtn.css";
+import "./AddWorkoutSplitBtn.css";
 import { useContext } from "react";
 
 import addLogo from "../../images/plus-circle.png";
 import { ModalContext } from "../ModalContext/ModalContext";
 
-const AddNewWorkout = () => {
+const AddNewWorkoutBtn = () => {
   const [isModalOpen, setIsModalOpen] = useContext(ModalContext);
 
   return (
@@ -20,4 +20,4 @@ const AddNewWorkout = () => {
   );
 };
 
-export default AddNewWorkout;
+export default AddNewWorkoutBtn;

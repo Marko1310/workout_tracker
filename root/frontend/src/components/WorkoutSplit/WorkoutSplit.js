@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import Exercise from "../Exercise/Exercise";
 import Scroll from "../Scroll/Scroll";
-import "./Workout.css";
+import "./WorkoutSplit.css";
 import { ModalContext } from "../ModalContext/ModalContext";
 import { Outlet } from "react-router-dom";
 
-const Workout = () => {
+const WorkoutSplit = () => {
   const [isModalOpen] = useContext(ModalContext);
 
   return (
@@ -35,4 +35,4 @@ const Workout = () => {
   );
 };
 
-export default Workout;
+export default WorkoutSplit;
