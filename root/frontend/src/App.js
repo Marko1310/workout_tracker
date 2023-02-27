@@ -9,12 +9,12 @@ import Navigation from "./components/Navigation/Navigation";
 import Login from "./components/Login/Login";
 import WorkoutSplit from "./components/WorkoutSplit/WorkoutSplit";
 import WorkoutSplitGrid from "./components/WorkoutSplit/WorkoutSplitGrid";
-import ExerciseGrid from "./components/Exercise/ExerciseGrid";
+import ExerciseGrid from "./components/Workouts/ExerciseGrid";
 import NotFound from "./components/NotFound/NotFound";
-import NewExercise from "./components/Exercise/NewExercise";
+import NewExercise from "./components/Workouts/NewExercise";
 
 import { ModalContext } from "./components/ModalContext/ModalContext";
-import Exercise from "./components/Exercise/Exercise";
+import Exercise from "./components/Workouts/Exercise";
 
 function App() {
   const [isModalOpen] = useContext(ModalContext);

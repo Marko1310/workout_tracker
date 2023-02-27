@@ -8,9 +8,9 @@ const NewWorkoutSplit = () => {
 
   return (
     <div className={`newWorkout-container + ${isModalOpen ? "show" : ""}`}>
-      <p className="title">Create new workout</p>
+      <p className="title">Create new workout split</p>
       <form>
-        <label htmlFor="title">Title of the workout</label>
+        <label htmlFor="title">Title of the split</label>
         <input
           className="forms"
           type="text"
@@ -35,7 +35,7 @@ const NewWorkoutSplit = () => {
             }}
             className="button"
           >
-            Create workout
+            Create workout split
           </button>
           <button
             onClick={(e) => {

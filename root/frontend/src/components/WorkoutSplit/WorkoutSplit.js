@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Exercise from "../Exercise/Exercise";
+import Exercise from "../Workouts/Exercise";
 import Scroll from "../Scroll/Scroll";
 import "./WorkoutSplit.css";
 import { ModalContext } from "../ModalContext/ModalContext";

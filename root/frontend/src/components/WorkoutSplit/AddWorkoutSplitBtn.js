@@ -15,7 +15,7 @@ const AddNewWorkoutBtn = () => {
         alt="addLogo"
         src={addLogo}
       />
-      <p>Add new workout</p>
+      <p>Add new workout split</p>
     </div>
   );
 };
