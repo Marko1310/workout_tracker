@@ -15,49 +15,17 @@
   margin-bottom: -10rem;
   bottom: 0;
   margin-left: -12.5rem;
-  /* visibility: hidden;
-  opacity: 0; */
+  visibility: hidden;
+  opacity: 0;
   transition: opacity 0.5s ease, visibility 0s linear 0s;
   transition: all 0.8s ease;
   margin-bottom: 0rem;
 }
 
-/* .show {
-  width: 25rem;
-  z-index: 1;
-  background-color: white;
-  padding: 1.5rem;
-  border-width: 2px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 6px 50px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  height: auto;
-  margin-top: 50rem;
-  transition: opacity 0.5s ease, visibility 0s linear 0s;
+.show {
   visibility: visible;
   opacity: 1;
-  margin-bottom: 5rem;
-} */
-
-/* .show {
-  position: absolute;
-  width: 25rem;
-  z-index: 1;
-  background-color: white;
-  padding: 1.5rem;
-  border-width: 2px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 6px 50px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  height: auto;
-  margin-top: 2rem;
-  /* visibility: hidden;
-  opacity: 0; */
-/* transition: opacity 0.5s ease, visibility 0s linear 0s; */
-/* transition: all 0.8s ease; */
-/* } */
+}
 
 .title {
   color: var(--clr-grey-1);
