@@ -26,9 +26,9 @@ function App() {
 
           <Routes>
             <Route path="login" element={<Login />} />
-            <Route path="exercise/:id" element={<ExerciseGrid />} />
             <Route path="/" element={<WorkoutGrid />} />
-            <Route path="workout/:id" element={<ExerciseGrid />} />
+            <Route path="workout/:id" element={<WorkoutGrid />} />
+            <Route path="exercise/:id" element={<ExerciseGrid />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Particle />
