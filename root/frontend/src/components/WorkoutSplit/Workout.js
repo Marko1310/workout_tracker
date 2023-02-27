@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Exercise from "../Workouts/Exercise";
 import Scroll from "../Scroll/Scroll";
-import "./WorkoutSplit.css";
+import "./Workout.css";
 import { ModalContext } from "../ModalContext/ModalContext";
 import { Outlet } from "react-router-dom";
 

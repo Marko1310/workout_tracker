@@ -7,7 +7,7 @@ import Particle from "./components/Particle/Particle.js";
 
 import Navigation from "./components/Navigation/Navigation";
 import Login from "./components/Login/Login";
-import WorkoutSplit from "./components/WorkoutSplit/WorkoutSplit";
+import Workout from "./components/WorkoutSplit/Workout";
 import WorkoutSplitGrid from "./components/WorkoutSplit/WorkoutSplitGrid";
 import ExerciseGrid from "./components/Workouts/ExerciseGrid";
 import NotFound from "./components/NotFound/NotFound";
@@ -28,8 +28,8 @@ function App() {
           <Routes>
             <Route path="login" element={<Login />} />
             <Route path="/" element={<WorkoutSplitGrid />} />
-            <Route path="workout/:id" element={<WorkoutSplit />} />
-            <Route path="exercise/:id" element={<ExerciseGrid />} />
+            <Route path="workout/:id" element={<ExerciseGrid />} />
+            <Route path="exercise/:id" element={<Workout />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Particle />
