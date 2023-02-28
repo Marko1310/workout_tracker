@@ -71,5 +71,5 @@
 
 .addSetBtn:hover {
   filter: brightness(0.95);
-  transition: all 0.4s;
+  transition: all 0.2s;
 }

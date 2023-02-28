@@ -50,22 +50,25 @@ p {
   width: 100%;
 }
 
-.button {
+.workoutBtn {
   font-size: 1rem;
   color: #fff;
   padding-left: 1rem;
   padding-right: 1rem;
   text-transform: uppercase;
-
+  width: 90%;
   height: 2rem;
   border-radius: 3px;
   background-color: #38d28f;
   outline: none;
   border: none;
   transition: all 0.4s;
-  margin-top: 2rem;
-  /* margin-bottom: 2rem; */
+  margin-bottom: 1rem;
   font-family: "Montserrat", sans-serif;
+}
+
+.add {
+  background-color: rgb(16, 172, 224);
 }
 
 .buttonFinish {
@@ -82,8 +85,8 @@ p {
   height: 1.8rem;
 }
 
-.button:hover {
-  background-color: #59e7aa;
+.workoutBtn:hover {
+  filter: brightness(1.05);
 }
 
 .buttonFinish:hover {
