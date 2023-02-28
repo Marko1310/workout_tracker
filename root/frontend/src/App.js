@@ -11,7 +11,7 @@ import Workout from "./components/Splits/Workout";
 import SplitGrid from "./components/Splits/SplitGrid";
 import WorkoutGrid from "./components/Workouts/WorkoutGrid";
 import NotFound from "./components/NotFound/NotFound";
-import NewExercise from "./components/Workouts/NewExercise";
+import NewExercise from "./components/Workouts/NewWorkout";
 
 import { ModalContext } from "./components/ModalContext/ModalContext";
 import Exercise from "./components/Workouts/Exercise";

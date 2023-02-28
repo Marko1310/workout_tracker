@@ -1,10 +1,10 @@
-import "./AddExerciseBtn.css";
+import "./AddWorkoutBtn.css";
 import { useContext } from "react";
 
 import addLogo from "../../images/plus-circle.png";
 import { ModalContext } from "../ModalContext/ModalContext";
 
-const AddExerciseBtn = () => {
+const AddWorkoutBtn = () => {
   const [isModalOpen, setIsModalOpen] = useContext(ModalContext);
 
   return (
@@ -15,9 +15,9 @@ const AddExerciseBtn = () => {
         alt="addLogo"
         src={addLogo}
       />
-      <p>Add new exercise</p>
+      <p>Add new workout</p>
     </div>
   );
 };
 
-export default AddExerciseBtn;
+export default AddWorkoutBtn;

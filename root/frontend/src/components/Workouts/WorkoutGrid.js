@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { ModalContext } from "../ModalContext/ModalContext.js";
-import NewExercise from "./NewExercise.js";
-import AddExerciseBtn from "./AddExerciseBtn.js";
+import NewExercise from "./NewWorkout.js";
+import AddWorkoutBtn from "./AddWorkoutBtn.js";
 
 import "./WorkoutGrid.css";
 import logo from "../../images/workout.png";
 
-const ExerciseGrid = () => {
+const WorkoutGrid = () => {
   const [isModalOpen] = useContext(ModalContext);
 
   return (
@@ -133,9 +133,9 @@ const ExerciseGrid = () => {
         {/* ////////////////////////////////////////////////////// */}
       </div>
       <NewExercise />
-      <AddExerciseBtn />
+      <AddWorkoutBtn />
     </div>
   );
 };
 
-export default ExerciseGrid;
+export default WorkoutGrid;
