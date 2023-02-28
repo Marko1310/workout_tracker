@@ -1,9 +1,10 @@
 .workout {
+  background-color: aliceblue;
   border-radius: 3px;
   width: 25rem;
   padding: 1rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 6px 50px;
-  background: rgba(9, 20, 9, 0.2);
+  /* background: rgba(9, 20, 9, 0.2); */
   /* background-color: red; */
   display: flex;
   flex-direction: column;
@@ -27,9 +28,10 @@
 
 .description-container {
   display: flex;
-  flex-direction: column;
-  align-items: start;
-  padding-left: 1rem;
+}
+
+p {
+  color: black;
 }
 
 .button-container {

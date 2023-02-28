@@ -15,7 +15,7 @@ const WorkoutSplit = () => {
           <p>Title</p>
           <p>Day</p>
           <p>Time</p>
-          <div>Notes</div>
+          {/* <div>Notes</div> */}
         </div>
         <div className="exercise-slider">
           <Scroll>

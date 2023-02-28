@@ -25,14 +25,11 @@ function App() {
       <div className="App">
         <div className="content">
           <Navigation />
-
           <Routes>
             <Route path="login" element={<Login />} />
             <Route path="/" element={<SplitGrid />} />
-            <Route path="/test" element={<Workout />} />
-
-            <Route path="workout/:id" element={<WorkoutGrid />} />
-            <Route path="exercise/:id" element={<Workout />} />
+            <Route path="workouts/:id" element={<WorkoutGrid />} />
+            <Route path="workout/:id" element={<Workout />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Particle />
