@@ -72,7 +72,7 @@
 }
 
 .button:hover {
-  background-color: #59e7aa;
+  filter: brightness(1.05);
 }
 
 .dismiss {
@@ -80,7 +80,7 @@
 }
 
 .dismiss:hover {
-  background-color: #f43b3b;
+  filter: brightness(1.05);
 }
 
 select {
