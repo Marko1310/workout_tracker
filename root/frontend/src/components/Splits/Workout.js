@@ -17,14 +17,12 @@ const WorkoutSplit = () => {
           <button className="buttonFinish">Finish</button>
           {/* <div>Notes</div> */}
         </div>
-        <div className="exercise-slider">
-          <Scroll>
-            <Exercise />
-            <Exercise />
-            <Exercise />
-            <Exercise />
-          </Scroll>
-        </div>
+        <Scroll>
+          <Exercise />
+          <Exercise />
+          <Exercise />
+          <Exercise />
+        </Scroll>
 
         <div className="button-container">
           <button className="button">Add exercise</button>

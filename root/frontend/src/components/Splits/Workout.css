@@ -1,6 +1,6 @@
 .workout {
   background-color: aliceblue;
-  border-radius: 3px;
+  border-radius: 10px;
   width: 25rem;
   padding: 1rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 6px 50px;
@@ -12,25 +12,29 @@
   margin-top: 3rem;
   margin-bottom: 3rem;
   height: 45rem;
-  padding-top: 2rem;
+  padding-top: 1rem;
 }
 
 .container {
-  border-style: dashed;
-  border-color: red;
+  /* border-style: dashed;
+  border-color: red; */
   width: inherit;
   height: inherit;
   margin: 0;
   display: flex;
   flex-direction: column;
+  background-color: aliceblue;
+
   /* align-items: center; */
 }
 
 .description-container {
   display: flex;
   justify-content: space-between;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-bottom: var(--clr-grey-8);
+  border-bottom-style: solid;
 }
 
 p {
