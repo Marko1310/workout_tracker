@@ -1,5 +1,5 @@
 .workout {
-  background-color: aliceblue;
+  background-color: white;
   border-radius: 10px;
   width: 25rem;
   padding: 1rem;
@@ -23,7 +23,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-color: aliceblue;
+  background-color: white;
 
   /* align-items: center; */
 }
