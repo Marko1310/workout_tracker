@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { ModalContext } from "../ModalContext/ModalContext.js";
-import AddWorkoutSplitBtn from "./AddWorkoutSplitBtn";
-import NewWorkoutSplit from "./NewWorkoutSplit.js";
+import AddSplitBtn from "./AddSplitBtn";
+import NewSplit from "./NewSplitModal.js";
 
-import "./WorkoutSplitGrid.css";
+import "./SplitGrid.css";
 import logo from "../../images/workout.png";
 
 const WorkoutSplitGrid = () => {
@@ -66,8 +66,8 @@ const WorkoutSplitGrid = () => {
         </ul>
         {/* ////////////////////////////////////////////////////// */}
       </div>
-      <NewWorkoutSplit />
-      <AddWorkoutSplitBtn />
+      <NewSplit />
+      <AddSplitBtn />
     </div>
   );
 };

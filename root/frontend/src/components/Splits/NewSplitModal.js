@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ModalContext } from "../ModalContext/ModalContext";
 
-import "./NewWorkoutSplit.css";
+import "./NewSplitModal.css";
 
 const NewWorkoutSplit = () => {
   const [isModalOpen, setIsModalOpen] = useContext(ModalContext);

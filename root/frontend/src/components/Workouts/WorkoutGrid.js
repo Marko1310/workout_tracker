@@ -3,7 +3,7 @@ import { ModalContext } from "../ModalContext/ModalContext.js";
 import NewExercise from "./NewExercise.js";
 import AddExerciseBtn from "./AddExerciseBtn.js";
 
-import "./ExerciseGrid.css";
+import "./WorkoutGrid.css";
 import logo from "../../images/workout.png";
 
 const ExerciseGrid = () => {

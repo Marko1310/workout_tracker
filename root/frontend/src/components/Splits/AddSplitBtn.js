@@ -1,4 +1,4 @@
-import "./AddWorkoutSplitBtn.css";
+import "./AddSplitBtn.css";
 import { useContext } from "react";
 
 import addLogo from "../../images/plus-circle.png";

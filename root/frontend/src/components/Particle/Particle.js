@@ -18,7 +18,7 @@ const Particle = () => {
       options={{
         fullScreen: { enable: true, zIndex: -1 },
 
-        fpsLimit: 120,
+        fpsLimit: 60,
         interactivity: {
           events: {
             onClick: {
@@ -58,11 +58,11 @@ const Particle = () => {
           move: {
             directions: "none",
             enable: true,
-            outModes: {
-              default: "bounce",
-            },
+            // outModes: {
+            //   default: "bounce",
+            // },
             random: false,
-            speed: 2,
+            speed: 1,
             straight: false,
           },
           number: {
