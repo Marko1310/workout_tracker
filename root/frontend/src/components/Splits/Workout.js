@@ -13,8 +13,8 @@ const WorkoutSplit = () => {
       <div className="container">
         <div className="description-container">
           <p>Title</p>
-          <p>Day</p>
           <p>Time</p>
+          <button className="buttonFinish">Finish</button>
           {/* <div>Notes</div> */}
         </div>
         <div className="exercise-slider">
