@@ -7,7 +7,7 @@ const NewWorkout = () => {
   const [isModalOpen, setIsModalOpen] = useContext(ModalContext);
 
   return (
-    <div className={`newExercise-container ${isModalOpen ? "show" : ""}`}>
+    <div className={`newWorkout-container ${isModalOpen ? "show" : ""}`}>
       <p className="title">Add new workout</p>
       <form>
         <label htmlFor="title">Title of the workout</label>

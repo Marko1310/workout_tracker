@@ -10,7 +10,7 @@ const WorkoutGrid = () => {
   const [isModalOpen] = useContext(ModalContext);
 
   return (
-    <div className="main-container">
+    <div className="workoutGrid-main-container">
       <div className={`exercise-grid ${isModalOpen ? "blurred" : ""}`}>
         <ul className="exercise-list-container">
           <img className="exercise-image" src={logo} alt="exercise"></img>

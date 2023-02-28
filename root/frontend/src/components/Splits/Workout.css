@@ -1,3 +1,12 @@
+.workout-main-container {
+  width: 100%;
+  height: 100%;
+  margin-top: 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
 .workout {
   background-color: white;
   border-radius: 10px;

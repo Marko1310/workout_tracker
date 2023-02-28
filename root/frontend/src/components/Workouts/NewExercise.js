@@ -3,7 +3,7 @@ import { ModalContext } from "../ModalContext/ModalContext";
 
 import "./NewExercise.css";
 
-const NewWorkout = () => {
+const NewExercise = () => {
   const [isModalOpen, setIsModalOpen] = useContext(ModalContext);
 
   return (
@@ -62,4 +62,4 @@ const NewWorkout = () => {
   );
 };
 
-export default NewWorkout;
+export default NewExercise;
