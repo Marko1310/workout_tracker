@@ -15,6 +15,7 @@ import NewExercise from "./components/Workouts/NewWorkout";
 
 import { ModalContext } from "./components/ModalContext/ModalContext";
 import Exercise from "./components/Workouts/Exercise";
+import Timer from "./components/Timer/Timer";
 // import CardExercise from "./components/Workouts/CardExercise";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Route path="workouts/:id" element={<WorkoutGrid />} />
             <Route path="workout/:id" element={<Workout />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="test" element={<Timer />} />
           </Routes>
           <Particle />
         </div>
