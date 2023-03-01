@@ -4,6 +4,7 @@ import Scroll from "../Scroll/Scroll";
 import "./Workout.css";
 import { ModalContext } from "../ModalContext/ModalContext";
 import NewExercise from "../Workouts/NewExercise";
+import Timer from "../Timer/Timer";
 const WorkoutSplit = () => {
   const [isModalOpen] = useContext(ModalContext);
 
@@ -13,11 +14,14 @@ const WorkoutSplit = () => {
         <div className="container">
           <div className="description-container">
             <p>Title</p>
-            <p>Time</p>
+            <Timer />
             <button className="buttonFinish">Finish</button>
             {/* <div>Notes</div> */}
           </div>
           <Scroll>
+            <Exercise />
+            <Exercise />
+            <Exercise />
             <Exercise />
             <Exercise />
             <Exercise />

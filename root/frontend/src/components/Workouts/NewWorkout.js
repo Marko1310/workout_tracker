@@ -10,7 +10,7 @@ const NewWorkout = () => {
     <div className={`newWorkout-container ${isModalOpen ? "show" : ""}`}>
       <p className="title">Add new workout</p>
       <form>
-        <label htmlFor="title">Title of the workout</label>
+        <label htmlFor="newWorkout-title">Title of the workout</label>
         <input
           className="forms"
           type="text"

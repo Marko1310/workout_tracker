@@ -26,7 +26,7 @@
   opacity: 1;
 }
 
-.title {
+.newExercise-title {
   color: var(--clr-grey-1);
   font-weight: 800;
   font-size: 2rem;

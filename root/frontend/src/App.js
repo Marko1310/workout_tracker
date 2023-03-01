@@ -32,7 +32,7 @@ function App() {
             <Route path="workouts/:id" element={<WorkoutGrid />} />
             <Route path="workout/:id" element={<Workout />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="test" element={<Timer />} />
+            {/* <Route path="test" element={<Timer />} /> */}
           </Routes>
           <Particle />
         </div>

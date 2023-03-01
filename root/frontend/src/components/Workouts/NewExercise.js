@@ -8,7 +8,7 @@ const NewExercise = () => {
 
   return (
     <div className={`newExercise-container ${isModalOpen ? "show" : ""}`}>
-      <p className="title">Add new exercise</p>
+      <p className="newExercise-title">Add new exercise</p>
       <form>
         <label htmlFor="title">Title of the exercise</label>
         <input
