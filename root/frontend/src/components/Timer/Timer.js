@@ -4,20 +4,21 @@ import "./Timer.css";
 const Timer = () => {
   const [timer, setTimer] = useState({ seconds: 0, minutes: 0, hours: 0 });
 
-  let updatedS = timer.seconds,
-    updatedM = timer.minutes,
-    updatedH = timer.hours;
-
   const run = () => {
-    if (updatedS > 9) {
-      updatedM++;
-      updatedS = 0;
-    }
-    updatedS++;
-    return setTimer({ seconds: updatedS, minutes: updatedM, hours: updatedH });
+    setTimer((prevTimer) => {
+      const updatedS = prevTimer.seconds + 1;
+      const updatedM = prevTimer.minutes + (updatedS === 60 ? 1 : 0);
+      const updatedH = prevTimer.hours + (updatedM === 60 ? 1 : 0);
+      console.log(updatedS, updatedM, updatedH);
+
+      return { seconds: updatedS, minutes: updatedM, hours: updatedH };
+    });
   };
 
-  if (true) setInterval(run, 1000);
+  useEffect(() => {
+    const intervalId = setInterval(run, 1000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div className="timer-container">
