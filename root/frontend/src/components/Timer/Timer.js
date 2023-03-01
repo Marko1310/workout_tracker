@@ -11,7 +11,11 @@ const Timer = () => {
       const updatedH = prevTimer.hours + (updatedM === 60 ? 1 : 0);
       console.log(updatedS, updatedM, updatedH);
 
-      return { seconds: updatedS, minutes: updatedM, hours: updatedH };
+      return {
+        seconds: updatedS % 60,
+        minutes: updatedM % 60,
+        hours: updatedH,
+      };
     });
   };
 
