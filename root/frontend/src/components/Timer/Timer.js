@@ -2,29 +2,29 @@ import { useEffect, useState } from "react";
 import "./Timer.css";
 
 const Timer = () => {
-  const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [hours, setHours] = useState(0);
+  const [timer, setTimer] = useState({ seconds: 0, minutes: 0, hours: 0 });
 
-  let updatedS = seconds,
-    updatedM = minutes,
-    updatedH = hours;
+  let updatedS = timer.seconds,
+    updatedM = timer.minutes,
+    updatedH = timer.hours;
 
-  const start = () => {
-    setInterval(() => {
-      updatedS++;
-      setSeconds(updatedS);
-    }, 1000);
+  const run = () => {
+    if (updatedS > 9) {
+      updatedM++;
+      updatedS = 0;
+    }
+    updatedS++;
+    return setTimer({ seconds: updatedS, minutes: updatedM, hours: updatedH });
   };
 
-  start();
+  if (true) setInterval(run, 1000);
 
   return (
     <div className="timer-container">
       <p>
-        {hours < 10 ? "0" + hours : hours}:
-        {minutes < 10 ? "0" + minutes : minutes}:
-        {seconds < 10 ? "0" + seconds : seconds}
+        {timer.hours < 10 ? "0" + timer.hours : timer.hours}:
+        {timer.minutes < 10 ? "0" + timer.minutes : timer.minutes}:
+        {timer.seconds < 10 ? "0" + timer.seconds : timer.seconds}
       </p>
     </div>
   );
