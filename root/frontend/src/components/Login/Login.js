@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import "./Login.css";
 
 function Login() {
-  const [form, setForm] = useState("signup");
+  const [form, setForm] = useState("login");
 
   return (
     <div className="login-container">
       <form className="form-validate">
-        <p className="title">{form === "login" ? `Login Form` : `Signup`}</p>
+        <p className="title">{form === "login" ? `Login` : `Signup`}</p>
         <div className="buttons-container">
           <button
             onClick={(e) => {
@@ -61,7 +61,9 @@ function Login() {
         {form === "login" && (
           <div className="login-footer">
             <p>Not a member? </p>
-            <a className="sign-up">Sign up now</a>
+            <a onClick={() => setForm("signup")} className="sign-up">
+              Sign up now
+            </a>
           </div>
         )}
       </form>

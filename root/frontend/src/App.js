@@ -14,9 +14,6 @@ import NotFound from "./components/NotFound/NotFound";
 import NewExercise from "./components/Workouts/NewWorkout";
 
 import { ModalContext } from "./components/ModalContext/ModalContext";
-import Exercise from "./components/Workouts/Exercise";
-import Timer from "./components/Timer/Timer";
-// import CardExercise from "./components/Workouts/CardExercise";
 
 function App() {
   const [isModalOpen] = useContext(ModalContext);

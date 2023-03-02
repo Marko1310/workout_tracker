@@ -1,11 +1,12 @@
 .login-container {
-  padding: 3rem 2rem 0rem 2rem;
+  padding: 0rem 2rem 0rem 2rem;
   display: flex;
   border-radius: 3px;
   width: 25rem;
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 6px 50px;
   background: rgba(9, 20, 9, 0.2);
+  height: 35rem;
 }
 
 .form-validate {
@@ -14,13 +15,14 @@
   align-items: center;
   flex-direction: column;
   width: 100%;
+  margin-top: 3.5rem;
 }
 
 .title {
   color: var(--clr-grey-9);
   font-weight: 800;
   font-size: 2rem;
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
   text-decoration: underline;
 }
 
@@ -89,10 +91,11 @@
 }
 
 .login-footer {
-  margin-top: 5rem;
-  margin-bottom: 0rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
   display: flex;
   gap: 0.5rem;
+  height: 2rem;
 }
 
 .sign-up {
