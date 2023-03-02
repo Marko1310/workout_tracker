@@ -14,17 +14,16 @@ function Login() {
               setForm("login");
               e.preventDefault();
             }}
-            className="buttons login"
+            className={`loginButtons ${form === "login" ? "current" : ""}`}
           >
             Login
           </button>
           <button
             onClick={(e) => {
               setForm("signup");
-
               e.preventDefault("signup");
             }}
-            className="buttons signup"
+            className={`loginButtons ${form === "signup" ? "current" : ""}`}
           >
             Signup
           </button>
