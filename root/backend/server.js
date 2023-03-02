@@ -34,3 +34,8 @@ app.listen(PORT, () => {
 app.post("/api/register", (req, res) => {
   register.handleRegister(req, res, pool, bcrypt);
 });
+
+//login route
+app.post("/api/login", (req, res) => {
+  login.handleLogin(req, res, pool, bcrypt);
+});
