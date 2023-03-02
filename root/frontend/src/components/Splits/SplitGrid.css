@@ -5,6 +5,15 @@
   position: relative;
 }
 
+.choose {
+  font-weight: 600;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
+  color: #fff;
+}
+
 .workout-grid {
   width: 100%;
   padding: 1rem;
