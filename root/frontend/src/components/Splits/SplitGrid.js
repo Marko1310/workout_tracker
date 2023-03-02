@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { ModalContext } from "../ModalContext/ModalContext.js";
 import AddSplitBtn from "./AddSplitBtn";
 import NewSplit from "./NewSplitModal.js";
+import { useNavigate } from "react-router-dom";
 
 import "./SplitGrid.css";
 import logo from "../../images/workout.png";
@@ -9,12 +10,18 @@ import logo from "../../images/workout.png";
 const WorkoutSplitGrid = () => {
   const [isModalOpen] = useContext(ModalContext);
 
+  const navigate = useNavigate();
+
+  const changeRoute = function () {
+    navigate("/workouts/:id");
+  };
+
   return (
     <div className="main-container">
       <div className={`${isModalOpen ? "blurred" : ""}`}>
         <p className="choose">Choose a Workout Split</p>
         <div className="workout-grid">
-          <ul className="workout-container">
+          <ul onClick={changeRoute} className="workout-container">
             <img className="workout-image" src={logo} alt="Workout"></img>
             <div className="workout-card">
               <li className="workout-card-title">Workout split title</li>

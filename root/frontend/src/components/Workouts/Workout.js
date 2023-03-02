@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import Exercise from "../Workouts/Exercise";
+import Exercise from "./Exercise";
 import Scroll from "../Scroll/Scroll";
 import "./Workout.css";
 import { ModalContext } from "../ModalContext/ModalContext";
-import NewExercise from "../Workouts/NewExercise";
+import NewExercise from "./NewExercise";
 import Timer from "../Timer/Timer";
 const WorkoutSplit = () => {
   const [isModalOpen] = useContext(ModalContext);

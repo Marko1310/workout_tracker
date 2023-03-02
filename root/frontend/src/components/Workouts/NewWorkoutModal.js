@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { ModalContext } from "../ModalContext/ModalContext";
 
-import "./NewWorkout.css";
+import "./NewWorkoutModal.css";
 
-const NewWorkout = () => {
+const NewWorkoutModal = () => {
   const [isModalOpen, setIsModalOpen] = useContext(ModalContext);
 
   return (
     <div className={`newWorkout-container ${isModalOpen ? "show" : ""}`}>
-      <p className="title">Add new workout</p>
+      <p className="newWorkout-title">Add new workout</p>
       <form>
         <label htmlFor="newWorkout-title">Title of the workout</label>
         <input
@@ -44,4 +44,4 @@ const NewWorkout = () => {
   );
 };
 
-export default NewWorkout;
+export default NewWorkoutModal;

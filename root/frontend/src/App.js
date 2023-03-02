@@ -7,7 +7,7 @@ import Particle from "./components/Particle/Particle.js";
 
 import Navigation from "./components/Navigation/Navigation";
 import Login from "./components/Login/Login";
-import Workout from "./components/Splits/Workout";
+import Workout from "./components/Workouts/Workout";
 import SplitGrid from "./components/Splits/SplitGrid";
 import WorkoutGrid from "./components/Workouts/WorkoutGrid";
 import NotFound from "./components/NotFound/NotFound";
