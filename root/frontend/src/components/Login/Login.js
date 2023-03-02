@@ -9,8 +9,25 @@ function Login() {
       <form className="form-validate">
         <p className="title">{form === "login" ? `Login Form` : `Signup`}</p>
         <div className="buttons-container">
-          <button className="buttons login">Login</button>
-          <button className="buttons signup">Signup</button>
+          <button
+            onClick={(e) => {
+              setForm("login");
+              e.preventDefault();
+            }}
+            className="buttons login"
+          >
+            Login
+          </button>
+          <button
+            onClick={(e) => {
+              setForm("signup");
+
+              e.preventDefault("signup");
+            }}
+            className="buttons signup"
+          >
+            Signup
+          </button>
         </div>
 
         {form === "signup" && (
