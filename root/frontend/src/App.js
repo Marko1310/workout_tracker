@@ -23,8 +23,8 @@ function App() {
         <div className="content">
           <Navigation />
           <Routes>
-            <Route path="login" element={<Login />} />
-            <Route path="/" element={<SplitGrid />} />
+            <Route path="/" element={<Login />} />
+            <Route path="dashboard" element={<SplitGrid />} />
             <Route path="workouts/:id" element={<WorkoutGrid />} />
             <Route path="workout/:id" element={<Workout />} />
             <Route path="*" element={<NotFound />} />
