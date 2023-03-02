@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const { Pool } = require("pg");
+const bcrypt = require("bcryptjs");
 
 //controllers
 const register = require("./controllers/register");
@@ -15,7 +16,7 @@ const pool = new Pool({
   user: process.env.USER,
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
-  ssl: true,
+  //   ssl: true,
 });
 
 const PORT = 8000;
@@ -31,5 +32,5 @@ app.listen(PORT, () => {
 
 //register route
 app.post("/api/register", (req, res) => {
-  register.handleRegister(req, res, pool);
+  register.handleRegister(req, res, pool, bcrypt);
 });
