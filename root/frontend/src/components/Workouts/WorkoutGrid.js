@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ModalContext } from "../ModalContext/ModalContext.js";
+import { ModalContext } from "../../context/ModalContext.js";
 import NewWorkoutModal from "./NewWorkoutModal.js";
 import AddWorkoutBtn from "./AddWorkoutBtn.js";
 import { useNavigate } from "react-router-dom";

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Exercise from "./Exercise";
 import Scroll from "../Scroll/Scroll";
 import "./Workout.css";
-import { ModalContext } from "../ModalContext/ModalContext";
+import { ModalContext } from "../../context/ModalContext";
 import NewExercise from "./NewExercise";
 import Timer from "../Timer/Timer";
 

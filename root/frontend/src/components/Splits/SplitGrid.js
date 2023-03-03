@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ModalContext } from "../ModalContext/ModalContext.js";
+import { ModalContext } from "../../context/ModalContext.js";
 import AddSplitBtn from "./AddSplitBtn";
 import NewSplit from "./NewSplitModal.js";
 import { useNavigate } from "react-router-dom";

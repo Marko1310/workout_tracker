@@ -2,7 +2,7 @@ import "./AddSplitBtn.css";
 import { useContext } from "react";
 
 import addLogo from "../../images/plus-circle.png";
-import { ModalContext } from "../ModalContext/ModalContext";
+import { ModalContext } from "../../context/ModalContext";
 
 const AddNewWorkoutBtn = () => {
   const [isModalOpen, setIsModalOpen] = useContext(ModalContext);
