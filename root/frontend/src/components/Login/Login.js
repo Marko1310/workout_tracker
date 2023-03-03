@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+// React
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+// Css
 import "./Login.css";
 
+// Context
+import { GlobalContext } from "../../context/GlobalContext";
+
 function Login() {
+  const { user, setUser } = useContext(GlobalContext);
   const [form, setForm] = useState("signup");
   const [input, setInput] = useState({
     name: "",
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(user);
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -18,7 +34,13 @@ function Login() {
         email: input.email,
         password: input.password,
       }),
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.id) {
+          setUser(data);
+        }
+      });
   };
 
   return (
