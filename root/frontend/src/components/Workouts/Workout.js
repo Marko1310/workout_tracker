@@ -5,6 +5,7 @@ import "./Workout.css";
 import { ModalContext } from "../ModalContext/ModalContext";
 import NewExercise from "./NewExercise";
 import Timer from "../Timer/Timer";
+
 const WorkoutSplit = () => {
   const [isModalOpen] = useContext(ModalContext);
 
