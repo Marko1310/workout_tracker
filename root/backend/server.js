@@ -6,6 +6,7 @@ const cors = require("cors");
 const { Pool } = require("pg");
 const bcrypt = require("bcryptjs");
 const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 
 //controllers
 const register = require("./controllers/register");
@@ -39,5 +40,5 @@ app.post("/api/register", (req, res) => {
 
 //login route
 app.post("/api/login", (req, res) => {
-  login.handleLogin(req, res, pool, bcrypt);
+  login.handleLogin(req, res, pool, bcrypt, cookieParser, jwt);
 });

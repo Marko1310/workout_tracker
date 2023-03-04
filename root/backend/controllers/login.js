@@ -1,4 +1,4 @@
-const handleLogin = (req, res, pool, bcrypt) => {
+const handleLogin = (req, res, pool, bcrypt, cookieParser, jwt) => {
   const { email, password } = req.body;
 
   const user = pool
@@ -19,20 +19,22 @@ const handleLogin = (req, res, pool, bcrypt) => {
       const token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: "7d",
       });
+      console.log(token);
 
       res.cookie("access-token", token, {
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        httpOnly: true,
       });
 
-      const // return everything except the password
-        userCredentials = {
-          id: user.rows[0].id,
-          name: user.rows[0].name,
-          email: user.rows[0].email,
-        };
-      res.json(userCredentials);
+      // return everything except the password
+      const userCredentials = {
+        id: user.rows[0].id,
+        name: user.rows[0].name,
+        email: user.rows[0].email,
+      };
+      res.json({ user: userCredentials, token: token });
     })
-    .catch(() => res.status(500).send(err.message));
+    .catch((err) => res.status(500).send(err.message));
 };
 
 module.exports = {
