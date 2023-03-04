@@ -15,12 +15,21 @@ const handleLogin = (req, res, pool, bcrypt) => {
         return res.json("Something is wrong with your credentials");
       }
 
-      // return everything except the password
-      userCredentials = {
-        id: user.rows[0].id,
-        name: user.rows[0].name,
-        email: user.rows[0].email,
-      };
+      const payload = { userId: user.rows[0].id };
+      const token = jwt.sign(payload, process.env.JWT_SECRET, {
+        expiresIn: "7d",
+      });
+
+      res.cookie("access-token", token, {
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      });
+
+      const // return everything except the password
+        userCredentials = {
+          id: user.rows[0].id,
+          name: user.rows[0].name,
+          email: user.rows[0].email,
+        };
       res.json(userCredentials);
     })
     .catch(() => res.status(500).send(err.message));

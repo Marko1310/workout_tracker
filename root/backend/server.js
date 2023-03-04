@@ -5,6 +5,7 @@ const app = express();
 const cors = require("cors");
 const { Pool } = require("pg");
 const bcrypt = require("bcryptjs");
+const cookieParser = require("cookie-parser");
 
 //controllers
 const register = require("./controllers/register");
@@ -25,6 +26,7 @@ app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(cookieParser());
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
