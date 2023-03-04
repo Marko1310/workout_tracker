@@ -20,7 +20,7 @@ function Login() {
 
   useEffect(() => {
     console.log(user);
-    if (user) {
+    if (user && navigate) {
       navigate("/dashboard");
     }
   }, [user, navigate]);
