@@ -1,8 +1,11 @@
 import "./Navigation.css";
 import logo from "../../images/workout-icon.jpg";
 import { NavLink } from "react-router-dom";
+import { GlobalContext } from "../../context/GlobalContext";
+import { useContext } from "react";
 
 const Navigation = () => {
+  const { setUser } = useContext(GlobalContext);
   return (
     <div className="navigation-container">
       <div className="user">
@@ -10,8 +13,10 @@ const Navigation = () => {
         <div className="navigation-user">Marko</div>
       </div>
       <div className="links">
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/login">Logout</NavLink>
+        <NavLink to="/dashboard">Home</NavLink>
+        <NavLink onClick={() => setUser(null)} to="/">
+          Logout
+        </NavLink>
       </div>
     </div>
   );
