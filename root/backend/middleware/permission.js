@@ -29,7 +29,6 @@ const requiresAuth = async (req, res, next) => {
             name: user.rows[0].name,
             email: user.rows[0].email,
           };
-          console.log(userCredentials);
           req.user = userCredentials;
           isAuthorized = true;
         }

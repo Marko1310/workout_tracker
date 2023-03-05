@@ -27,7 +27,7 @@ function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8000/api/login", {
+    fetch("http://localhost:8000/api/auth/login", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -37,7 +37,7 @@ function Login() {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.id) {
+        if (data.user.id) {
           setUser(data);
         }
       });

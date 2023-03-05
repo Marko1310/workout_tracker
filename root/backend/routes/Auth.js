@@ -1,4 +1,3 @@
-const { application } = require("express");
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
@@ -13,13 +12,6 @@ const pool = new Pool({
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
   //   ssl: true,
-});
-
-// @route   GET /api/auth/test
-// @desc    Test the auth route
-// @access  Public
-router.get("/test", (req, res) => {
-  res.send("route working");
 });
 
 // @route   POST /api/auth/register
@@ -80,13 +72,11 @@ router.post("/register", async (req, res) => {
 // @access  Public
 router.post("/login", async (req, res) => {
   try {
-    /////////
     const { email, password } = req.body;
-
     const user = await pool.query("SELECT * FROM users WHERE email = $1", [
       email,
     ]);
-
+    //CHECKS
     // if user does not exist
     if (user.rows.length === 0) {
       return res.json({ error: "Something is wrong with your credentials" });
@@ -97,6 +87,7 @@ router.post("/login", async (req, res) => {
       return res.json({ error: "Something is wrong with your credentials" });
     }
 
+    //IF NO ERRORS
     const payload = { userId: user.rows[0].id };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "7d",

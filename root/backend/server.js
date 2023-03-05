@@ -10,19 +10,7 @@ const jwt = require("jsonwebtoken");
 
 // import routes
 const authRoute = require("./routes/Auth");
-
-//controllers
-const register = require("./controllers/register");
-const login = require("./controllers/login");
-
-const pool = new Pool({
-  host: process.env.HOST,
-  port: process.env.DB_PORT,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE,
-  //   ssl: true,
-});
+const workoutRoute = require("./routes/Workouts");
 
 const PORT = 8000;
 
@@ -33,17 +21,8 @@ app.use(express.urlencoded());
 app.use(cookieParser());
 
 app.use("/api/auth", authRoute);
+app.use("/api/auth", workoutRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-});
-
-//register route
-app.post("/api/register", (req, res) => {
-  register.handleRegister(req, res, pool, bcrypt);
-});
-
-//login route
-app.post("/api/login", (req, res) => {
-  login.handleLogin(req, res, pool, bcrypt, cookieParser, jwt);
 });
