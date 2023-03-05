@@ -61,7 +61,12 @@ router.post("/register", async (req, res) => {
       "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
       [name, email, hashedPassword]
     );
-    res.json(user.rows[0]);
+    const userCredentials = {
+      id: user.rows[0].id,
+      name: user.rows[0].name,
+      email: user.rows[0].email,
+    };
+    res.json(userCredentials);
   } catch (err) {
     console.log(err);
     res.status(500).send(err.message);
