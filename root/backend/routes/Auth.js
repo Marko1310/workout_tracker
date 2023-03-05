@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const { Pool } = require("pg");
+const jwt = require("jsonwebtoken");
 
 const pool = new Pool({
   host: process.env.HOST,
@@ -69,6 +70,50 @@ router.post("/register", async (req, res) => {
     res.json(userCredentials);
   } catch (err) {
     console.log(err);
+    res.status(500).send(err.message);
+  }
+});
+
+// @route   POST /api/auth/login
+// @desc    Login
+// @access  Public
+router.post("/login", async (req, res) => {
+  try {
+    /////////
+    const { email, password } = req.body;
+
+    const user = await pool.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
+
+    // if user does not exist
+    if (user.rows.length === 0) {
+      return res.json({ error: "Something is wrong with your credentials" });
+    }
+    // is password is invalid
+    const isValid = await bcrypt.compareSync(password, user.rows[0].password);
+    if (!isValid) {
+      return res.json({ error: "Something is wrong with your credentials" });
+    }
+
+    const payload = { userId: user.rows[0].id };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    res.cookie("access-token", token, {
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+    });
+
+    // return everything except the password
+    const userCredentials = {
+      id: user.rows[0].id,
+      name: user.rows[0].name,
+      email: user.rows[0].email,
+    };
+    res.json({ user: userCredentials, token: token });
+  } catch {
     res.status(500).send(err.message);
   }
 });
