@@ -115,40 +115,39 @@ router.post("/split/workout/exercise/new", requiresAuth, async (req, res) => {
   }
 });
 
-// @route   POST /api/split/workout/exercise/track/new
-// @desc    Create new exercise in the workout split
+// @route   POST /api/split/workout/exercise/track
+// @desc    Update exercise with weight and reps
 // @access  Private
-router.post("/split/workout/exercise/new", requiresAuth, async (req, res) => {
+router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
     const date = new Date();
-    const { title, goal_sets, workout_id } = req.body;
+    const { set, reps, weight, exercise_id } = req.body;
 
-    if (!title) {
-      return res.status(400).json({ title: "Title field can not be empty" });
-    }
+    // if (!title) {
+    //   return res.status(400).json({ title: "Title field can not be empty" });
+    // }
 
-    if (goal_sets < 0) {
-      return res
-        .status(400)
-        .json({ sets: "Number of sets must be greater then 0" });
-    }
+    // if (goal_sets < 0) {
+    //   return res
+    //     .status(400)
+    //     .json({ sets: "Number of sets must be greater then 0" });
+    // }
 
-    const checkWorkoutId = await pool.query(
-      "SELECT * FROM workouts WHERE workout_id = $1",
-      [workout_id]
+    const checkExerciseId = await pool.query(
+      "SELECT * FROM exercises WHERE exercise_id = $1",
+      [exercise_id]
     );
 
-    if (checkWorkoutId.rows.length === 0) {
+    if (checkExerciseId.rows.length === 0) {
       return res.status(400).send("Unathorized");
     }
 
-    const exercise = await pool.query(
-      "INSERT INTO exercises (exercise_name, goal_sets, date, workout_id, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [title, goal_sets, date, workout_id, user_id]
+    const track = await pool.query(
+      "INSERT INTO track (set, weight, reps, date, exercise_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      [set, weight, reps, date, exercise_id, user_id]
     );
-
-    res.json(exercise.rows);
+    res.json(track.rows);
   } catch (err) {
     return res.status(500).send(err.message);
   }
