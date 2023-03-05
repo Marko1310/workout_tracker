@@ -122,17 +122,12 @@ router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
     const date = new Date();
-    const { set, reps, weight, exercise_id } = req.body;
+    const { set, exercise_id } = req.body;
+    let { reps, weight } = req.body;
+    console.log(reps, weight);
 
-    // if (!title) {
-    //   return res.status(400).json({ title: "Title field can not be empty" });
-    // }
-
-    // if (goal_sets < 0) {
-    //   return res
-    //     .status(400)
-    //     .json({ sets: "Number of sets must be greater then 0" });
-    // }
+    if (!reps) reps = 0;
+    if (!weight) weight = 0;
 
     const checkExerciseId = await pool.query(
       "SELECT * FROM exercises WHERE exercise_id = $1",
