@@ -34,27 +34,34 @@ router.post("/register", async (req, res) => {
       "SELECT * FROM users WHERE email=$1",
       [email]
     );
+    if (existingEmail.rows.length !== 0) {
+      return res
+        .status(400)
+        .json({ error: "There is already a user with this email" });
+    }
+    // check the proper name
+    if (name === "") {
+      return res.status(400).json({ error: "name field can not be empty" });
+    }
 
-    // if (name === "") {
-    //   return res.status(400).json("name field can not be empty");
-    // } else if (email === "" || !emailRegex.test(email)) {
-    //   return res.status(400).json("not a proper email");
-    // } else if (password.length < 6) {
-    //   return res
-    //     .status(400)
-    //     .json("password has to be at least 6 characters long");
-    // } else if (name && email && password) {
+    // check the proper email
+    if (email === "" || !emailRegex.test(email)) {
+      return res.status(400).json({ error: "not a proper email" });
+    }
 
-    // create a new user
+    // check the proper password
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json({ error: "password has to be at least 6 characters long" });
+    }
+
+    // if no errors -> create a new user
     const user = await pool.query(
       "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
       [name, email, hashedPassword]
     );
     res.json(user.rows[0]);
-
-    // }
-
-    ////////////
   } catch (err) {
     console.log(err);
     res.status(500).send(err.message);
