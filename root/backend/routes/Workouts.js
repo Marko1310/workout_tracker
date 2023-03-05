@@ -25,14 +25,31 @@ router.get("/test", (req, res) => {
 router.post("/split/new", requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
+    const date = new Date();
     const { title, days } = req.body;
 
     const split = await pool.query(
-      "INSERT INTO splits (split_name, user_id, days) VALUES ($1, $2, $3) RETURNING *",
-      [title, user_id, days]
+      "INSERT INTO splits (split_name, user_id, days, date) VALUES ($1, $2, $3, $4) RETURNING *",
+      [title, user_id, days, date]
     );
-    res.json(split.rows[0]);
-  } catch {
+    res.json(split.rows);
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
+});
+
+// @route   GET /api/splits/current
+// @desc    get user splita
+// @access  Private
+router.get("/splits/current", requiresAuth, async (req, res) => {
+  try {
+    user_id = req.user.id;
+    const splits = await pool.query(
+      "SELECT * FROM splits WHERE user_id=$1 ORDER BY date DESC",
+      [user_id]
+    );
+    res.json(splits.rows);
+  } catch (err) {
     return res.status(500).send(err.message);
   }
 });
