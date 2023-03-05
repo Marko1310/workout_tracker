@@ -8,6 +8,9 @@ const bcrypt = require("bcryptjs");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 
+// import routes
+const authRoute = require("./routes/Auth");
+
 //controllers
 const register = require("./controllers/register");
 const login = require("./controllers/login");
@@ -28,6 +31,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cookieParser());
+
+app.use("/api/auth", authRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
