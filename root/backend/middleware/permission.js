@@ -1,35 +1,49 @@
 const jwt = require("jsonwebtoken");
+const { Pool } = require("pg");
+const pool = new Pool({
+  host: process.env.HOST,
+  port: process.env.DB_PORT,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
+  //   ssl: true,
+});
 
-const requireAuth = (req, res, next) => {
+// get JWT token from the request and check is it is valid
+const requiresAuth = async (req, res, next) => {
   const token = req.cookies["access-token"];
-  let isAuth = false;
+  let isAuthorized = false;
 
   if (token) {
-    const { userId } = jwt.verify(token, process.env.JWT_SECRET);
+    try {
+      const { userId } = jwt.verify(token, process.env.JWT_SECRET);
 
-    const user = pool
-      .query("SELECT * FROM users WHERE id = $1", [userId])
-      .then((user) => {
-        // if user exists
-        if (user.rows.length === 0) {
+      try {
+        const user = await pool.query("SELECT * FROM users WHERE id = $1", [
+          userId,
+        ]);
+
+        if (user.rows.length !== 0) {
           const userCredentials = {
             id: user.rows[0].id,
             name: user.rows[0].name,
             email: user.rows[0].email,
           };
+          console.log(userCredentials);
           req.user = userCredentials;
-          isAuth = true;
+          isAuthorized = true;
         }
-        isAuth = false;
-      });
+      } catch {
+        isAuthorized = false;
+      }
+    } catch {
+      isAuthorized = false;
+    }
   }
-  isAuth = false;
-
-  if (isAuth) {
+  if (isAuthorized) {
     return next();
-  } else {
-    return res.status(401).send("Unathorized");
   }
+  return res.status(401).send("Unathorized");
 };
 
-module.exports = requireAuth;
+module.exports = requiresAuth;

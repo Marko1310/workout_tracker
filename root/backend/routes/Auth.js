@@ -4,6 +4,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const { Pool } = require("pg");
 const jwt = require("jsonwebtoken");
+const requiresAuth = require("../middleware/permission");
 
 const pool = new Pool({
   host: process.env.HOST,
@@ -116,6 +117,17 @@ router.post("/login", async (req, res) => {
   } catch {
     res.status(500).send(err.message);
   }
+});
+
+// @route   POST /api/auth/current
+// @desc    Return the currently authed user
+// @access  Private
+
+router.get("/current", requiresAuth, (req, res) => {
+  if (!req.user) {
+    return res.status(401).send("Unathorized");
+  }
+  return res.json(req.user);
 });
 
 module.exports = router;
