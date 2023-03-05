@@ -151,16 +151,38 @@ router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
 //      RETRIEVING DATA     //
 ///////////////////////////////
 // @route   GET /api/splits/current
-// @desc    get user splita
+// @desc    get user splits
 // @access  Private
 router.get("/splits/current", requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
+    // Get user splits
     const splits = await pool.query(
       "SELECT * FROM splits WHERE user_id=$1 ORDER BY date DESC",
       [user_id]
     );
+
     res.json(splits.rows);
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
+});
+
+// @route   GET /api/splits/workouts/current
+// @desc    get user splits
+// @access  Private
+// Get users workouts
+router.get("/splits/workouts/current", requiresAuth, async (req, res) => {
+  try {
+    user_id = req.user.id;
+    const { split_id } = req.body;
+
+    // Get user workouts
+    const workouts = await pool.query(
+      "SELECT * FROM workouts WHERE user_id=$1 AND split_id = $2 ORDER BY date DESC",
+      [user_id, split_id]
+    );
+    res.json(workouts.rows);
   } catch (err) {
     return res.status(500).send(err.message);
   }
