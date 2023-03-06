@@ -132,14 +132,17 @@ router.get("/current", requiresAuth, (req, res) => {
   return res.json(req.user);
 });
 
-// @route   POST /api/auth/current
-// @desc    Return the currently authed user
+// @route   PUT /api/auth/logout
+// @desc    Logout user and clear cookie
 // @access  Private
-router.get("/current", requiresAuth, (req, res) => {
-  if (!req.user) {
-    return res.status(401).send("Unathorized");
+router.put("/logout", requiresAuth, async (req, res) => {
+  try {
+    res.clearCookie("access-token");
+    return res.json({ success: true });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send(err.message);
   }
-  return res.json(req.user);
 });
 
 module.exports = router;
