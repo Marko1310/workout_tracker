@@ -20,17 +20,14 @@ export const GlobalProvider = (props) => {
       .get("http://localhost:8000/api/auth/splits/current", {
         withCredentials: true,
       })
-      .then((data) => console.log(data.data))
+      .then((data) => {
+        console.log(data.data);
+        setWorkouts(data.data);
+      })
       .catch((error) => {
         console.log(error);
       });
-    // console.log(res);
-    //
   };
-
-  // const getWorkouts = function (){
-  //   fetch ("http://localhost:8000/api/auth/splits/current").then
-  // }
 
   const globalState = {
     user,
