@@ -169,9 +169,8 @@ router.get("/splits/current", requiresAuth, async (req, res) => {
 });
 
 // @route   GET /api/splits/workouts/current
-// @desc    get user splits
+// @desc    get user workouts
 // @access  Private
-// Get users workouts
 router.get("/splits/workouts/current", requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
@@ -187,5 +186,43 @@ router.get("/splits/workouts/current", requiresAuth, async (req, res) => {
     return res.status(500).send(err.message);
   }
 });
+
+// @route   GET /api/splits/workouts/workout/current
+// @desc    get user workout
+// @access  Private
+router.get(
+  "/splits/workouts/workout/current",
+  requiresAuth,
+  async (req, res) => {
+    try {
+      user_id = req.user.id;
+      const { workout_id, exercise_id } = req.body;
+
+      // Get user exercises from the workout
+      const exercises = await pool.query(
+        "SELECT * FROM exercises WHERE user_id=$1 AND workout_id = $2 ORDER BY date DESC",
+        [user_id, workout_id]
+      );
+      console.log(exercises.rows);
+
+      // Get track data from each exercise from the workout
+      // 1. get all the id's of the exercises from the given workout
+      //   const exercise_id = await pool.query(
+      //     "SELECT exercise_id FROM exercises WHERE workout_id=$1 ORDER BY date DESC",
+      //     [workout_id]
+      //   );
+      //   console.log(exercise_id.rows);
+
+      const track = await pool.query(
+        "SELECT * FROM track WHERE user_id=$1 AND exercise_id = $2 ORDER BY date DESC",
+        [user_id, exercise_id]
+      );
+
+      res.json({ exercises: exercises.rows, track: track.rows });
+    } catch (err) {
+      return res.status(500).send(err.message);
+    }
+  }
+);
 
 module.exports = router;
