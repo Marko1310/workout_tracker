@@ -10,7 +10,8 @@ const jwt = require("jsonwebtoken");
 
 // import routes
 const authRoute = require("./routes/Auth");
-const workoutRoute = require("./routes/Workouts");
+const addWorkoutRoute = require("./routes/AddWorkouts");
+const retrieveWorkoutRoute = require("./routes/RetrieveWorkouts");
 
 const PORT = 8000;
 
@@ -21,7 +22,8 @@ app.use(express.urlencoded());
 app.use(cookieParser());
 
 app.use("/api/auth", authRoute);
-app.use("/api/auth", workoutRoute);
+app.use("/api/auth", addWorkoutRoute);
+app.use("/api/auth", retrieveWorkoutRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
