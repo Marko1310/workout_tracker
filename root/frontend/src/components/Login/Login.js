@@ -29,6 +29,7 @@ function Login() {
     e.preventDefault();
     fetch("http://localhost:8000/api/auth/login", {
       method: "post",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email: input.email,

@@ -8,6 +8,13 @@ const bcrypt = require("bcryptjs");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 
+const corsOptions = {
+  origin: true,
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 // import routes
 const authRoute = require("./routes/Auth");
 const addWorkoutRoute = require("./routes/AddWorkouts");
@@ -15,7 +22,7 @@ const retrieveWorkoutRoute = require("./routes/RetrieveWorkouts");
 
 const PORT = 8000;
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded());
