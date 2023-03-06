@@ -55,6 +55,18 @@ router.post("/register", async (req, res) => {
       "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
       [name, email, hashedPassword]
     );
+
+    // Set a token if registered
+    const payload = { userId: user.rows[0].id };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    res.cookie("access-token", token, {
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+    });
+
     const userCredentials = {
       id: user.rows[0].id,
       name: user.rows[0].name,
@@ -113,7 +125,16 @@ router.post("/login", async (req, res) => {
 // @route   POST /api/auth/current
 // @desc    Return the currently authed user
 // @access  Private
+router.get("/current", requiresAuth, (req, res) => {
+  if (!req.user) {
+    return res.status(401).send("Unathorized");
+  }
+  return res.json(req.user);
+});
 
+// @route   POST /api/auth/current
+// @desc    Return the currently authed user
+// @access  Private
 router.get("/current", requiresAuth, (req, res) => {
   if (!req.user) {
     return res.status(401).send("Unathorized");
