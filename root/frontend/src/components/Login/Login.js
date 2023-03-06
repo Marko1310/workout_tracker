@@ -1,6 +1,7 @@
 // React
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // Css
 import "./Login.css";
@@ -9,13 +10,18 @@ import "./Login.css";
 import { GlobalContext } from "../../context/GlobalContext";
 
 function Login() {
+  // States
   const { user, setUser } = useContext(GlobalContext);
-  const [form, setForm] = useState("signup");
+  const [form, setForm] = useState("login");
   const [input, setInput] = useState({
     name: "",
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  // Routing
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,28 +31,44 @@ function Login() {
     }
   }, [user, navigate]);
 
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8000/api/auth/login", {
-      method: "post",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    setLoading(true);
+
+    let data = {};
+
+    if (form === "signup") {
+      data = {
+        name: input.name,
         email: input.email,
         password: input.password,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.user.id) {
-          setUser(data);
-        }
+      };
+    } else {
+      data = {
+        email: input.email,
+        password: input.password,
+      };
+    }
+
+    axios
+      .post(
+        form === "signup"
+          ? "http://localhost:8000/api/auth/register"
+          : "http://localhost:8000/api/auth/login",
+        data
+      )
+      .then((res) => {
+        console.log(res.data.user);
+        // setUser(data);
+      })
+      .catch((error) => {
+        setErrors(error.response.data);
       });
   };
 
   return (
     <div className="login-container">
-      <form onSubmit={handleLogin} className="form-validate">
+      <form onSubmit={handleSubmit} className="form-validate">
         <p className="title">{form === "login" ? `Login` : `Signup`}</p>
         <div className="buttons-container">
           <button
@@ -117,7 +139,7 @@ function Login() {
           placeholder="Password"
         ></input>
 
-        <button className="login-button">
+        <button disabled={loading} type="submit" className="login-button">
           {form === "login" ? "Login" : "Register"}
         </button>
         {form === "login" && (

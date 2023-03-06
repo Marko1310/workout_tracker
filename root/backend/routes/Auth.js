@@ -84,6 +84,7 @@ router.post("/register", async (req, res) => {
 // @access  Public
 router.post("/login", async (req, res) => {
   try {
+    console.log(req.body);
     const { email, password } = req.body;
     const user = await pool.query("SELECT * FROM users WHERE email = $1", [
       email,
@@ -91,12 +92,16 @@ router.post("/login", async (req, res) => {
     //CHECKS
     // if user does not exist
     if (user.rows.length === 0) {
-      return res.json({ error: "Something is wrong with your credentials" });
+      return res
+        .status(400)
+        .json({ error: "Something is wrong with your credentials" });
     }
     // is password is invalid
     const isValid = await bcrypt.compareSync(password, user.rows[0].password);
     if (!isValid) {
-      return res.json({ error: "Something is wrong with your credentials" });
+      return res
+        .status(400)
+        .json({ error: "Something is wrong with your credentials" });
     }
 
     //IF NO ERRORS
