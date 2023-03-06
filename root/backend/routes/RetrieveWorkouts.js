@@ -20,9 +20,9 @@ const pool = new Pool({
 router.get("/splits/current", requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
-    // Get user splits
+    // Get user splits with workouts
     const splits = await pool.query(
-      "SELECT * FROM splits WHERE user_id=$1 ORDER BY date DESC",
+      "SELECT s.*, w.* FROM splits s INNER JOIN workouts w ON w.split_id = s.split_id WHERE s.user_id = $1",
       [user_id]
     );
 

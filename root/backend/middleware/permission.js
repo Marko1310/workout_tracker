@@ -12,12 +12,15 @@ const pool = new Pool({
 // get JWT token from the request and check is it is valid
 const requiresAuth = async (req, res, next) => {
   const token = req.cookies["access-token"];
+  console.log(token);
   let isAuthorized = false;
 
   if (token) {
+    console.log(token);
     try {
+      console.log("aaaa");
       const { userId } = jwt.verify(token, process.env.JWT_SECRET);
-
+      console.log(userId);
       try {
         const user = await pool.query("SELECT * FROM users WHERE id = $1", [
           userId,

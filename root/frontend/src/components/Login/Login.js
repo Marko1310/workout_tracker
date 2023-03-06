@@ -20,12 +20,12 @@ function Login() {
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const { getWorkouts } = useContext(GlobalContext);
 
   // Routing
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(user);
     if (user && navigate) {
       navigate("/dashboard");
     }
@@ -55,13 +55,15 @@ function Login() {
         form === "signup"
           ? "http://localhost:8000/api/auth/register"
           : "http://localhost:8000/api/auth/login",
-        data
+        data,
+        { withCredentials: true }
       )
-      .then((res) => {
-        console.log(res.data.user);
-        // setUser(data);
+      .then(() => {
+        getWorkouts();
+        // setUser(res.data.user);
       })
       .catch((error) => {
+        console.log(error);
         setErrors(error.response.data);
       });
   };
@@ -139,7 +141,7 @@ function Login() {
           placeholder="Password"
         ></input>
 
-        <button disabled={loading} type="submit" className="login-button">
+        <button type="submit" className="login-button">
           {form === "login" ? "Login" : "Register"}
         </button>
         {form === "login" && (

@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { createContext, useContext, useState } from "react";
 
 //create context
@@ -13,6 +14,23 @@ export const GlobalProvider = (props) => {
   const [reps, setReps] = useState([]);
   const [prevSets, setPrevSets] = useState([]);
   const [prevReps, setPrevReps] = useState([]);
+
+  const getWorkouts = () => {
+    axios
+      .get("http://localhost:8000/api/auth/splits/current", {
+        withCredentials: true,
+      })
+      .then((data) => console.log(data.data))
+      .catch((error) => {
+        console.log(error);
+      });
+    // console.log(res);
+    //
+  };
+
+  // const getWorkouts = function (){
+  //   fetch ("http://localhost:8000/api/auth/splits/current").then
+  // }
 
   const globalState = {
     user,
@@ -31,6 +49,7 @@ export const GlobalProvider = (props) => {
     setPrevSets,
     prevReps,
     setPrevReps,
+    getWorkouts,
   };
 
   return (
