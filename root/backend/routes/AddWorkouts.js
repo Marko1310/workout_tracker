@@ -57,8 +57,8 @@ router.post("/split/workout/new", requiresAuth, async (req, res) => {
     }
 
     const checkSplitId = await pool.query(
-      "SELECT * FROM splits WHERE split_id = $1",
-      [split_id]
+      "SELECT * FROM splits WHERE split_id = $1 AND user_id = $2",
+      [split_id, user_id]
     );
     console.log(checkSplitId.rows);
 
@@ -96,8 +96,8 @@ router.post("/split/workout/exercise/new", requiresAuth, async (req, res) => {
     }
 
     const checkWorkoutId = await pool.query(
-      "SELECT * FROM workouts WHERE workout_id = $1",
-      [workout_id]
+      "SELECT * FROM workouts WHERE workout_id = $1 AND user_id = $2",
+      [workout_id, user_id]
     );
 
     if (checkWorkoutId.rows.length === 0) {
@@ -130,8 +130,8 @@ router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
     if (!weight) weight = 0;
 
     const checkExerciseId = await pool.query(
-      "SELECT * FROM exercises WHERE exercise_id = $1",
-      [exercise_id]
+      "SELECT * FROM exercises WHERE exercise_id = $1 AND user_id = $2",
+      [exercise_id, user_id]
     );
 
     if (checkExerciseId.rows.length === 0) {

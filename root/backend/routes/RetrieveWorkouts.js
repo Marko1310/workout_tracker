@@ -15,7 +15,7 @@ const pool = new Pool({
 //      RETRIEVING DATA     //
 ///////////////////////////////
 // @route   GET /api/splits/current
-// @desc    get user splits
+// @desc    get user splits with list of workouts
 // @access  Private
 router.get("/splits/current", requiresAuth, async (req, res) => {
   try {
@@ -33,7 +33,7 @@ router.get("/splits/current", requiresAuth, async (req, res) => {
 });
 
 // @route   GET /api/splits/workouts/:splitId
-// @desc    get user workouts from the split
+// @desc    get user workouts with list of exercises from the split
 // @access  Private
 router.get("/splits/workouts/:splitId", requiresAuth, async (req, res) => {
   try {
@@ -42,8 +42,9 @@ router.get("/splits/workouts/:splitId", requiresAuth, async (req, res) => {
 
     // Get user workouts
     const workouts = await pool.query(
-      "SELECT * FROM workouts WHERE user_id=$1 AND split_id = $2 ORDER BY date DESC",
+      "SELECT w.workout_id, w.workout_name, w.date, array_agg(e.exercise_name) FROM workouts w LEFT JOIN exercises e ON e.workout_id = w.workout_id WHERE w.user_id = $1 AND w.split_id = $2 GROUP BY w.workout_id",
       [user_id, split_id]
+      // "SELECT * FROM workouts WHERE user_id=$1 AND split_id = $2 ORDER BY date DESC",
     );
     res.json(workouts.rows);
   } catch (err) {
