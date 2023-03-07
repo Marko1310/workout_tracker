@@ -35,19 +35,19 @@ router.post("/register", async (req, res) => {
     }
     // check the proper name
     if (name === "") {
-      return res.status(400).json({ error: "name field can not be empty" });
+      return res.status(400).json({ name: "name field can not be empty" });
     }
 
     // check the proper email
     if (email === "" || !emailRegex.test(email)) {
-      return res.status(400).json({ error: "not a proper email" });
+      return res.status(400).json({ email: "not a proper email" });
     }
 
     // check the proper password
     if (password.length < 6) {
       return res
         .status(400)
-        .json({ error: "password has to be at least 6 characters long" });
+        .json({ password: "password has to be at least 6 characters long" });
     }
 
     // if no errors -> create a new user

@@ -105,12 +105,15 @@ function Login() {
                   name: e.target.value,
                 }))
               }
-              className="forms"
+              className="login-forms"
               type="text"
               id="fname"
               name="fname"
               placeholder="Name"
             ></input>
+            {errors.name && form === "signup" && (
+              <p className="error">{errors.name}</p>
+            )}
           </>
         )}
 
@@ -122,13 +125,15 @@ function Login() {
               email: e.target.value,
             }))
           }
-          className="forms"
+          className="login-forms"
           type="text"
           id="email"
           name="email"
           placeholder="Email"
         ></input>
-        {alert.email && <p className="register-alert">Wrong credentials</p>}
+        {errors.email && form === "signup" && (
+          <p className="error">{errors.email}</p>
+        )}
 
         <label htmlFor="password"></label>
         <input
@@ -138,10 +143,13 @@ function Login() {
               password: e.target.value,
             }))
           }
-          className="forms"
+          className="login-forms"
           type="password"
           placeholder="Password"
         ></input>
+        {errors.password && form === "signup" && (
+          <p className="error">{errors.password}</p>
+        )}
         {errors && form === "login" && <p className="error">{errors.error}</p>}
         <button type="submit" className="login-button">
           {form === "login" ? "Login" : "Register"}

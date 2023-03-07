@@ -18,7 +18,7 @@
   align-items: center;
   flex-direction: column;
   width: 100%;
-  margin-top: 3.5rem;
+  margin-top: 1.5rem;
 }
 
 .title {
@@ -54,8 +54,8 @@
   color: #fff;
 }
 
-.forms {
-  margin-bottom: 1.5rem;
+.login-forms {
+  margin-bottom: 0.5rem;
   display: flex;
   background-color: var(--clr-grey-9);
   border-radius: 5px;
@@ -84,7 +84,7 @@
   outline: none;
   border: none;
   transition: all 0.4s;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   margin-bottom: 2rem;
   font-family: "Montserrat", sans-serif;
 }
@@ -118,6 +118,7 @@ p {
 }
 
 .error {
-  color: #ee3d1e;
-  margin-bottom: 0;
+  color: #d63012;
+  margin-bottom: 0.5;
+  margin-top: 0;
 }
