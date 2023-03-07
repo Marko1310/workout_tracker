@@ -10,7 +10,7 @@ export const GlobalProvider = (props) => {
   const [splits, setSplits] = useState([]);
   const [workouts, setWorkouts] = useState([]);
   const [exercises, setExercises] = useState([]);
-  const [sets, setSets] = useState([]);
+  const [sets, setSets] = useState();
   const [reps, setReps] = useState([]);
   const [prevSets, setPrevSets] = useState([]);
   const [prevReps, setPrevReps] = useState([]);
@@ -22,12 +22,15 @@ export const GlobalProvider = (props) => {
       })
       .then((data) => {
         console.log(data.data);
-        setWorkouts(data.data);
+        setSplits(data.data);
       })
+
       .catch((error) => {
         console.log(error);
       });
   };
+
+  console.log(splits);
 
   const globalState = {
     user,

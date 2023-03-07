@@ -3,17 +3,24 @@ import { ModalContext } from "../../context/ModalContext.js";
 import AddSplitBtn from "./AddSplitBtn";
 import NewSplit from "./NewSplitModal.js";
 import { useNavigate } from "react-router-dom";
+import { GlobalContext } from "../../context/GlobalContext.js";
 
 import "./SplitGrid.css";
 import logo from "../../images/workout.png";
+import axios from "axios";
 
 const WorkoutSplitGrid = () => {
   const [isModalOpen] = useContext(ModalContext);
-
+  const splits = useContext(GlobalContext).splits;
   const navigate = useNavigate();
 
-  const changeRoute = function () {
-    navigate("/workouts/:id");
+  const changeRoute = function (id) {
+    axios
+      .get(`http://localhost:8000/api/auth/splits/workouts/${id}`, {
+        withCredentials: true,
+      })
+      .then((data) => console.log(data.data));
+    navigate(`/workouts/:${id}`);
   };
 
   return (
@@ -21,59 +28,27 @@ const WorkoutSplitGrid = () => {
       <div className={`${isModalOpen ? "blurred" : ""}`}>
         <p className="choose">Choose a Workout Split</p>
         <div className="workout-grid">
-          <ul onClick={changeRoute} className="workout-container">
-            <img className="workout-image" src={logo} alt="Workout"></img>
-            <div className="workout-card">
-              <li className="workout-card-title">Workout split title</li>
-              <li>4 day split:</li>
-              <li> - Push day</li>
-              <li> - Pull day</li>
-              <li> - Legs day</li>
-              <li> - Core day</li>
-              <li>--------------------------------</li>
-              <li>Date created: 2022-12-20</li>
-            </div>
-          </ul>
-          {/* ////////////////////////////////////////////////////// */}
-          <ul className="workout-container">
-            <img className="workout-image" src={logo} alt="Workout"></img>
-            <div className="workout-card">
-              <li className="workout-card-title">Workout split title</li>
-              <li>3 day split:</li>
-              <li> - Upper day</li>
-              <li> - Lower day</li>
-              <li> - Upper day</li>
-              <li>--------------------------------</li>
-              <li>Date created: 2022-12-20</li>
-            </div>
-          </ul>
-          {/* ////////////////////////////////////////////////////// */}
-          <ul className="workout-container">
-            <img className="workout-image" src={logo} alt="Workout"></img>
-            <div className="workout-card">
-              <li className="workout-card-title">Workout split title</li>
-              <li>4 day split:</li>
-              <li> - Upper day</li>
-              <li> - Lower day</li>
-              <li> - Upper day</li>
-              <li>--------------------------------</li>
-              <li>Date created: 2022-12-20</li>
-            </div>
-          </ul>
-          {/* ////////////////////////////////////////////////////// */}
-          <ul className="workout-container">
-            <img className="workout-image" src={logo} alt="Workout"></img>
-            <div className="workout-card">
-              <li className="workout-card-title">Workout split title</li>
-              <li>4 day split:</li>
-              <li> - Upper day</li>
-              <li> - Lower day</li>
-              <li> - Upper day</li>
-              <li>--------------------------------</li>
-              <li>Date created: 2022-12-20</li>
-            </div>
-          </ul>
-          {/* ////////////////////////////////////////////////////// */}
+          {splits.length > 0 &&
+            splits.map((el) => {
+              return (
+                <ul
+                  key={el.split_id}
+                  onClick={() => changeRoute(el.split_id)}
+                  className="workout-container"
+                >
+                  <img className="workout-image" src={logo} alt="Workout"></img>
+                  <div className="workout-card">
+                    <li className="workout-card-title">{el.split_name}</li>
+                    <li>{el.days} day split:</li>
+                    {el.array_agg.map((name) => {
+                      return <li> - {name} day</li>;
+                    })}
+                    <li>--------------------------------</li>
+                    <li>Created on: {el.date.slice(0, 10)}</li>
+                  </div>
+                </ul>
+              );
+            })}
         </div>
       </div>
 

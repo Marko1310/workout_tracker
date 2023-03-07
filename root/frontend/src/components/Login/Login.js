@@ -29,7 +29,7 @@ function Login() {
     if (user && navigate) {
       navigate("/dashboard");
     }
-  }, [user, navigate]);
+  }, [user, navigate, getWorkouts]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,7 +60,7 @@ function Login() {
       )
       .then(() => {
         getWorkouts();
-        // setUser(res.data.user);
+        setUser("aaa");
       })
       .catch((error) => {
         console.log(error);
