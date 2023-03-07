@@ -5,19 +5,21 @@ import { GlobalContext } from "../../context/GlobalContext";
 import { useContext } from "react";
 
 const Navigation = () => {
-  const { setUser } = useContext(GlobalContext);
+  const { user, setUser } = useContext(GlobalContext);
   return (
     <div className="navigation-container">
       <div className="user">
         <img className="navigation-logo" src={logo} alt="Logo" />
-        <div className="navigation-user">Marko</div>
+        {user && <div className="navigation-user">{user.name}</div>}
       </div>
-      <div className="links">
-        <NavLink to="/dashboard">Home</NavLink>
-        <NavLink onClick={() => setUser(null)} to="/">
-          Logout
-        </NavLink>
-      </div>
+      {user && (
+        <div className="links">
+          <NavLink to="/dashboard">Home</NavLink>
+          <NavLink onClick={() => setUser(null)} to="/">
+            Logout
+          </NavLink>
+        </div>
+      )}
     </div>
   );
 };

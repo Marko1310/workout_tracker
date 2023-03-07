@@ -26,7 +26,7 @@ function App() {
     <Router>
       <div className="App">
         <div className="content">
-          a{user && <Navigation />}
+          {<Navigation />}
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="dashboard" element={<SplitGrid />} />
