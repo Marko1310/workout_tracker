@@ -15,7 +15,7 @@ export const GlobalProvider = (props) => {
   const [prevSets, setPrevSets] = useState([]);
   const [prevReps, setPrevReps] = useState([]);
 
-  const getWorkouts = () => {
+  const getSplits = () => {
     axios
       .get("http://localhost:8000/api/auth/splits/current", {
         withCredentials: true,
@@ -24,13 +24,38 @@ export const GlobalProvider = (props) => {
         console.log(data.data);
         setSplits(data.data);
       })
-
       .catch((error) => {
         console.log(error);
       });
   };
 
-  console.log(splits);
+  const getWorkouts = (id) => {
+    axios
+      .get(`http://localhost:8000/api/auth/splits/workouts/${id}`, {
+        withCredentials: true,
+      })
+      .then((data) => {
+        console.log(data.data);
+        setWorkouts(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getExercises = (id) => {
+    axios
+      .get(`http://localhost:8000/api/auth/splits/workouts/${id}`, {
+        withCredentials: true,
+      })
+      .then((data) => {
+        console.log(data.data);
+        setWorkouts(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const globalState = {
     user,
@@ -49,6 +74,7 @@ export const GlobalProvider = (props) => {
     setPrevSets,
     prevReps,
     setPrevReps,
+    getSplits,
     getWorkouts,
   };
 

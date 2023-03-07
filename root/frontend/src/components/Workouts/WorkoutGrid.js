@@ -3,17 +3,21 @@ import { ModalContext } from "../../context/ModalContext.js";
 import NewWorkoutModal from "./NewWorkoutModal.js";
 import AddWorkoutBtn from "./AddWorkoutBtn.js";
 import { useNavigate } from "react-router-dom";
+import { GlobalContext } from "../../context/GlobalContext.js";
 
 import "./WorkoutGrid.css";
 import logo from "../../images/workout.png";
 
 const WorkoutGrid = () => {
   const [isModalOpen] = useContext(ModalContext);
+  const workouts = useContext(GlobalContext).workouts;
+  console.log(workouts);
 
   const navigate = useNavigate();
 
-  const changeRoute = function () {
-    navigate("/workout/:id");
+  const changeRoute = function (id) {
+    // getExercises(id);
+    navigate(`/workout/:${id}`);
   };
 
   return (
@@ -21,125 +25,27 @@ const WorkoutGrid = () => {
       <div className={`${isModalOpen ? "blurred" : ""}`}>
         <p className="choose">Choose a Workout</p>
         <div className="exercise-grid">
-          <ul onClick={changeRoute} className="exercise-list-container">
-            <img className="exercise-image" src={logo} alt="exercise"></img>
-            <div className="exercise-card">
-              <li className="exercise-card-title">Day 1 - Upper day: </li>
-
-              <li> - Bench press</li>
-              <li> - Pullups</li>
-              <li> - Incline dumbell bech</li>
-              <li> - Seated row</li>
-              <li> - Laterall raises</li>
-              <li> - Biceps bench</li>
-              <li> - Triceps rope</li>
-              <li>--------------------------------</li>
-              <li>Date created: 2022-12-20</li>
-            </div>
-          </ul>
-          {/* ////////////////////////////////////////////////////// */}
-          <ul className="exercise-list-container">
-            <img className="exercise-image" src={logo} alt="exercise"></img>
-            <div className="exercise-card">
-              <li className="exercise-card-title">Day 1 - Upper day: </li>
-
-              <li> - Bench press</li>
-              <li> - Pullups</li>
-              <li> - Incline dumbell bech</li>
-              <li> - Seated row</li>
-              <li> - Laterall raises</li>
-              <li> - Biceps bench</li>
-              <li> - Triceps rope</li>
-              <li>--------------------------------</li>
-              <li>Date created: 2022-12-20</li>
-            </div>
-          </ul>
-          {/* ////////////////////////////////////////////////////// */}
-          <ul className="exercise-list-container">
-            <img className="exercise-image" src={logo} alt="exercise"></img>
-            <div className="exercise-card">
-              <li className="exercise-card-title">Day 1 - Upper day: </li>
-
-              <li> - Bench press</li>
-              <li> - Pullups</li>
-              <li> - Incline dumbell bech</li>
-              <li> - Seated row</li>
-              <li> - Laterall raises</li>
-              <li> - Biceps bench</li>
-              <li> - Triceps rope</li>
-              <li>--------------------------------</li>
-              <li>Date created: 2022-12-20</li>
-            </div>
-          </ul>
-          {/* ////////////////////////////////////////////////////// */}
-          <ul className="exercise-list-container">
-            <img className="exercise-image" src={logo} alt="exercise"></img>
-            <div className="exercise-card">
-              <li className="exercise-card-title">Day 1 - Upper day: </li>
-
-              <li> - Bench press</li>
-              <li> - Pullups</li>
-              <li> - Incline dumbell bech</li>
-              <li> - Seated row</li>
-              <li> - Laterall raises</li>
-              <li> - Biceps bench</li>
-              <li> - Triceps rope</li>
-              <li>--------------------------------</li>
-              <li>Date created: 2022-12-20</li>
-            </div>
-          </ul>
-          {/* ////////////////////////////////////////////////////// */}
-          <ul className="exercise-list-container">
-            <img className="exercise-image" src={logo} alt="exercise"></img>
-            <div className="exercise-card">
-              <li className="exercise-card-title">Day 1 - Upper day: </li>
-
-              <li> - Bench press</li>
-              <li> - Pullups</li>
-              <li> - Incline dumbell bech</li>
-              <li> - Seated row</li>
-              <li> - Laterall raises</li>
-              <li> - Biceps bench</li>
-              <li> - Triceps rope</li>
-              <li>--------------------------------</li>
-              <li>Date created: 2022-12-20</li>
-            </div>
-          </ul>
-          {/* ////////////////////////////////////////////////////// */}
-          <ul className="exercise-list-container">
-            <img className="exercise-image" src={logo} alt="exercise"></img>
-            <div className="exercise-card">
-              <li className="exercise-card-title">Day 1 - Upper day: </li>
-
-              <li> - Bench press</li>
-              <li> - Pullups</li>
-              <li> - Incline dumbell bech</li>
-              <li> - Seated row</li>
-              <li> - Laterall raises</li>
-              <li> - Biceps bench</li>
-              <li> - Triceps rope</li>
-              <li>--------------------------------</li>
-              <li>Date created: 2022-12-20</li>
-            </div>
-          </ul>
-          {/* ////////////////////////////////////////////////////// */}
-          <ul className="exercise-list-container">
-            <img className="exercise-image" src={logo} alt="exercise"></img>
-            <div className="exercise-card">
-              <li className="exercise-card-title">Day 1 - Upper day: </li>
-
-              <li> - Bench press</li>
-              <li> - Pullups</li>
-              <li> - Incline dumbell bech</li>
-              <li> - Seated row</li>
-              <li> - Laterall raises</li>
-              <li> - Biceps bench</li>
-              <li> - Triceps rope</li>
-              <li>--------------------------------</li>
-              <li>Date created: 2022-12-20</li>
-            </div>
-          </ul>
-          {/* ////////////////////////////////////////////////////// */}
+          {workouts.map((el) => {
+            return (
+              <ul
+                key={el.workout_id}
+                onClick={() => changeRoute(el.workout_id)}
+                className="exercise-list-container"
+              >
+                <img className="exercise-image" src={logo} alt="exercise"></img>
+                <div className="exercise-card">
+                  <li className="exercise-card-title">
+                    {el.workout_name} day:
+                  </li>
+                  {el.array_agg.map((name) => {
+                    return <li> - {name}</li>;
+                  })}
+                  <li>--------------------------------</li>
+                  <li>Date created: {el.date.slice(0, 10)}</li>
+                </div>
+              </ul>
+            );
+          })}
         </div>
       </div>
       <NewWorkoutModal />

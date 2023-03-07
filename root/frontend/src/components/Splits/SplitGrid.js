@@ -12,14 +12,11 @@ import axios from "axios";
 const WorkoutSplitGrid = () => {
   const [isModalOpen] = useContext(ModalContext);
   const splits = useContext(GlobalContext).splits;
+  const { getWorkouts } = useContext(GlobalContext);
   const navigate = useNavigate();
 
   const changeRoute = function (id) {
-    axios
-      .get(`http://localhost:8000/api/auth/splits/workouts/${id}`, {
-        withCredentials: true,
-      })
-      .then((data) => console.log(data.data));
+    getWorkouts(id);
     navigate(`/workouts/:${id}`);
   };
 

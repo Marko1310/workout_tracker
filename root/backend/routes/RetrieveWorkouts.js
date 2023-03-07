@@ -56,49 +56,55 @@ router.get("/splits/workouts/:splitId", requiresAuth, async (req, res) => {
 // @desc    get user workout
 // @access  Private
 router.get(
-  "/splits/workouts/workout/current",
+  "/splits/workouts/workout/:workoutId",
   requiresAuth,
   async (req, res) => {
     try {
       user_id = req.user.id;
-      const { workout_id } = req.body;
+      const workout_id = req.params.workoutId;
+      console.log(workout_id);
 
       // Get user exercises from the workout
       const exercises = await pool.query(
         "SELECT * FROM exercises WHERE user_id=$1 AND workout_id = $2 ORDER BY date DESC",
         [user_id, workout_id]
       );
-      //   console.log(exercises.rows);
-
-      // Get track data from each exercise from the workout
-      // 1. get all the id's of the exercises from the given workout
-      //   const exercise_id = await pool.query(
-      //     "SELECT exercise_id FROM exercises WHERE workout_id=$1 ORDER BY date DESC",
-      //     [workout_id]
-      //   );
-      //   console.log(exercise_id.rows);
-
-      //   const track = await pool.query(
-      //     "SELECT * FROM track WHERE user_id=$1 AND exercise_id = $2 ORDER BY date DESC",
-      //     [user_id, exercise_id]
-      //   );
-
-      //   const track = await pool.query(
-      //     "SELECT * FROM track WHERE user_id=$1 ORDER BY date DESC",
-      //     [user_id]
-      //   );
 
       const track_data = await pool.query(
-        "SELECT w.workout_name, e.exercise_name, t.set, t.weight FROM workouts w INNER JOIN exercises e ON e.workout_id = w.workout_id INNER JOIN track t ON t.exercise_id = e.exercise_id WHERE w.workout_id = $1;",
-        [9]
+        // "SELECT e.exercise_name, array_agg(t.set_reps_weight) FROM exercises e INNER JOIN track t ON t.exercise_id = e.exercise_id WHERE e.user_id = $1 AND e.workout_id = $2 GROUP BY e.exercise_name",
+        // [user_id, workout_id]
+
+        // "SELECT e.exercise_name, t.* FROM exercises e INNER JOIN track t ON e.exercise_id = t.exercise_id WHERE e.workout_id = $1;",
+        // [workout_id]
+
+        // "SELECT w.workout_name, e.exercise_name, e.exercise_id, t.track_id, t.set, t.weight FROM workouts w INNER JOIN exercises e ON e.workout_id = w.workout_id INNER JOIN track t ON t.exercise_id = e.exercise_id WHERE w.workout_id = $1",
+        // [workout_id]
+
+        "SELECT e.exercise_id, e.exercise_name, json_agg(json_build_object('sets', t.set, 'reps', t.reps, 'weight', t.weight)) AS sets_reps_weigh FROM exercises e LEFT JOIN track t ON e.exercise_id = t.exercise_id WHERE e.workout_id = $1 GROUP BY e.exercise_id, e.exercise_name ORDER BY e.exercise_id;",
+        [workout_id]
       );
 
-      //   const track_data = await pool.query(
-      //     "SELECT w.workout_name, e.exercise_name FROM workouts w INNER JOIN exercises e ON e.workout_id = w.workout_id WHERE w.workout_id = $1;",
-      //     [9]
+      // const groupedDataByExercise = track_data.reduce((acc, exercise) => {
+      //   const exerciseIndex = acc.findIndex(
+      //     (ex) => ex.exercise_id === exercise.exercise_id
       //   );
+      //   if (exerciseIndex === -1) {
+      //     acc.push({
+      //       exercise_name: exercise.exercise_name,
+      //       sets: [
+      //         {
+      //           set: exercise.set,
+      //           weight: exercise.weight,
+      //           reps: exercise_reps,
+      //         },
+      //       ],
+      //     });
+      //   } else {
+      //     acc[exerciseIndex].set;
+      //   }
+      // });
 
-      console.log(track_data.rows);
+      console.log(exercises);
       res.json(track_data.rows);
     } catch (err) {
       return res.status(500).send(err.message);

@@ -20,7 +20,7 @@ function Login() {
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
-  const { getWorkouts } = useContext(GlobalContext);
+  const { getSplits } = useContext(GlobalContext);
 
   // Routing
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ function Login() {
     if (user && navigate) {
       navigate("/dashboard");
     }
-  }, [user, navigate, getWorkouts]);
+  }, [user, navigate, getSplits]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,7 +59,7 @@ function Login() {
         { withCredentials: true }
       )
       .then(() => {
-        getWorkouts();
+        getSplits();
         setUser("aaa");
       })
       .catch((error) => {
