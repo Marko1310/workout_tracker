@@ -20,6 +20,7 @@ function Login() {
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const { getCurrentUser } = useContext(GlobalContext);
   const { getSplits } = useContext(GlobalContext);
 
   // Routing
@@ -59,6 +60,7 @@ function Login() {
         { withCredentials: true }
       )
       .then(() => {
+        getCurrentUser();
         getSplits();
         setUser("aaa");
       })

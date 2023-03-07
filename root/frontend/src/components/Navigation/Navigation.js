@@ -10,7 +10,7 @@ const Navigation = () => {
     <div className="navigation-container">
       <div className="user">
         <img className="navigation-logo" src={logo} alt="Logo" />
-        {user && <div className="navigation-user">{user.name}</div>}
+        {user && <div className="navigation-user">Hello {user.name}</div>}
       </div>
       {user && (
         <div className="links">
