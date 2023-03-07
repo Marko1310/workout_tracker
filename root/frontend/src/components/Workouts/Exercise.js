@@ -15,9 +15,9 @@ const Exercise = ({ el }) => {
       </div>
 
       {/* <form> */}
-      {el.sets_reps_weigh.map((el) => {
+      {el.sets_reps_weight.map((el) => {
         return (
-          <div className="exercise">
+          <div key={el.id} className="exercise">
             <p className="set">{el.sets}</p>
             <p className="previous">
               {el.weight} kg x {el.reps}

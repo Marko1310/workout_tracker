@@ -84,7 +84,7 @@
   outline: none;
   border: none;
   transition: all 0.4s;
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   margin-bottom: 2rem;
   font-family: "Montserrat", sans-serif;
 }
@@ -115,4 +115,9 @@
 
 p {
   color: #ffff;
+}
+
+.error {
+  color: #ee3d1e;
+  margin-bottom: 0;
 }

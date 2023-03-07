@@ -76,6 +76,7 @@ function Login() {
           <button
             onClick={(e) => {
               setForm("login");
+              setErrors({});
               e.preventDefault();
             }}
             className={`loginButtons ${form === "login" ? "current" : ""}`}
@@ -85,6 +86,7 @@ function Login() {
           <button
             onClick={(e) => {
               setForm("signup");
+              setErrors({});
               e.preventDefault("signup");
             }}
             className={`loginButtons ${form === "signup" ? "current" : ""}`}
@@ -140,7 +142,7 @@ function Login() {
           type="password"
           placeholder="Password"
         ></input>
-
+        {errors && form === "login" && <p className="error">{errors.error}</p>}
         <button type="submit" className="login-button">
           {form === "login" ? "Login" : "Register"}
         </button>
