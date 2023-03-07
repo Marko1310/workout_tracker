@@ -45,12 +45,12 @@ export const GlobalProvider = (props) => {
 
   const getExercises = (id) => {
     axios
-      .get(`http://localhost:8000/api/auth/splits/workouts/${id}`, {
+      .get(`http://localhost:8000/api/auth/splits/workouts/workout/${id}`, {
         withCredentials: true,
       })
       .then((data) => {
         console.log(data.data);
-        setWorkouts(data.data);
+        setExercises(data.data);
       })
       .catch((error) => {
         console.log(error);
@@ -76,6 +76,7 @@ export const GlobalProvider = (props) => {
     setPrevReps,
     getSplits,
     getWorkouts,
+    getExercises,
   };
 
   return (

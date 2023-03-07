@@ -3,30 +3,29 @@ import Exercise from "./Exercise";
 import Scroll from "../Scroll/Scroll";
 import "./Workout.css";
 import { ModalContext } from "../../context/ModalContext";
+import { GlobalContext } from "../../context/GlobalContext";
 import NewExercise from "./NewExercise";
 import Timer from "../Timer/Timer";
 
 const WorkoutSplit = () => {
   const [isModalOpen] = useContext(ModalContext);
+  const exercises = useContext(GlobalContext).exercises;
+  const workouts = useContext(GlobalContext).workouts;
 
   return (
     <div className="workout-main-container">
       <div className={`workout ${isModalOpen ? "blurred" : ""}`}>
         <div className="container">
           <div className="description-container">
-            <p>Title</p>
+            {<p>{"Push"}</p>}
             <Timer />
             <button className="buttonFinish">Finish</button>
             {/* <div>Notes</div> */}
           </div>
           <Scroll>
-            <Exercise />
-            <Exercise />
-            <Exercise />
-            <Exercise />
-            <Exercise />
-            <Exercise />
-            <Exercise />
+            {exercises.map((el) => {
+              return <Exercise key={el.exercise_id} el={el} />;
+            })}
           </Scroll>
 
           <div className="button-container">

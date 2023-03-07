@@ -1,10 +1,10 @@
 import "./Exercise.css";
 
-const Exercise = () => {
+const Exercise = ({ el }) => {
   return (
     <div className="exercise-container">
       <div className="title-container">
-        <p className="exercise-title">Name of the exercise</p>
+        <p className="exercise-title">{el.exercise_name}</p>
         <div>...</div>
       </div>
       <div className="exercise">
@@ -14,77 +14,32 @@ const Exercise = () => {
         <p>Reps</p>
 
         {/* <form> */}
-        <p className="set">1</p>
-        <p className="previous">100 kg x 5</p>
-        {/* <label htmlFor="name"></label> */}
-        <input
-          className="exercise-forms"
-          type="text"
-          id="kg"
-          name="kg"
-          placeholder="kg"
-        ></input>
-        <input
-          className="exercise-forms"
-          type="text"
-          id="reps"
-          name="reps"
-          placeholder="reps"
-        ></input>
+        {el.sets_reps_weigh.map((el) => {
+          return (
+            <>
+              <p className="set">{el.sets}</p>
+              <p className="previous">
+                {el.weight} kg x {el.reps}
+              </p>
+              {/* <label htmlFor="name"></label> */}
+              <input
+                className="exercise-forms"
+                type="text"
+                id="kg"
+                name="kg"
+                placeholder="kg"
+              ></input>
+              <input
+                className="exercise-forms"
+                type="text"
+                id="reps"
+                name="reps"
+                placeholder="reps"
+              ></input>
+            </>
+          );
+        })}
 
-        <p className="set">2</p>
-        <p className="previous">100kg x 5</p>
-        {/* <label htmlFor="name"></label> */}
-        <input
-          className="exercise-forms"
-          type="text"
-          id="kg"
-          name="kg"
-          placeholder="kg"
-        ></input>
-        <input
-          className="exercise-forms"
-          type="text"
-          id="reps"
-          name="reps"
-          placeholder="reps"
-        ></input>
-
-        <p className="set">3</p>
-        <p className="previous">100kg x 5</p>
-        {/* <label htmlFor="name"></label> */}
-        <input
-          className="exercise-forms"
-          type="text"
-          id="kg"
-          name="kg"
-          placeholder="kg"
-        ></input>
-        <input
-          className="exercise-forms"
-          type="text"
-          id="reps"
-          name="reps"
-          placeholder="reps"
-        ></input>
-
-        <p className="set">3</p>
-        <p className="previous">100kg x 5</p>
-        {/* <label htmlFor="name"></label> */}
-        <input
-          className="exercise-forms"
-          type="text"
-          id="kg"
-          name="kg"
-          placeholder="kg"
-        ></input>
-        <input
-          className="exercise-forms"
-          type="text"
-          id="reps"
-          name="reps"
-          placeholder="reps"
-        ></input>
         {/* </form> */}
       </div>
       <button className="addSetBtn">+ Add Set</button>

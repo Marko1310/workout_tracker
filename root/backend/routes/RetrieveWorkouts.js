@@ -64,47 +64,13 @@ router.get(
       const workout_id = req.params.workoutId;
       console.log(workout_id);
 
-      // Get user exercises from the workout
-      const exercises = await pool.query(
-        "SELECT * FROM exercises WHERE user_id=$1 AND workout_id = $2 ORDER BY date DESC",
-        [user_id, workout_id]
-      );
-
+      // Get user exercises with tracking data from a given workout
+      // importing track data into object to attach to every exercise
       const track_data = await pool.query(
-        // "SELECT e.exercise_name, array_agg(t.set_reps_weight) FROM exercises e INNER JOIN track t ON t.exercise_id = e.exercise_id WHERE e.user_id = $1 AND e.workout_id = $2 GROUP BY e.exercise_name",
-        // [user_id, workout_id]
-
-        // "SELECT e.exercise_name, t.* FROM exercises e INNER JOIN track t ON e.exercise_id = t.exercise_id WHERE e.workout_id = $1;",
-        // [workout_id]
-
-        // "SELECT w.workout_name, e.exercise_name, e.exercise_id, t.track_id, t.set, t.weight FROM workouts w INNER JOIN exercises e ON e.workout_id = w.workout_id INNER JOIN track t ON t.exercise_id = e.exercise_id WHERE w.workout_id = $1",
-        // [workout_id]
-
         "SELECT e.exercise_id, e.exercise_name, json_agg(json_build_object('sets', t.set, 'reps', t.reps, 'weight', t.weight)) AS sets_reps_weigh FROM exercises e LEFT JOIN track t ON e.exercise_id = t.exercise_id WHERE e.workout_id = $1 GROUP BY e.exercise_id, e.exercise_name ORDER BY e.exercise_id;",
         [workout_id]
       );
 
-      // const groupedDataByExercise = track_data.reduce((acc, exercise) => {
-      //   const exerciseIndex = acc.findIndex(
-      //     (ex) => ex.exercise_id === exercise.exercise_id
-      //   );
-      //   if (exerciseIndex === -1) {
-      //     acc.push({
-      //       exercise_name: exercise.exercise_name,
-      //       sets: [
-      //         {
-      //           set: exercise.set,
-      //           weight: exercise.weight,
-      //           reps: exercise_reps,
-      //         },
-      //       ],
-      //     });
-      //   } else {
-      //     acc[exerciseIndex].set;
-      //   }
-      // });
-
-      console.log(exercises);
       res.json(track_data.rows);
     } catch (err) {
       return res.status(500).send(err.message);

@@ -11,12 +11,13 @@ import logo from "../../images/workout.png";
 const WorkoutGrid = () => {
   const [isModalOpen] = useContext(ModalContext);
   const workouts = useContext(GlobalContext).workouts;
+  const { getExercises } = useContext(GlobalContext);
   console.log(workouts);
 
   const navigate = useNavigate();
 
   const changeRoute = function (id) {
-    // getExercises(id);
+    getExercises(id);
     navigate(`/workout/:${id}`);
   };
 
