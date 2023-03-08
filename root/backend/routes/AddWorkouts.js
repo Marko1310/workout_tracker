@@ -53,6 +53,8 @@ router.post("/split/workout/new", requiresAuth, async (req, res) => {
     user_id = req.user.id;
     const date = new Date();
     const { title, split_id } = req.body;
+    console.log(title);
+    console.log(split_id);
 
     if (!title) {
       return res.status(400).json({ title: "Title field can not be empty" });

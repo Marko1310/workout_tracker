@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 //create context
 export const GlobalContext = createContext();
@@ -80,7 +81,6 @@ export const GlobalProvider = (props) => {
   };
 
   const getWorkouts = (id) => {
-    setLoading(true);
     axios
       .get(`http://localhost:8000/api/auth/splits/workouts/${id}`, {
         withCredentials: true,
@@ -91,6 +91,7 @@ export const GlobalProvider = (props) => {
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   };
 
@@ -111,7 +112,7 @@ export const GlobalProvider = (props) => {
 
   const addSplit = (e, title, days) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
     axios
       .post(
         "http://localhost:8000/api/auth/split/new",
@@ -121,9 +122,32 @@ export const GlobalProvider = (props) => {
       .then((data) => {
         if (data) {
           setIsModalOpen(false);
-          // setLoading(false);
           getSplits();
         }
+      });
+  };
+
+  const addWorkout = (e, title, split_id) => {
+    e.preventDefault();
+    axios
+      .post(
+        "http://localhost:8000/api/auth/split/workout/new",
+        { title, split_id },
+        { withCredentials: true }
+      )
+      .then((data) => {
+        if (data) {
+          setIsModalOpen(false);
+          // setLoading(false);
+          getWorkouts();
+        } else {
+          setIsModalOpen(false);
+          // setLoading(false);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        // setLoading(false);
       });
   };
 
@@ -151,8 +175,10 @@ export const GlobalProvider = (props) => {
     getExercises,
     loading,
     addSplit,
+    addWorkout,
     isModalOpen,
     setIsModalOpen,
+    setLoading,
   };
 
   return (

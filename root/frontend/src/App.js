@@ -33,7 +33,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="dashboard" element={<SplitGrid />} />
-              <Route path="workouts/:id" element={<WorkoutGrid />} />
+              <Route path="workouts/:split_id" element={<WorkoutGrid />} />
               <Route path="workout/:id" element={<Workout />} />
               <Route path="*" element={<NotFound />} />
               {/* <Route path="test" element={<Timer />} /> */}

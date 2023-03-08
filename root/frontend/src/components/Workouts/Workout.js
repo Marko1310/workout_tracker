@@ -8,7 +8,7 @@ import Timer from "../Timer/Timer";
 import { useNavigate } from "react-router-dom";
 
 const WorkoutSplit = () => {
-  const [isModalOpen] = useContext(GlobalContext);
+  const { isModalOpen } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
   const { exercises } = useContext(GlobalContext);
   const navigate = useNavigate();

@@ -6,7 +6,6 @@ import { GlobalContext } from "../../context/GlobalContext.js";
 
 import "./SplitGrid.css";
 import logo from "../../images/workout.png";
-import axios from "axios";
 
 const WorkoutSplitGrid = () => {
   const { isModalOpen } = useContext(GlobalContext);
@@ -15,9 +14,9 @@ const WorkoutSplitGrid = () => {
   const { getWorkouts } = useContext(GlobalContext);
   const navigate = useNavigate();
 
-  const changeRoute = function (id) {
+  const changeRoute = (id) => {
     getWorkouts(id);
-    navigate(`/workouts/:${id}`);
+    navigate(`/workouts/${id}`);
   };
 
   useEffect(() => {
@@ -36,7 +35,7 @@ const WorkoutSplitGrid = () => {
               return (
                 <ul
                   key={el.split_id}
-                  onClick={() => changeRoute(el.split_id)}
+                  onClick={isModalOpen ? null : () => changeRoute(el.split_id)}
                   className="workout-container"
                 >
                   <img className="workout-image" src={logo} alt="Workout"></img>

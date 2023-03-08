@@ -9,11 +9,18 @@ const NewWorkoutSplit = () => {
   const [title, setTitle] = useState("");
   const [days, setDays] = useState("");
   const { addSplit } = useContext(GlobalContext);
+  const { setLoading } = useContext(GlobalContext);
+
+  const handleNewSplit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    addSplit(e, title, days);
+  };
 
   return (
     <div className={`newWorkout-container + ${isModalOpen ? "show" : ""}`}>
       <p className="newWorkout-title">Create new workout split</p>
-      <form onSubmit={(e) => addSplit(e, title, days)}>
+      <form onSubmit={(e) => handleNewSplit(e)}>
         <label htmlFor="title">Title of the split</label>
         <input
           onChange={(e) => setTitle(e.target.value)}
@@ -37,15 +44,7 @@ const NewWorkoutSplit = () => {
         </select>
 
         <div className="button-container">
-          <button
-            onClick={(e) => {
-              // e.preventDefault();
-              // setIsModalOpen(false);
-            }}
-            className="button"
-          >
-            Create workout split
-          </button>
+          <button className="button">Create workout split</button>
           <button
             onClick={(e) => {
               e.preventDefault();

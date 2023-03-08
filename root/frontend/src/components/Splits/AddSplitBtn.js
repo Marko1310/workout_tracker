@@ -11,7 +11,7 @@ const AddNewWorkoutBtn = () => {
   return (
     <div className={`addNewWorkout-container ${isModalOpen ? `blurred` : ""}`}>
       <img
-        onClick={() => setIsModalOpen(true)}
+        onClick={isModalOpen ? null : () => setIsModalOpen(true)}
         className="addLogo"
         alt="addLogo"
         src={addLogo}
