@@ -1,5 +1,5 @@
 // React
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // css
@@ -16,25 +16,29 @@ import NotFound from "./components/NotFound/NotFound";
 
 // Context
 import { GlobalContext } from "./context/GlobalContext";
-import { ModalContext } from "./context/ModalContext";
 
 function App() {
-  const { user } = useContext(GlobalContext);
-  const [isModalOpen] = useContext(ModalContext);
+  const { loading } = useContext(GlobalContext);
 
   return (
     <Router>
       <div className="App">
         <div className="content">
           {<Navigation />}
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="dashboard" element={<SplitGrid />} />
-            <Route path="workouts/:id" element={<WorkoutGrid />} />
-            <Route path="workout/:id" element={<Workout />} />
-            <Route path="*" element={<NotFound />} />
-            {/* <Route path="test" element={<Timer />} /> */}
-          </Routes>
+          {loading ? (
+            <div className="loading">
+              <h1>Loading</h1>
+            </div>
+          ) : (
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="dashboard" element={<SplitGrid />} />
+              <Route path="workouts/:id" element={<WorkoutGrid />} />
+              <Route path="workout/:id" element={<Workout />} />
+              <Route path="*" element={<NotFound />} />
+              {/* <Route path="test" element={<Timer />} /> */}
+            </Routes>
+          )}
           <Particle />
         </div>
       </div>

@@ -9,8 +9,8 @@ import Timer from "../Timer/Timer";
 
 const WorkoutSplit = () => {
   const [isModalOpen] = useContext(ModalContext);
-  const exercises = useContext(GlobalContext).exercises;
-  const workouts = useContext(GlobalContext).workouts;
+  const { exercises } = useContext(GlobalContext);
+  const { workouts } = useContext(GlobalContext);
 
   return (
     <div className="workout-main-container">

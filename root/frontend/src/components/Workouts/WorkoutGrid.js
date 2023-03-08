@@ -10,9 +10,8 @@ import logo from "../../images/workout.png";
 
 const WorkoutGrid = () => {
   const [isModalOpen] = useContext(ModalContext);
-  const workouts = useContext(GlobalContext).workouts;
+  const { workouts } = useContext(GlobalContext);
   const { getExercises } = useContext(GlobalContext);
-  console.log(workouts);
 
   const navigate = useNavigate();
 

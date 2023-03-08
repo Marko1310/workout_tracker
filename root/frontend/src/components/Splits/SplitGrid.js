@@ -11,7 +11,7 @@ import axios from "axios";
 
 const WorkoutSplitGrid = () => {
   const [isModalOpen] = useContext(ModalContext);
-  const splits = useContext(GlobalContext).splits;
+  const { splits } = useContext(GlobalContext);
   const { getWorkouts } = useContext(GlobalContext);
   const navigate = useNavigate();
 

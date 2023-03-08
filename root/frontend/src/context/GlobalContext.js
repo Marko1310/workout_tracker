@@ -14,6 +14,7 @@ export const GlobalProvider = (props) => {
   const [reps, setReps] = useState([]);
   const [prevSets, setPrevSets] = useState([]);
   const [prevReps, setPrevReps] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getCurrentUser();
@@ -27,15 +28,17 @@ export const GlobalProvider = (props) => {
       .then((user) => {
         if (!user) {
           setUser(null);
+          setLoading(false);
         } else {
+          setLoading(true);
           setUser(user.data);
           axios
             .get("http://localhost:8000/api/auth/splits/current", {
               withCredentials: true,
             })
             .then((data) => {
-              console.log(data.data);
               setSplits(data.data);
+              setLoading(false);
             })
             .catch((error) => {
               console.log(error);
@@ -124,6 +127,7 @@ export const GlobalProvider = (props) => {
     getSplits,
     getWorkouts,
     getExercises,
+    loading,
   };
 
   return (

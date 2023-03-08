@@ -167,3 +167,12 @@ main {
 .blurred {
   filter: blur(5px);
 }
+
+.loading {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100vh;
+  min-height: 100vh;
+}
