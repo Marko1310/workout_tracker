@@ -63,28 +63,15 @@ export const GlobalProvider = (props) => {
       });
   };
 
-  const getSplits = () => {
-    axios
-      .get("http://localhost:8000/api/auth/splits/current", {
-        withCredentials: true,
-      })
-      .then((data) => {
-        console.log(data.data);
-        setSplits(data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   const getWorkouts = (id) => {
+    setLoading(true);
     axios
       .get(`http://localhost:8000/api/auth/splits/workouts/${id}`, {
         withCredentials: true,
       })
       .then((data) => {
-        console.log(data.data);
         setWorkouts(data.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -92,13 +79,14 @@ export const GlobalProvider = (props) => {
   };
 
   const getExercises = (id) => {
+    setLoading(true);
     axios
       .get(`http://localhost:8000/api/auth/splits/workouts/workout/${id}`, {
         withCredentials: true,
       })
       .then((data) => {
-        console.log(data.data);
         setExercises(data.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -124,7 +112,6 @@ export const GlobalProvider = (props) => {
     setPrevReps,
     getCurrentUser,
     logout,
-    getSplits,
     getWorkouts,
     getExercises,
     loading,
