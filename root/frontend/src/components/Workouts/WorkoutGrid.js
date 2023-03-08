@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ModalContext } from "../../context/ModalContext.js";
 import NewWorkoutModal from "./NewWorkoutModal.js";
 import AddWorkoutBtn from "./AddWorkoutBtn.js";
@@ -10,6 +10,7 @@ import logo from "../../images/workout.png";
 
 const WorkoutGrid = () => {
   const [isModalOpen] = useContext(ModalContext);
+  const { user } = useContext(GlobalContext);
   const { workouts } = useContext(GlobalContext);
   const { getExercises } = useContext(GlobalContext);
 
@@ -19,6 +20,12 @@ const WorkoutGrid = () => {
     getExercises(id);
     navigate(`/workout/:${id}`);
   };
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   return (
     <div className="workoutGrid-main-container">

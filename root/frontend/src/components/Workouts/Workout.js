@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Exercise from "./Exercise";
 import Scroll from "../Scroll/Scroll";
 import "./Workout.css";
@@ -6,11 +6,20 @@ import { ModalContext } from "../../context/ModalContext";
 import { GlobalContext } from "../../context/GlobalContext";
 import NewExercise from "./NewExercise";
 import Timer from "../Timer/Timer";
+import { useNavigate } from "react-router-dom";
 
 const WorkoutSplit = () => {
   const [isModalOpen] = useContext(ModalContext);
+  const { user } = useContext(GlobalContext);
   const { exercises } = useContext(GlobalContext);
   const { workouts } = useContext(GlobalContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   return (
     <div className="workout-main-container">
