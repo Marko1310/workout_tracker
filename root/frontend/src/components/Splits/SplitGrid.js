@@ -13,6 +13,7 @@ const WorkoutSplitGrid = () => {
   const { splits } = useContext(GlobalContext);
   const { getWorkouts } = useContext(GlobalContext);
   const navigate = useNavigate();
+  const { getSplits } = useContext(GlobalContext);
 
   const changeRoute = (id) => {
     getWorkouts(id);
@@ -23,6 +24,7 @@ const WorkoutSplitGrid = () => {
     if (!user) {
       navigate("/");
     }
+    getSplits();
   }, [user, navigate]);
 
   return (

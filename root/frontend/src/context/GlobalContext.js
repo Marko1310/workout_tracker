@@ -112,7 +112,6 @@ export const GlobalProvider = (props) => {
 
   const addSplit = (e, title, days) => {
     e.preventDefault();
-    // setLoading(true);
     axios
       .post(
         "http://localhost:8000/api/auth/split/new",
@@ -137,17 +136,18 @@ export const GlobalProvider = (props) => {
       )
       .then((data) => {
         if (data) {
+          getWorkouts(split_id);
           setIsModalOpen(false);
-          // setLoading(false);
+          setLoading(false);
           getWorkouts();
         } else {
           setIsModalOpen(false);
-          // setLoading(false);
+          setLoading(false);
         }
       })
       .catch((error) => {
         console.log(error);
-        // setLoading(false);
+        setLoading(false);
       });
   };
 

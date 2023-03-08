@@ -14,7 +14,7 @@ const NewWorkoutModal = () => {
 
   const handleNewWorkout = (e) => {
     e.preventDefault();
-    setLoading(false);
+    setLoading(true);
     addWorkout(e, title, split_id);
   };
   return (
