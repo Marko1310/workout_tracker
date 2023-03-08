@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import { ModalContext } from "../../context/ModalContext";
+import { GlobalContext } from "../../context/GlobalContext";
 
 import "./NewWorkoutModal.css";
 
 const NewWorkoutModal = () => {
-  const [isModalOpen, setIsModalOpen] = useContext(ModalContext);
+  const { isModalOpen } = useContext(GlobalContext);
+  const { setIsModalOpen } = useContext(GlobalContext);
 
   return (
     <div className={`newWorkout-container ${isModalOpen ? "show" : ""}`}>

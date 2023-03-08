@@ -2,10 +2,11 @@ import "./AddWorkoutBtn.css";
 import { useContext } from "react";
 
 import addLogo from "../../images/plus-circle.png";
-import { ModalContext } from "../../context/ModalContext";
+import { GlobalContext } from "../../context/GlobalContext";
 
 const AddWorkoutBtn = () => {
-  const [isModalOpen, setIsModalOpen] = useContext(ModalContext);
+  const { isModalOpen } = useContext(GlobalContext);
+  const { setIsModalOpen } = useContext(GlobalContext);
 
   return (
     <div className={`addNewExercise-container ${isModalOpen ? `blurred` : ""}`}>

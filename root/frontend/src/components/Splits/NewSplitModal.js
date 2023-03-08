@@ -1,17 +1,22 @@
-import React, { useContext } from "react";
-import { ModalContext } from "../../context/ModalContext";
+import React, { useContext, useState } from "react";
+import { GlobalContext } from "../../context/GlobalContext";
 
 import "./NewSplitModal.css";
 
 const NewWorkoutSplit = () => {
-  const [isModalOpen, setIsModalOpen] = useContext(ModalContext);
+  const { isModalOpen } = useContext(GlobalContext);
+  const { setIsModalOpen } = useContext(GlobalContext);
+  const [title, setTitle] = useState("");
+  const [days, setDays] = useState("");
+  const { addSplit } = useContext(GlobalContext);
 
   return (
     <div className={`newWorkout-container + ${isModalOpen ? "show" : ""}`}>
       <p className="newWorkout-title">Create new workout split</p>
-      <form>
+      <form onSubmit={(e) => addSplit(e, title, days)}>
         <label htmlFor="title">Title of the split</label>
         <input
+          onChange={(e) => setTitle(e.target.value)}
           className="forms"
           type="text"
           id="title"
@@ -21,17 +26,21 @@ const NewWorkoutSplit = () => {
 
         <label htmlFor="days">Number of days in a week</label>
 
-        <select className="forms">
+        <select onChange={(e) => setDays(e.target.value)} className="forms">
           <option name="1">1</option>
           <option name="2">2</option>
           <option name="3">3</option>
+          <option name="4">4</option>
+          <option name="5">5</option>
+          <option name="6">6</option>
+          <option name="7">7</option>
         </select>
 
         <div className="button-container">
           <button
             onClick={(e) => {
-              e.preventDefault();
-              setIsModalOpen(false);
+              // e.preventDefault();
+              // setIsModalOpen(false);
             }}
             className="button"
           >

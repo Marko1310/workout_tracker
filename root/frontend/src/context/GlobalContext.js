@@ -15,6 +15,7 @@ export const GlobalProvider = (props) => {
   const [prevSets, setPrevSets] = useState([]);
   const [prevReps, setPrevReps] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     getCurrentUser();
@@ -93,6 +94,21 @@ export const GlobalProvider = (props) => {
       });
   };
 
+  const addSplit = (e, title, days) => {
+    e.preventDefault();
+    axios
+      .post(
+        "http://localhost:8000/api/auth/split/new",
+        { title, days },
+        { withCredentials: true }
+      )
+      .then((data) => {
+        if (data) {
+          setIsModalOpen(false);
+        }
+      });
+  };
+
   const globalState = {
     user,
     setUser,
@@ -115,6 +131,9 @@ export const GlobalProvider = (props) => {
     getWorkouts,
     getExercises,
     loading,
+    addSplit,
+    isModalOpen,
+    setIsModalOpen,
   };
 
   return (

@@ -5,16 +5,13 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 import { GlobalProvider } from "./context/GlobalContext";
-import { ModalProvider } from "./context/ModalContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ModalProvider>
-      <GlobalProvider>
-        <App />
-      </GlobalProvider>
-    </ModalProvider>
+    <GlobalProvider>
+      <App />
+    </GlobalProvider>
   </React.StrictMode>
 );
 

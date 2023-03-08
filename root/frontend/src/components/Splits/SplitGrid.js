@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import { ModalContext } from "../../context/ModalContext.js";
 import AddSplitBtn from "./AddSplitBtn";
 import NewSplit from "./NewSplitModal.js";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +9,7 @@ import logo from "../../images/workout.png";
 import axios from "axios";
 
 const WorkoutSplitGrid = () => {
-  const [isModalOpen] = useContext(ModalContext);
+  const { isModalOpen } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
   const { splits } = useContext(GlobalContext);
   const { getWorkouts } = useContext(GlobalContext);
