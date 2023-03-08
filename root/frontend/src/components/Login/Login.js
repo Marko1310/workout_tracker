@@ -61,8 +61,6 @@ function Login() {
       )
       .then(() => {
         getCurrentUser();
-        getSplits();
-        setUser("aaa");
       })
       .catch((error) => {
         console.log(error);

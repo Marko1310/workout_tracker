@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 //create context
 export const GlobalContext = createContext();
@@ -15,14 +15,32 @@ export const GlobalProvider = (props) => {
   const [prevSets, setPrevSets] = useState([]);
   const [prevReps, setPrevReps] = useState([]);
 
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
+
   const getCurrentUser = () => {
     axios
       .get("http://localhost:8000/api/auth/current", {
         withCredentials: true,
       })
-      .then((data) => {
-        console.log(data.data);
-        setUser(data.data);
+      .then((user) => {
+        if (!user) {
+          setUser(null);
+        } else {
+          setUser(user.data);
+          axios
+            .get("http://localhost:8000/api/auth/splits/current", {
+              withCredentials: true,
+            })
+            .then((data) => {
+              console.log(data.data);
+              setSplits(data.data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       })
       .catch((error) => {
         console.log(error);
