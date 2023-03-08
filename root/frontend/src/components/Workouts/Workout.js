@@ -3,12 +3,13 @@ import Exercise from "./Exercise";
 import Scroll from "../Scroll/Scroll";
 import "./Workout.css";
 import { GlobalContext } from "../../context/GlobalContext";
-import NewExercise from "./NewExercise";
+import NewExerciseModal from "./NewExerciseModal";
 import Timer from "../Timer/Timer";
 import { useNavigate } from "react-router-dom";
 
 const WorkoutSplit = () => {
   const { isModalOpen } = useContext(GlobalContext);
+  const { setIsModalOpen } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
   const { exercises } = useContext(GlobalContext);
   const navigate = useNavigate();
@@ -36,14 +37,31 @@ const WorkoutSplit = () => {
           </Scroll>
 
           <div className="button-container">
-            <button className="workoutBtn add">Add exercise</button>
+            <button
+              onClick={isModalOpen ? null : () => setIsModalOpen(true)}
+              className="workoutBtn add"
+            >
+              Add exercise
+            </button>
             <button className="workoutBtn">Save workout</button>
           </div>
         </div>
       </div>
-      <NewExercise />
+      <NewExerciseModal />
     </div>
   );
 };
 
 export default WorkoutSplit;
+
+{
+  /* <div className={`addNewExercise-container ${isModalOpen ? `blurred` : ""}`}>
+  <img
+    onClick={isModalOpen ? null : () => setIsModalOpen(true)}
+    className="addLogo"
+    alt="addLogo"
+    src={addLogo}
+  />
+  <p>Add new workout</p>
+</div>; */
+}

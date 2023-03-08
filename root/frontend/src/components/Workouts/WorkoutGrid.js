@@ -17,7 +17,7 @@ const WorkoutGrid = () => {
 
   const changeRoute = function (id) {
     getExercises(id);
-    navigate(`/workout/:${id}`);
+    navigate(`/workout/${id}`);
   };
 
   useEffect(() => {

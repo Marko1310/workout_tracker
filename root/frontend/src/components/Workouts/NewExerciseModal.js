@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 
-import "./NewExercise.css";
+import "./NewExerciseModal.css";
 
-const NewExercise = () => {
+const NewExerciseModal = () => {
   const { isModalOpen } = useContext(GlobalContext);
   const { setIsModalOpen } = useContext(GlobalContext);
 
@@ -63,4 +63,4 @@ const NewExercise = () => {
   );
 };
 
-export default NewExercise;
+export default NewExerciseModal;
