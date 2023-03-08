@@ -6,6 +6,7 @@ import { useContext } from "react";
 
 const Navigation = () => {
   const { user, setUser } = useContext(GlobalContext);
+  const { logout } = useContext(GlobalContext);
   return (
     <div className="navigation-container">
       <div className="user">
@@ -15,7 +16,7 @@ const Navigation = () => {
       {user && (
         <div className="links">
           <NavLink to="/dashboard">Home</NavLink>
-          <NavLink onClick={() => setUser(null)} to="/">
+          <NavLink onClick={() => logout()} to="/">
             Logout
           </NavLink>
         </div>

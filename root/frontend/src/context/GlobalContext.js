@@ -29,6 +29,19 @@ export const GlobalProvider = (props) => {
       });
   };
 
+  const logout = () => {
+    axios
+      .get("http://localhost:8000/api/auth/logout", {
+        withCredentials: true,
+      })
+      .then(() => {
+        setUser(null);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const getSplits = () => {
     axios
       .get("http://localhost:8000/api/auth/splits/current", {
@@ -89,6 +102,7 @@ export const GlobalProvider = (props) => {
     prevReps,
     setPrevReps,
     getCurrentUser,
+    logout,
     getSplits,
     getWorkouts,
     getExercises,

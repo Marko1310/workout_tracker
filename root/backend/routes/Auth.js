@@ -140,7 +140,7 @@ router.get("/current", requiresAuth, (req, res) => {
 // @route   PUT /api/auth/logout
 // @desc    Logout user and clear cookie
 // @access  Private
-router.put("/logout", requiresAuth, async (req, res) => {
+router.get("/logout", requiresAuth, async (req, res) => {
   try {
     res.clearCookie("access-token");
     return res.json({ success: true });
