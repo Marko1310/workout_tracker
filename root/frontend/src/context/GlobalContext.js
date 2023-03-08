@@ -64,6 +64,21 @@ export const GlobalProvider = (props) => {
       });
   };
 
+  const getSplits = () => {
+    axios
+      .get("http://localhost:8000/api/auth/splits/current", {
+        withCredentials: true,
+      })
+      .then((data) => {
+        setSplits(data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
   const getWorkouts = (id) => {
     setLoading(true);
     axios
@@ -96,6 +111,7 @@ export const GlobalProvider = (props) => {
 
   const addSplit = (e, title, days) => {
     e.preventDefault();
+    setLoading(true);
     axios
       .post(
         "http://localhost:8000/api/auth/split/new",
@@ -105,6 +121,8 @@ export const GlobalProvider = (props) => {
       .then((data) => {
         if (data) {
           setIsModalOpen(false);
+          // setLoading(false);
+          getSplits();
         }
       });
   };
@@ -128,6 +146,7 @@ export const GlobalProvider = (props) => {
     setPrevReps,
     getCurrentUser,
     logout,
+    getSplits,
     getWorkouts,
     getExercises,
     loading,
