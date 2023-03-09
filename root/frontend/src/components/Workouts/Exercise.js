@@ -11,9 +11,8 @@ const Exercise = ({ el }) => {
 
   const handleNewSet = (e) => {
     e.preventDefault();
-    // setLoading(true);
-    addNewSet(e, el.exercise_id, id);
-    console.log(`workout id is ${id}`);
+    setLoading(true);
+    addNewSet(el.exercise_id, id);
   };
 
   return (

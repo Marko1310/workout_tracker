@@ -19,6 +19,7 @@ app.use(cors(corsOptions));
 const authRoute = require("./routes/Auth");
 const addWorkoutRoute = require("./routes/AddWorkouts");
 const retrieveWorkoutRoute = require("./routes/RetrieveWorkouts");
+const editWorkoutRoute = require("./routes/EditWorkouts");
 
 const PORT = 8000;
 
@@ -31,6 +32,7 @@ app.use(cookieParser());
 app.use("/api/auth", authRoute);
 app.use("/api/auth", addWorkoutRoute);
 app.use("/api/auth", retrieveWorkoutRoute);
+app.use("/api/auth", editWorkoutRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

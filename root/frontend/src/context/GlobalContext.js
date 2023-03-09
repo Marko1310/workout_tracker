@@ -13,11 +13,11 @@ export const GlobalProvider = (props) => {
   const [exercises, setExercises] = useState([]);
   // const [prevSets, setPrevSets] = useState([]);
   // const [prevReps, setPrevReps] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    // getCurrentUser();
+    getCurrentUser();
   }, []);
 
   const getCurrentUser = () => {
@@ -47,6 +47,7 @@ export const GlobalProvider = (props) => {
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   };
 
@@ -94,7 +95,7 @@ export const GlobalProvider = (props) => {
   };
 
   const getExercises = (workout_id) => {
-    // setLoading(true);
+    setLoading(true);
     axios
       .get(
         `http://localhost:8000/api/auth/splits/workouts/workout/${workout_id}`,
@@ -104,10 +105,11 @@ export const GlobalProvider = (props) => {
       )
       .then((data) => {
         setExercises(data.data);
-        // setLoading(false);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   };
 
@@ -122,13 +124,18 @@ export const GlobalProvider = (props) => {
       .then((data) => {
         if (data) {
           setIsModalOpen(false);
+          setLoading(false);
           getSplits();
         }
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsModalOpen(false);
+        setLoading(false);
       });
   };
 
   const addWorkout = (e, title, split_id) => {
-    e.preventDefault();
     axios
       .post(
         "http://localhost:8000/api/auth/split/workout/new",
@@ -147,6 +154,7 @@ export const GlobalProvider = (props) => {
       })
       .catch((error) => {
         console.log(error);
+        setIsModalOpen(false);
         setLoading(false);
       });
   };
@@ -174,25 +182,20 @@ export const GlobalProvider = (props) => {
       });
   };
 
-  const addNewSet = (e, exercise_id, workout_id) => {
-    e.preventDefault();
+  const addNewSet = (exercise_id, workout_id) => {
     axios
       .post(
         "http://localhost:8000/api/auth/split/workout/exercise/set/new",
         { exercise_id },
         { withCredentials: true }
       )
-      .then((data) => {
-        if (data) {
-          getExercises(workout_id);
-          // setLoading(false);
-        } else {
-          // setLoading(false);
-        }
+      .then(() => {
+        getExercises(workout_id);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
-        // setLoading(false);
+        setLoading(false);
       });
   };
 

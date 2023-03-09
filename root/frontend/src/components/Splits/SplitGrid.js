@@ -40,7 +40,14 @@ const WorkoutSplitGrid = () => {
                   onClick={isModalOpen ? null : () => changeRoute(el.split_id)}
                   className="workout-container"
                 >
-                  <img className="workout-image" src={logo} alt="Workout"></img>
+                  <div className="image-and-delete-container">
+                    <img
+                      className="workout-image"
+                      src={logo}
+                      alt="Workout"
+                    ></img>
+                    <button className="delete-split">Delete</button>
+                  </div>
                   <div className="workout-card">
                     <li className="workout-card-title">{el.split_name}</li>
                     <li>{el.days} day split:</li>

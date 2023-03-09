@@ -45,8 +45,39 @@
   scale: 1.05;
 }
 
+.image-and-delete-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
 .workout-image {
   height: 5rem;
+}
+
+.delete-split {
+  position: absolute;
+  right: 0rem;
+  top: 0rem;
+  height: 2rem;
+  width: 5rem;
+  font-size: 1rem;
+  color: #fff;
+  padding: 0rem 0.5rem 0rem 0.5rem;
+  border-radius: 3px;
+  font-weight: 600;
+  background-color: #d42c1d;
+  outline: none;
+  border: none;
+  transition: all 0.4s;
+  font-family: "Montserrat", sans-serif;
+}
+
+.delete-split:hover {
+  scale: 1.05;
+  filter: brightness(1.05);
 }
 
 .workout-card {

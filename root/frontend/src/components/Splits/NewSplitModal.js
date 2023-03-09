@@ -12,7 +12,6 @@ const NewWorkoutSplit = () => {
   const { setLoading } = useContext(GlobalContext);
 
   const handleNewSplit = (e) => {
-    e.preventDefault();
     setLoading(true);
     addSplit(e, title, days);
   };
