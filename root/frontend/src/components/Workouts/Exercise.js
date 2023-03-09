@@ -1,7 +1,20 @@
 import "./Exercise.css";
+import { GlobalContext } from "../../context/GlobalContext";
+import { useContext } from "react";
+import { useParams } from "react-router-dom";
 
 const Exercise = ({ el }) => {
-  const trackEmpty = el.sets_reps_weight[0].id === null;
+  const { addNewSet } = useContext(GlobalContext);
+  const { setLoading } = useContext(GlobalContext);
+  const isTrackEmpty = el.sets_reps_weight[0].id === null;
+  const { id } = useParams();
+
+  const handleNewSet = (e) => {
+    e.preventDefault();
+    // setLoading(true);
+    addNewSet(e, el.exercise_id, id);
+    console.log(`workout id is ${id}`);
+  };
 
   return (
     <div className="exercise-container">
@@ -19,7 +32,7 @@ const Exercise = ({ el }) => {
       </div>
 
       {/* <form> */}
-      {!trackEmpty &&
+      {!isTrackEmpty &&
         el.sets_reps_weight.map((el) => {
           return (
             <div key={el.id} className="exercise">
@@ -47,7 +60,9 @@ const Exercise = ({ el }) => {
         })}
 
       {/* </form> */}
-      <button className="addSetBtn">+ Add Set</button>
+      <button onClick={(e) => handleNewSet(e)} className="addSetBtn">
+        + Add Set
+      </button>
     </div>
   );
 };

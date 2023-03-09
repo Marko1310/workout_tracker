@@ -80,9 +80,9 @@ export const GlobalProvider = (props) => {
       });
   };
 
-  const getWorkouts = (id) => {
+  const getWorkouts = (split_id) => {
     axios
-      .get(`http://localhost:8000/api/auth/splits/workouts/${id}`, {
+      .get(`http://localhost:8000/api/auth/splits/workouts/${split_id}`, {
         withCredentials: true,
       })
       .then((data) => {
@@ -95,15 +95,18 @@ export const GlobalProvider = (props) => {
       });
   };
 
-  const getExercises = (id) => {
-    setLoading(true);
+  const getExercises = (workout_id) => {
+    // setLoading(true);
     axios
-      .get(`http://localhost:8000/api/auth/splits/workouts/workout/${id}`, {
-        withCredentials: true,
-      })
+      .get(
+        `http://localhost:8000/api/auth/splits/workouts/workout/${workout_id}`,
+        {
+          withCredentials: true,
+        }
+      )
       .then((data) => {
         setExercises(data.data);
-        setLoading(false);
+        // setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -139,7 +142,6 @@ export const GlobalProvider = (props) => {
           getWorkouts(split_id);
           setIsModalOpen(false);
           setLoading(false);
-          getWorkouts();
         } else {
           setIsModalOpen(false);
           setLoading(false);
@@ -148,6 +150,28 @@ export const GlobalProvider = (props) => {
       .catch((error) => {
         console.log(error);
         setLoading(false);
+      });
+  };
+
+  const addNewSet = (e, exercise_id, workout_id) => {
+    e.preventDefault();
+    axios
+      .post(
+        "http://localhost:8000/api/auth/split/workout/exercise/set/new",
+        { exercise_id },
+        { withCredentials: true }
+      )
+      .then((data) => {
+        if (data) {
+          getExercises(workout_id);
+          // setLoading(false);
+        } else {
+          // setLoading(false);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        // setLoading(false);
       });
   };
 
@@ -176,6 +200,7 @@ export const GlobalProvider = (props) => {
     loading,
     addSplit,
     addWorkout,
+    addNewSet,
     isModalOpen,
     setIsModalOpen,
     setLoading,
