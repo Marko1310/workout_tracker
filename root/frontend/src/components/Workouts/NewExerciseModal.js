@@ -8,6 +8,7 @@ const NewExerciseModal = () => {
   const { isModalOpen } = useContext(GlobalContext);
   const { setIsModalOpen } = useContext(GlobalContext);
   const { addExercise } = useContext(GlobalContext);
+  const { setLoading } = useContext(GlobalContext);
   const { id } = useParams();
 
   const [title, setTitle] = useState("");
@@ -16,7 +17,7 @@ const NewExerciseModal = () => {
 
   const handleNewExercise = (e) => {
     e.preventDefault();
-    // setLoading(true);
+    setLoading(true);
     addExercise(title, goal_sets, goal_reps, id);
   };
 

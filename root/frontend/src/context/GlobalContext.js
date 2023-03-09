@@ -13,11 +13,11 @@ export const GlobalProvider = (props) => {
   const [exercises, setExercises] = useState([]);
   // const [prevSets, setPrevSets] = useState([]);
   // const [prevReps, setPrevReps] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    getCurrentUser();
+    // getCurrentUser();
   }, []);
 
   const getCurrentUser = () => {
@@ -162,15 +162,15 @@ export const GlobalProvider = (props) => {
         if (data) {
           getExercises(workout_id);
           setIsModalOpen(false);
-          // setLoading(false);
+          setLoading(false);
         } else {
           setIsModalOpen(false);
-          // setLoading(false);
+          setLoading(false);
         }
       })
       .catch((error) => {
         console.log(error);
-        // setLoading(false);
+        setLoading(false);
       });
   };
 

@@ -1,6 +1,7 @@
 // React
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
 
 // css
 import "./index.css";
@@ -27,7 +28,17 @@ function App() {
           {<Navigation />}
           {loading ? (
             <div className="loading">
-              <h1>Loading</h1>
+              <ThreeDots
+                height="80"
+                width="80"
+                radius="9"
+                color="#fff"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                wrapperClassName=""
+                visible={true}
+              />
+              <h2 className="loading-title">Loading</h2>
             </div>
           ) : (
             <Routes>
