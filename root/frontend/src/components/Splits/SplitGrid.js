@@ -23,8 +23,10 @@ const WorkoutSplitGrid = () => {
   };
 
   const handleDelete = (e, split_id) => {
-    deleteSplit(e, split_id);
-    setLoading(true);
+    if (window.confirm("Are you sure you want to delete this split?")) {
+      deleteSplit(e, split_id);
+      setLoading(true);
+    }
     e.stopPropagation();
   };
 
