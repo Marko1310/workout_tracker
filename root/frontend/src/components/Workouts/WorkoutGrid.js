@@ -3,6 +3,7 @@ import NewWorkoutModal from "./NewWorkoutModal.js";
 import AddWorkoutBtn from "./AddWorkoutBtn.js";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../context/GlobalContext.js";
+import { useParams } from "react-router-dom";
 
 import "./WorkoutGrid.css";
 import logo from "../../images/workout.png";
@@ -12,6 +13,8 @@ const WorkoutGrid = () => {
   const { user } = useContext(GlobalContext);
   const { workouts } = useContext(GlobalContext);
   const { getExercises } = useContext(GlobalContext);
+  const { split_id } = useParams();
+  const { getWorkouts } = useContext(GlobalContext);
 
   const navigate = useNavigate();
 
@@ -24,6 +27,7 @@ const WorkoutGrid = () => {
     if (!user) {
       navigate("/");
     }
+    getWorkouts(split_id);
   }, [user, navigate]);
 
   return (

@@ -53,15 +53,3 @@ const WorkoutSplit = () => {
 };
 
 export default WorkoutSplit;
-
-{
-  /* <div className={`addNewExercise-container ${isModalOpen ? `blurred` : ""}`}>
-  <img
-    onClick={isModalOpen ? null : () => setIsModalOpen(true)}
-    className="addLogo"
-    alt="addLogo"
-    src={addLogo}
-  />
-  <p>Add new workout</p>
-</div>; */
-}

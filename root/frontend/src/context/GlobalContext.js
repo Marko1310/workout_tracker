@@ -11,10 +11,8 @@ export const GlobalProvider = (props) => {
   const [splits, setSplits] = useState([]);
   const [workouts, setWorkouts] = useState([]);
   const [exercises, setExercises] = useState([]);
-  const [sets, setSets] = useState();
-  const [reps, setReps] = useState([]);
-  const [prevSets, setPrevSets] = useState([]);
-  const [prevReps, setPrevReps] = useState([]);
+  // const [prevSets, setPrevSets] = useState([]);
+  // const [prevReps, setPrevReps] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -153,6 +151,29 @@ export const GlobalProvider = (props) => {
       });
   };
 
+  const addExercise = (title, goal_sets, goal_reps, workout_id) => {
+    axios
+      .post(
+        "http://localhost:8000/api/auth/split/workout/exercise/new",
+        { title, goal_sets, goal_reps, workout_id },
+        { withCredentials: true }
+      )
+      .then((data) => {
+        if (data) {
+          getExercises(workout_id);
+          setIsModalOpen(false);
+          // setLoading(false);
+        } else {
+          setIsModalOpen(false);
+          // setLoading(false);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        // setLoading(false);
+      });
+  };
+
   const addNewSet = (e, exercise_id, workout_id) => {
     e.preventDefault();
     axios
@@ -184,14 +205,6 @@ export const GlobalProvider = (props) => {
     setWorkouts,
     exercises,
     setExercises,
-    sets,
-    setSets,
-    reps,
-    setReps,
-    prevSets,
-    setPrevSets,
-    prevReps,
-    setPrevReps,
     getCurrentUser,
     logout,
     getSplits,
@@ -200,6 +213,7 @@ export const GlobalProvider = (props) => {
     loading,
     addSplit,
     addWorkout,
+    addExercise,
     addNewSet,
     isModalOpen,
     setIsModalOpen,

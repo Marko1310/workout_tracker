@@ -87,7 +87,7 @@ router.post("/split/workout/exercise/new", requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
     const date = new Date();
-    const { title, goal_sets, workout_id } = req.body;
+    const { title, goal_sets, goal_reps, workout_id } = req.body;
 
     if (!title) {
       return res.status(400).json({ title: "Title field can not be empty" });
@@ -109,8 +109,8 @@ router.post("/split/workout/exercise/new", requiresAuth, async (req, res) => {
     }
 
     const exercise = await pool.query(
-      "INSERT INTO exercises (exercise_name, goal_sets, date, workout_id, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [title, goal_sets, date, workout_id, user_id]
+      "INSERT INTO exercises (exercise_name, goal_sets, goal_reps, date, workout_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      [title, goal_sets, goal_reps, date, workout_id, user_id]
     );
 
     res.json(exercise.rows);
