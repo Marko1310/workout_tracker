@@ -14,10 +14,18 @@ const WorkoutSplitGrid = () => {
   const { getWorkouts } = useContext(GlobalContext);
   const navigate = useNavigate();
   const { getSplits } = useContext(GlobalContext);
+  const { deleteSplit } = useContext(GlobalContext);
+  const { setLoading } = useContext(GlobalContext);
 
   const changeRoute = (id) => {
     getWorkouts(id);
     navigate(`/workouts/${id}`);
+  };
+
+  const handleDelete = (e, split_id) => {
+    deleteSplit(e, split_id);
+    setLoading(true);
+    e.stopPropagation();
   };
 
   useEffect(() => {
@@ -46,7 +54,12 @@ const WorkoutSplitGrid = () => {
                       src={logo}
                       alt="Workout"
                     ></img>
-                    <button className="delete-split">Delete</button>
+                    <button
+                      onClick={(e) => handleDelete(e, el.split_id)}
+                      className="delete-split"
+                    >
+                      Delete
+                    </button>
                   </div>
                   <div className="workout-card">
                     <li className="workout-card-title">{el.split_name}</li>
