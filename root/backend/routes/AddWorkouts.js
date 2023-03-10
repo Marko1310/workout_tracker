@@ -22,8 +22,6 @@ router.post("/split/new", requiresAuth, async (req, res) => {
     user_id = req.user.id;
     const date = new Date();
     const { title, days } = req.body;
-    console.log(title);
-    console.log(days);
 
     if (!title) {
       return res.status(400).json({ title: "Title field can not be empty" });

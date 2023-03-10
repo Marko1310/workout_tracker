@@ -22,7 +22,10 @@ router.delete("/split/delete", requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
     const { split_id } = req.body;
-    databaseCheck.checkSplitId(split_id, user_id);
+    const isValidSplitId = await databaseCheck.checkSplitId(split_id, user_id);
+    if (isValidSplitId === 0) {
+      return res.status(400).send("Unathorized");
+    }
 
     const deletedSplit = await pool.query(
       "DELETE FROM splits WHERE split_id = $1 AND user_id = $2 RETURNING *",
@@ -41,8 +44,20 @@ router.delete("/split/workout/delete", requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
     const { split_id, workout_id } = req.body;
-    databaseCheck.checkSplitId(split_id, user_id);
-    databaseCheck.checkWorkoutId(workout_id, split_id, user_id);
+
+    const isValidSplitId = await databaseCheck.checkSplitId(split_id, user_id);
+    if (isValidSplitId === 0) {
+      return res.status(400).send("Unathorized");
+    }
+
+    const isValidWorkoutId = await databaseCheck.checkWorkoutId(
+      workout_id,
+      split_id,
+      user_id
+    );
+    if (isValidWorkoutId === 0) {
+      return res.status(400).send("Unathorized");
+    }
 
     const deletedWorkout = await pool.query(
       "DELETE FROM workouts WHERE workout_id = $1 AND user_id = $2 RETURNING *",
