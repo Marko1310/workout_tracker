@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { Pool } = require("pg");
 const requiresAuth = require("../middleware/permission");
+const databaseCheck = require("../middleware/databaseChecks");
 
 const pool = new Pool({
   host: process.env.HOST,
@@ -58,13 +59,8 @@ router.post("/split/workout/new", requiresAuth, async (req, res) => {
       return res.status(400).json({ title: "Title field can not be empty" });
     }
 
-    const checkSplitId = await pool.query(
-      "SELECT * FROM splits WHERE split_id = $1 AND user_id = $2",
-      [split_id, user_id]
-    );
-    console.log(checkSplitId.rows);
-
-    if (checkSplitId.rows.length === 0) {
+    const isValidSplitId = await databaseCheck.checkSplitId(split_id, user_id);
+    if (isValidSplitId === 0) {
       return res.status(400).send("Unathorized");
     }
 
@@ -97,12 +93,12 @@ router.post("/split/workout/exercise/new", requiresAuth, async (req, res) => {
         .json({ sets: "Number of sets must be greater then 0" });
     }
 
-    const checkWorkoutId = await pool.query(
-      "SELECT * FROM workouts WHERE workout_id = $1 AND user_id = $2",
-      [workout_id, user_id]
+    const isValidWorkoutId = await databaseCheck.checkWorkoutId(
+      workout_id,
+      split_id,
+      user_id
     );
-
-    if (checkWorkoutId.rows.length === 0) {
+    if (isValidWorkoutId === 0) {
       return res.status(400).send("Unathorized");
     }
 
@@ -183,12 +179,12 @@ router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
     if (!reps) reps = 0;
     if (!weight) weight = 0;
 
-    const checkExerciseId = await pool.query(
-      "SELECT * FROM exercises WHERE exercise_id = $1 AND user_id = $2",
-      [exercise_id, user_id]
+    const isValidExerciseId = await databaseCheck.checkExerciseId(
+      exercise_id,
+      user_id
     );
 
-    if (checkExerciseId.rows.length === 0) {
+    if (isValidExerciseId === 0) {
       return res.status(400).send("Unathorized");
     }
 

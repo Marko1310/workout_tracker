@@ -17,8 +17,8 @@ const NewWorkoutSplit = () => {
   };
 
   return (
-    <div className={`newWorkout-container + ${isModalOpen ? "show" : ""}`}>
-      <p className="newWorkout-title">Create new workout split</p>
+    <div className={`newSplit-container + ${isModalOpen ? "show" : ""}`}>
+      <p className="newSplit-title">Create new workout split</p>
       <form onSubmit={(e) => handleNewSplit(e)}>
         <label htmlFor="title">Title of the split</label>
         <input

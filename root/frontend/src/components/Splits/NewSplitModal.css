@@ -1,4 +1,4 @@
-.newWorkout-container {
+.newSplit-container {
   position: absolute;
   width: 25rem;
   z-index: 2;
@@ -27,7 +27,7 @@
   opacity: 1;
 }
 
-.newWorkout-title {
+.newSplit-title {
   color: var(--clr-grey-1);
   font-weight: 800;
   font-size: 1.5rem;

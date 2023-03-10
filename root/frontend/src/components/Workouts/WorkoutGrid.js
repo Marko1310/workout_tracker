@@ -41,49 +41,53 @@ const WorkoutGrid = () => {
   }, [user, navigate]);
 
   return (
-    <div className="workoutGrid-main-container">
-      <div className={`${isModalOpen ? "blurred" : ""}`}>
-        <p className="choose">Choose a Workout</p>
-        <div className="exercise-grid">
-          {workouts.map((el) => {
-            return (
-              <ul
-                key={el.workout_id}
-                onClick={() => changeRoute(el.workout_id)}
-                className="exercise-list-container"
-              >
-                <div className="image-and-delete-container-workout">
-                  <img
-                    className="exercise-image"
-                    src={logo}
-                    alt="exercise"
-                  ></img>
-                  <button
-                    onClick={(e) => handleDelete(e, split_id, el.workout_id)}
-                    className="delete-split"
-                  >
-                    Delete
-                  </button>
-                </div>
+    <>
+      <div className="workoutGrid-main-container">
+        <div className={`${isModalOpen ? "blurred" : ""}`}>
+          <p className="choose">Choose a Workout</p>
+          <div className="exercise-grid">
+            {workouts.map((el) => {
+              return (
+                <ul
+                  key={el.workout_id}
+                  onClick={() => changeRoute(el.workout_id)}
+                  className="exercise-list-container"
+                >
+                  <div className="image-and-delete-container-workout">
+                    <img
+                      className="exercise-image"
+                      src={logo}
+                      alt="exercise"
+                    ></img>
+                    <button
+                      onClick={(e) => handleDelete(e, split_id, el.workout_id)}
+                      className="delete-split"
+                    >
+                      Delete
+                    </button>
+                  </div>
 
-                <div className="exercise-card">
-                  <li className="exercise-card-title">
-                    {el.workout_name} day:
-                  </li>
-                  {el.array_agg.map((name) => {
-                    return <li> - {name}</li>;
-                  })}
-                  <li>--------------------------------</li>
-                  <li>Date created: {el.date.slice(0, 10)}</li>
-                </div>
-              </ul>
-            );
-          })}
+                  <div className="exercise-card">
+                    <li className="exercise-card-title">
+                      {el.workout_name} day:
+                    </li>
+                    {el.array_agg.map((name) => {
+                      return <li> - {name}</li>;
+                    })}
+                    <li>--------------------------------</li>
+                    <li>Date created: {el.date.slice(0, 10)}</li>
+                  </div>
+                </ul>
+              );
+            })}
+          </div>
         </div>
       </div>
-      <NewWorkoutModal />
-      <AddWorkoutBtn />
-    </div>
+      <div className="new-workout-add-container">
+        <NewWorkoutModal />
+        <AddWorkoutBtn />
+      </div>
+    </>
   );
 };
 

@@ -1,4 +1,6 @@
 .newWorkout-container {
+  /* display: flex; */
+  flex-direction: row;
   position: absolute;
   width: 25rem;
   z-index: 2;
@@ -9,17 +11,15 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: auto;
+  height: 25rem;
   margin-right: auto;
   left: 50%;
-  margin-bottom: -10rem;
-  bottom: 0;
+  top: -10rem;
   margin-left: -12.5rem;
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.5s ease, visibility 0s linear 0s;
   transition: all 0.8s ease;
-  margin-bottom: 0rem;
 }
 
 .show {
