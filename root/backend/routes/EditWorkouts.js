@@ -69,7 +69,7 @@ router.delete("/split/workout/delete", requiresAuth, async (req, res) => {
 
     const deletedWorkout = await pool.query(
       "DELETE FROM workouts WHERE workout_id = $1 AND user_id = $2 RETURNING *",
-      [split_id, user_id]
+      [workout_id, user_id]
     );
     res.json(deletedWorkout.rows);
   } catch (err) {
