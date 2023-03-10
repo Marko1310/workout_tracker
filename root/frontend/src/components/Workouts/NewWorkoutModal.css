@@ -1,6 +1,4 @@
 .newWorkout-container {
-  /* display: flex; */
-  flex-direction: row;
   position: absolute;
   width: 25rem;
   z-index: 2;

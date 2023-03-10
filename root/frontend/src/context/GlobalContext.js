@@ -243,6 +243,31 @@ export const GlobalProvider = (props) => {
       });
   };
 
+  const deleteExercise = (e, workout_id, exercise_id) => {
+    e.preventDefault();
+
+    fetch("http://localhost:8000/api/auth/split/workout/exercise/delete", {
+      method: "DELETE",
+      credentials: "include", // include cookies in the request
+      body: JSON.stringify({
+        workout_id: workout_id,
+        exercise_id: exercise_id,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        console.log(response.headers);
+        getExercises(workout_id);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
   const globalState = {
     user,
     setUser,

@@ -38,49 +38,54 @@ const WorkoutSplitGrid = () => {
   }, [user, navigate]);
 
   return (
-    <div className="main-container">
-      <div className={`${isModalOpen ? "blurred" : ""}`}>
-        <p className="choose">Choose a Workout Split</p>
-        <div className="workout-grid">
-          {splits.length > 0 &&
-            splits.map((el) => {
-              return (
-                <ul
-                  key={el.split_id}
-                  onClick={isModalOpen ? null : () => changeRoute(el.split_id)}
-                  className="workout-container"
-                >
-                  <div className="image-and-delete-container">
-                    <img
-                      className="workout-image"
-                      src={logo}
-                      alt="Workout"
-                    ></img>
-                    <button
-                      onClick={(e) => handleDelete(e, el.split_id)}
-                      className="delete-split"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                  <div className="workout-card">
-                    <li className="workout-card-title">{el.split_name}</li>
-                    <li>{el.days} day split:</li>
-                    {el.array_agg.map((name) => {
-                      return <li> - {name} day</li>;
-                    })}
-                    <li>--------------------------------</li>
-                    <li>Created on: {el.date.slice(0, 10)}</li>
-                  </div>
-                </ul>
-              );
-            })}
+    <>
+      <div className="main-container">
+        <div className={`${isModalOpen ? "blurred" : ""}`}>
+          <p className="choose">Choose a Workout Split</p>
+          <div className="workout-grid">
+            {splits.length > 0 &&
+              splits.map((el) => {
+                return (
+                  <ul
+                    key={el.split_id}
+                    onClick={
+                      isModalOpen ? null : () => changeRoute(el.split_id)
+                    }
+                    className="workout-container"
+                  >
+                    <div className="image-and-delete-container">
+                      <img
+                        className="workout-image"
+                        src={logo}
+                        alt="Workout"
+                      ></img>
+                      <button
+                        onClick={(e) => handleDelete(e, el.split_id)}
+                        className="delete-split"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                    <div className="workout-card">
+                      <li className="workout-card-title">{el.split_name}</li>
+                      <li>{el.days} day split:</li>
+                      {el.array_agg.map((name) => {
+                        return <li> - {name} day</li>;
+                      })}
+                      <li>--------------------------------</li>
+                      <li>Created on: {el.date.slice(0, 10)}</li>
+                    </div>
+                  </ul>
+                );
+              })}
+          </div>
         </div>
       </div>
-
-      <NewSplit />
-      <AddSplitBtn />
-    </div>
+      <div className="new-split-add-container">
+        <NewSplit />
+        <AddSplitBtn />
+      </div>
+    </>
   );
 };
 

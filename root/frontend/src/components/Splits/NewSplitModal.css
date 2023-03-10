@@ -9,17 +9,15 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: auto;
+  height: 30rem;
   margin-right: auto;
   left: 50%;
-  margin-bottom: -10rem;
-  bottom: 0;
+  top: -8rem;
   margin-left: -12.5rem;
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.5s ease, visibility 0s linear 0s;
   transition: all 0.8s ease;
-  margin-bottom: 0rem;
 }
 
 .show {
@@ -31,7 +29,7 @@
   color: var(--clr-grey-1);
   font-weight: 800;
   font-size: 1.5rem;
-  padding-bottom: 3rem;
+  padding-bottom: 1.5rem;
   text-decoration: underline;
   margin-top: 1rem;
 }
