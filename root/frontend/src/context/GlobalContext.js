@@ -221,6 +221,28 @@ export const GlobalProvider = (props) => {
       });
   };
 
+  const deleteWorkout = (e, split_id, workout_id) => {
+    e.preventDefault();
+
+    fetch("http://localhost:8000/api/auth/split/workout/delete", {
+      method: "DELETE",
+      credentials: "include", // include cookies in the request
+      body: JSON.stringify({ split_id: split_id, workout_id: workout_id }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        console.log(response.headers);
+        getWorkouts(split_id);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
   const globalState = {
     user,
     setUser,
@@ -241,6 +263,7 @@ export const GlobalProvider = (props) => {
     addExercise,
     addNewSet,
     deleteSplit,
+    deleteWorkout,
     isModalOpen,
     setIsModalOpen,
     setLoading,

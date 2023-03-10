@@ -15,12 +15,22 @@ const WorkoutGrid = () => {
   const { getExercises } = useContext(GlobalContext);
   const { split_id } = useParams();
   const { getWorkouts } = useContext(GlobalContext);
+  const { deleteWorkout } = useContext(GlobalContext);
+  const { setLoading } = useContext(GlobalContext);
 
   const navigate = useNavigate();
 
   const changeRoute = function (id) {
     getExercises(id);
     navigate(`/workout/${id}`);
+  };
+
+  const handleDelete = (e, split_id, workout_id) => {
+    if (window.confirm("Are you sure you want to delete this Workout?")) {
+      deleteWorkout(e, split_id, workout_id);
+      setLoading(true);
+    }
+    e.stopPropagation();
   };
 
   useEffect(() => {
@@ -42,7 +52,20 @@ const WorkoutGrid = () => {
                 onClick={() => changeRoute(el.workout_id)}
                 className="exercise-list-container"
               >
-                <img className="exercise-image" src={logo} alt="exercise"></img>
+                <div className="image-and-delete-container-workout">
+                  <img
+                    className="exercise-image"
+                    src={logo}
+                    alt="exercise"
+                  ></img>
+                  <button
+                    onClick={(e) => handleDelete(e, split_id, el.workout_id)}
+                    className="delete-split"
+                  >
+                    Delete
+                  </button>
+                </div>
+
                 <div className="exercise-card">
                   <li className="exercise-card-title">
                     {el.workout_name} day:
