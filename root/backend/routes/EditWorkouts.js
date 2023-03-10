@@ -69,4 +69,43 @@ router.delete("/split/workout/delete", requiresAuth, async (req, res) => {
   }
 });
 
+// @route   DELETE /api/split/workout/exercise/delete
+// @desc    Delete workout in a split
+// @access  Private
+router.delete(
+  "/split/workout/exercise/delete",
+  requiresAuth,
+  async (req, res) => {
+    try {
+      user_id = req.user.id;
+      const { workout_id, exercise_id } = req.body;
+
+      const isValidWorkoutId = await databaseCheck.checkWorkoutId(
+        workout_id,
+        split_id,
+        user_id
+      );
+      if (isValidWorkoutId === 0) {
+        return res.status(400).send("Unathorized");
+      }
+
+      const isValidExerciseId = await databaseCheck.checkExerciseId(
+        exercise_id,
+        user_id
+      );
+      if (isValidExerciseId === 0) {
+        return res.status(400).send("Unathorized");
+      }
+
+      const deletedExercise = await pool.query(
+        "DELETE FROM exercises WHERE exercise_id = $1 AND user_id = $2 RETURNING *",
+        [exercise_id, user_id]
+      );
+      res.json(deletedExercise.rows);
+    } catch (err) {
+      return res.status(500).send(err.message);
+    }
+  }
+);
+
 module.exports = router;

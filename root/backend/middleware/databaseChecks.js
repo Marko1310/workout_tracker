@@ -25,6 +25,8 @@ const checkWorkoutId = async (workout_id, split_id, user_id) => {
     const workoutId = await pool.query(
       "SELECT * FROM workouts WHERE workout_id = $1 AND split_id = $2 AND user_id = $3",
       [workout_id, split_id, user_id]
+
+      /////makni split_id iz ovih provjera!!!
     );
     return workoutId.rows.length;
   } catch (err) {
