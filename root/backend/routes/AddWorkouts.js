@@ -95,7 +95,6 @@ router.post("/split/workout/exercise/new", requiresAuth, async (req, res) => {
 
     const isValidWorkoutId = await databaseCheck.checkWorkoutId(
       workout_id,
-      split_id,
       user_id
     );
     if (isValidWorkoutId === 0) {

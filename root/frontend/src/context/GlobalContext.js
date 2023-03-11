@@ -289,6 +289,7 @@ export const GlobalProvider = (props) => {
     addNewSet,
     deleteSplit,
     deleteWorkout,
+    deleteExercise,
     isModalOpen,
     setIsModalOpen,
     setLoading,

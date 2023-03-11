@@ -52,7 +52,6 @@ router.delete("/split/workout/delete", requiresAuth, async (req, res) => {
 
     const isValidWorkoutId = await databaseCheck.checkWorkoutId(
       workout_id,
-      split_id,
       user_id
     );
     if (isValidWorkoutId === 0) {
@@ -82,7 +81,6 @@ router.delete(
 
       const isValidWorkoutId = await databaseCheck.checkWorkoutId(
         workout_id,
-        split_id,
         user_id
       );
       if (isValidWorkoutId === 0) {
