@@ -9,15 +9,18 @@ const NewExerciseModal = () => {
   const { setIsModalOpen } = useContext(GlobalContext);
   const { addExercise } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
+  const { error } = useContext(GlobalContext);
   const { id } = useParams();
 
   const [title, setTitle] = useState("");
-  const [goal_sets, setGoal_sets] = useState("");
-  const [goal_reps, setGoal_reps] = useState("");
+  const [goal_sets, setGoal_sets] = useState(0);
+  const [goal_reps, setGoal_reps] = useState(0);
 
   const handleNewExercise = (e) => {
     e.preventDefault();
-    setLoading(true);
+    if (title || goal_sets || goal_reps) {
+      setLoading(true);
+    }
     addExercise(title, goal_sets, goal_reps, id);
   };
 
@@ -34,6 +37,7 @@ const NewExerciseModal = () => {
           name="title"
           placeholder="e.g. Bench Press"
         ></input>
+        {error.title ? <p className="error">{error.title}</p> : ""}
 
         <label htmlFor="days">Number of goal sets</label>
         <input
@@ -44,6 +48,7 @@ const NewExerciseModal = () => {
           name="sets"
           placeholder="e.g. 4"
         ></input>
+        {error.sets ? <p className="error">{error.title}</p> : ""}
 
         <label htmlFor="days">Number of goal reps</label>
         <input
@@ -54,6 +59,7 @@ const NewExerciseModal = () => {
           name="reps"
           placeholder="e.g. 12"
         ></input>
+        {error.reps ? <p className="error">{error.title}</p> : ""}
 
         <div className="button-container">
           <button className="button">Add exercise</button>

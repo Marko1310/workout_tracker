@@ -34,8 +34,8 @@
   margin-top: 1rem;
 }
 
-.forms {
-  margin-bottom: 1.5rem;
+.newSplit-forms {
+  margin-bottom: 1rem;
   display: flex;
   background-color: var(--clr-grey-9);
   border-radius: 5px;

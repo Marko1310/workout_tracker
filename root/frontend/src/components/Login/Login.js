@@ -70,7 +70,7 @@ function Login() {
 
   return (
     <div className="login-container">
-      <form onSubmit={handleSubmit} className="form-validate">
+      <form onSubmit={(e) => handleSubmit(e)} className="form-validate">
         <p className="title">{form === "login" ? `Login` : `Signup`}</p>
         <div className="buttons-container">
           <button

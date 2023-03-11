@@ -7,11 +7,17 @@ import { GlobalContext } from "../../context/GlobalContext";
 const AddWorkoutBtn = () => {
   const { isModalOpen } = useContext(GlobalContext);
   const { setIsModalOpen } = useContext(GlobalContext);
+  const { setError } = useContext(GlobalContext);
+
+  const handleModal = () => {
+    setError("");
+    setIsModalOpen((setIsModalOpen) => !setIsModalOpen);
+  };
 
   return (
     <div className={`addNewExercise-container ${isModalOpen ? `blurred` : ""}`}>
       <img
-        onClick={isModalOpen ? null : () => setIsModalOpen(true)}
+        onClick={() => handleModal()}
         className="addLogo"
         alt="addLogo"
         src={addLogo}

@@ -10,6 +10,7 @@ export const GlobalProvider = (props) => {
   const [splits, setSplits] = useState([]);
   const [workouts, setWorkouts] = useState([]);
   const [exercises, setExercises] = useState([]);
+  const [error, setError] = useState("");
   // const [prevSets, setPrevSets] = useState([]);
   // const [prevReps, setPrevReps] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -128,8 +129,7 @@ export const GlobalProvider = (props) => {
         }
       })
       .catch((error) => {
-        console.log(error);
-        setIsModalOpen(false);
+        setError(error.response.data);
         setLoading(false);
       });
   };
@@ -152,8 +152,7 @@ export const GlobalProvider = (props) => {
         }
       })
       .catch((error) => {
-        console.log(error);
-        setIsModalOpen(false);
+        setError(error.response.data);
         setLoading(false);
       });
   };
@@ -176,7 +175,7 @@ export const GlobalProvider = (props) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.response.data);
         setLoading(false);
       });
   };
@@ -317,6 +316,8 @@ export const GlobalProvider = (props) => {
     isModalOpen,
     setIsModalOpen,
     setLoading,
+    error,
+    setError,
   };
 
   return (

@@ -10,9 +10,13 @@ const NewWorkoutSplit = () => {
   const [days, setDays] = useState("");
   const { addSplit } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
+  const { error } = useContext(GlobalContext);
 
   const handleNewSplit = (e) => {
-    setLoading(true);
+    e.preventDefault();
+    if (title && days) {
+      setLoading(true);
+    }
     addSplit(e, title, days);
   };
 
@@ -23,16 +27,21 @@ const NewWorkoutSplit = () => {
         <label htmlFor="title">Title of the split</label>
         <input
           onChange={(e) => setTitle(e.target.value)}
-          className="forms"
+          className="newSplit-forms"
           type="text"
           id="title"
           name="title"
           placeholder="e.g. Push/Pull/Legs"
         ></input>
+        {error.title ? <p className="error">{error.title}</p> : ""}
 
         <label htmlFor="days">Number of days in a week</label>
 
-        <select onChange={(e) => setDays(e.target.value)} className="forms">
+        <select
+          onChange={(e) => setDays(e.target.value)}
+          className="newSplit-forms"
+        >
+          <option name=""></option>
           <option name="1">1</option>
           <option name="2">2</option>
           <option name="3">3</option>
@@ -41,9 +50,12 @@ const NewWorkoutSplit = () => {
           <option name="6">6</option>
           <option name="7">7</option>
         </select>
+        {error.days ? <p className="error">{error.days}</p> : ""}
 
         <div className="button-container">
-          <button className="button">Create workout split</button>
+          <button type="submit" className="button">
+            Create workout split
+          </button>
           <button
             onClick={(e) => {
               e.preventDefault();

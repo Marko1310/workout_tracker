@@ -12,6 +12,8 @@ const WorkoutSplit = () => {
   const { setIsModalOpen } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
   const { exercises } = useContext(GlobalContext);
+  const { setError } = useContext(GlobalContext);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,6 +21,11 @@ const WorkoutSplit = () => {
       navigate("/");
     }
   }, [user, navigate]);
+
+  const handleModal = () => {
+    setError("");
+    setIsModalOpen((setIsModalOpen) => !setIsModalOpen);
+  };
 
   return (
     <div className="workout-main-container">
@@ -30,17 +37,14 @@ const WorkoutSplit = () => {
             <button className="buttonFinish">Finish</button>
             {/* <div>Notes</div> */}
           </div>
-          <Scroll>
-            {exercises.map((el) => {
-              return <Exercise key={el.exercise_id} el={el} />;
-            })}
-          </Scroll>
+          {/* <Scroll> */}
+          {exercises.map((el) => {
+            return <Exercise key={el.exercise_id} el={el} />;
+          })}
+          {/* </Scroll> */}
 
           <div className="button-container">
-            <button
-              onClick={isModalOpen ? null : () => setIsModalOpen(true)}
-              className="workoutBtn add"
-            >
+            <button onClick={() => handleModal()} className="workoutBtn add">
               Add exercise
             </button>
             <button className="workoutBtn">Save workout</button>

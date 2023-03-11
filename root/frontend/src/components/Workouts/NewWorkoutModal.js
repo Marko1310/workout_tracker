@@ -11,10 +11,13 @@ const NewWorkoutModal = () => {
   const { split_id } = useParams();
   const [title, setTitle] = useState("");
   const { setLoading } = useContext(GlobalContext);
+  const { error } = useContext(GlobalContext);
 
   const handleNewWorkout = (e) => {
     e.preventDefault();
-    setLoading(true);
+    if (title) {
+      setLoading(true);
+    }
     addWorkout(e, title, split_id);
   };
   return (
@@ -30,6 +33,7 @@ const NewWorkoutModal = () => {
           name="title"
           placeholder="e.g. Push day"
         ></input>
+        {error.title ? <p className="error">{error.title}</p> : ""}
 
         <div className="button-container">
           <button className="button">Add workout</button>
