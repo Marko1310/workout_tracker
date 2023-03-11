@@ -1,6 +1,5 @@
 import axios from "axios";
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { createContext, useEffect, useState } from "react";
 
 //create context
 export const GlobalContext = createContext();

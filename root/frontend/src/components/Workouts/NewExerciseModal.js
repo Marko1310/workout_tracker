@@ -35,7 +35,7 @@ const NewExerciseModal = () => {
           placeholder="e.g. Bench Press"
         ></input>
 
-        <label htmlFor="days">Number of sets</label>
+        <label htmlFor="days">Number of goal sets</label>
         <input
           onChange={(e) => setGoal_sets(e.target.value)}
           className="forms"
@@ -45,7 +45,7 @@ const NewExerciseModal = () => {
           placeholder="e.g. 4"
         ></input>
 
-        <label htmlFor="days">Number of reps</label>
+        <label htmlFor="days">Number of goal reps</label>
         <input
           onChange={(e) => setGoal_reps(e.target.value)}
           className="forms"

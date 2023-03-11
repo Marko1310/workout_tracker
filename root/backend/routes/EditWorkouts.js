@@ -69,7 +69,7 @@ router.delete("/split/workout/delete", requiresAuth, async (req, res) => {
 });
 
 // @route   DELETE /api/split/workout/exercise/delete
-// @desc    Delete workout in a split
+// @desc    Delete exercise in a workout
 // @access  Private
 router.delete(
   "/split/workout/exercise/delete",

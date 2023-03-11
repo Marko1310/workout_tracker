@@ -16,7 +16,19 @@ const Exercise = ({ el }) => {
     addNewSet(el.exercise_id, id);
   };
 
-  const handleDelete = (e, workout_id, exercise_id) => {
+  const handleDeleteExercise = (e, workout_id, exercise_id) => {
+    if (
+      window.confirm(
+        "By removing the exercise, you will also remove all previous data?"
+      )
+    ) {
+      deleteExercise(e, workout_id, exercise_id);
+      setLoading(true);
+    }
+    e.stopPropagation();
+  };
+
+  const handleDeleteSet = (e, workout_id, exercise_id) => {
     if (
       window.confirm(
         "By removing the exercise, you will also remove all previous data?"
@@ -35,17 +47,17 @@ const Exercise = ({ el }) => {
           {el.exercise_name} {el.goal_sets} x {el.goal_reps}
         </p>
         <p
-          onClick={(e) => handleDelete(e, id, el.exercise_id)}
+          onClick={(e) => handleDeleteExercise(e, id, el.exercise_id)}
           className="delete-exercise"
         >
           Delete
         </p>
       </div>
       <div className="exercise-navbar">
-        <p>Set</p>
-        <p>Previous</p>
-        <p>kg</p>
-        <p>Reps</p>
+        <p className="exercise-navbar-title">Set</p>
+        <p className="exercise-navbar-title">Previous</p>
+        <p className="exercise-navbar-title">kg</p>
+        <p className="exercise-navbar-title">Reps</p>
       </div>
 
       {/* <form> */}
@@ -72,6 +84,9 @@ const Exercise = ({ el }) => {
                 name="reps"
                 placeholder="reps"
               ></input>
+              <p onClick={() => console.log("aaa")} className="delete-set">
+                x
+              </p>
             </div>
           );
         })}
