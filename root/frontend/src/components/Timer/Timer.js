@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import React from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Timer.css";
+import { GlobalContext } from "../../context/GlobalContext";
 
-const Timer = () => {
+const Timer = React.memo(() => {
   const [timer, setTimer] = useState({ seconds: 0, minutes: 0, hours: 0 });
 
   const run = () => {
@@ -31,6 +33,6 @@ const Timer = () => {
       </p>
     </div>
   );
-};
+});
 
 export default Timer;

@@ -70,6 +70,7 @@ export const GlobalProvider = (props) => {
         withCredentials: true,
       })
       .then((data) => {
+        console.log(data.data);
         setSplits(data.data);
         setLoading(false);
       })
