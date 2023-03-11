@@ -38,7 +38,7 @@ const Exercise = ({ el }) => {
     <div className="exercise-container">
       <div className="title-container">
         <p className="exercise-title">
-          {el.exercise_name} {el.goal_sets} x {el.goal_reps}
+          {el.exercise_name} ({el.goal_sets} x {el.goal_reps})
         </p>
         <p
           onClick={(e) => handleDeleteExercise(e, id, el.exercise_id)}
@@ -53,8 +53,6 @@ const Exercise = ({ el }) => {
         <p className="exercise-navbar-title">kg</p>
         <p className="exercise-navbar-title">Reps</p>
       </div>
-
-      {/* <form> */}
       {!isTrackEmpty &&
         el.sets_reps_weight.map((element) => {
           return (
@@ -67,7 +65,6 @@ const Exercise = ({ el }) => {
               <p className="previous">
                 {element.weight} kg x {element.reps}
               </p>
-              {/* <label htmlFor="name"></label> */}
               <input
                 className="exercise-forms"
                 type="text"
@@ -84,7 +81,6 @@ const Exercise = ({ el }) => {
               ></input>
               <p
                 onClick={(e) => {
-                  // const parentId = this.getAttribute("data-parent-id");
                   handleDeleteSet(e, id, el.exercise_id, element.id);
                 }}
                 className="delete-set"
@@ -94,8 +90,6 @@ const Exercise = ({ el }) => {
             </div>
           );
         })}
-
-      {/* </form> */}
       <button onClick={(e) => handleNewSet(e)} className="addSetBtn">
         + Add Set
       </button>

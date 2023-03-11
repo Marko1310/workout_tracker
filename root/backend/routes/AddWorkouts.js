@@ -94,7 +94,7 @@ router.post("/split/workout/exercise/new", requiresAuth, async (req, res) => {
     if (goal_reps < 1) {
       return res
         .status(400)
-        .json({ sets: "Number of reps must be greater then 0" });
+        .json({ reps: "Number of reps must be greater then 0" });
     }
 
     const isValidWorkoutId = await databaseCheck.checkWorkoutId(

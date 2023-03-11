@@ -17,11 +17,10 @@ const NewExerciseModal = () => {
   const [goal_reps, setGoal_reps] = useState(0);
 
   const handleNewExercise = (e) => {
-    e.preventDefault();
-    if (title || goal_sets || goal_reps) {
+    if (title && goal_sets && goal_reps) {
       setLoading(true);
     }
-    addExercise(title, goal_sets, goal_reps, id);
+    addExercise(e, title, goal_sets, goal_reps, id);
   };
 
   return (
@@ -39,7 +38,7 @@ const NewExerciseModal = () => {
         ></input>
         {error.title ? <p className="error">{error.title}</p> : ""}
 
-        <label htmlFor="days">Number of goal sets</label>
+        <label htmlFor="sets">Number of goal sets</label>
         <input
           onChange={(e) => setGoal_sets(e.target.value)}
           className="forms"
@@ -48,9 +47,9 @@ const NewExerciseModal = () => {
           name="sets"
           placeholder="e.g. 4"
         ></input>
-        {error.sets ? <p className="error">{error.title}</p> : ""}
+        {error.sets ? <p className="error">{error.sets}</p> : ""}
 
-        <label htmlFor="days">Number of goal reps</label>
+        <label htmlFor="reps">Number of goal reps</label>
         <input
           onChange={(e) => setGoal_reps(e.target.value)}
           className="forms"
@@ -59,7 +58,7 @@ const NewExerciseModal = () => {
           name="reps"
           placeholder="e.g. 12"
         ></input>
-        {error.reps ? <p className="error">{error.title}</p> : ""}
+        {error.reps ? <p className="error">{error.reps}</p> : ""}
 
         <div className="button-container">
           <button className="button">Add exercise</button>

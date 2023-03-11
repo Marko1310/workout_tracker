@@ -158,7 +158,8 @@ export const GlobalProvider = (props) => {
       });
   };
 
-  const addExercise = (title, goal_sets, goal_reps, workout_id) => {
+  const addExercise = (e, title, goal_sets, goal_reps, workout_id) => {
+    e.preventDefault();
     axios
       .post(
         "http://localhost:8000/api/auth/split/workout/exercise/new",
