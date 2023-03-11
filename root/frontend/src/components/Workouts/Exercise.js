@@ -7,6 +7,7 @@ const Exercise = ({ el }) => {
   const { addNewSet } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
   const { deleteExercise } = useContext(GlobalContext);
+  const { deleteSet } = useContext(GlobalContext);
   const isTrackEmpty = el.sets_reps_weight[0].id === null;
   const { id } = useParams();
 
@@ -28,16 +29,9 @@ const Exercise = ({ el }) => {
     e.stopPropagation();
   };
 
-  const handleDeleteSet = (e, workout_id, exercise_id) => {
-    if (
-      window.confirm(
-        "By removing the exercise, you will also remove all previous data?"
-      )
-    ) {
-      deleteExercise(e, workout_id, exercise_id);
-      setLoading(true);
-    }
-    e.stopPropagation();
+  const handleDeleteSet = (e, workout_id, exercise_id, track_id) => {
+    deleteSet(e, workout_id, exercise_id, track_id);
+    setLoading(true);
   };
 
   return (
@@ -62,12 +56,16 @@ const Exercise = ({ el }) => {
 
       {/* <form> */}
       {!isTrackEmpty &&
-        el.sets_reps_weight.map((el) => {
+        el.sets_reps_weight.map((element) => {
           return (
-            <div key={el.id} className="exercise">
-              <p className="set">{el.sets}</p>
+            <div
+              parent-id={element.exercise_id}
+              key={element.id}
+              className="exercise"
+            >
+              <p className="set">{element.sets}</p>
               <p className="previous">
-                {el.weight} kg x {el.reps}
+                {element.weight} kg x {element.reps}
               </p>
               {/* <label htmlFor="name"></label> */}
               <input
@@ -84,7 +82,13 @@ const Exercise = ({ el }) => {
                 name="reps"
                 placeholder="reps"
               ></input>
-              <p onClick={() => console.log("aaa")} className="delete-set">
+              <p
+                onClick={(e) => {
+                  // const parentId = this.getAttribute("data-parent-id");
+                  handleDeleteSet(e, id, el.exercise_id, element.id);
+                }}
+                className="delete-set"
+              >
                 x
               </p>
             </div>

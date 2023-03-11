@@ -256,8 +256,32 @@ export const GlobalProvider = (props) => {
         "Content-Type": "application/json",
       },
     })
-      .then((response) => {
-        console.log(response.headers);
+      .then(() => {
+        getExercises(workout_id);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  const deleteSet = (e, workout_id, exercise_id, track_id) => {
+    e.preventDefault();
+
+    fetch("http://localhost:8000/api/auth/split/workout/exercise/set/delete", {
+      method: "DELETE",
+      credentials: "include", // include cookies in the request
+      body: JSON.stringify({
+        workout_id: workout_id,
+        exercise_id: exercise_id,
+        track_id: track_id,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(() => {
         getExercises(workout_id);
         setLoading(false);
       })
@@ -289,6 +313,7 @@ export const GlobalProvider = (props) => {
     deleteSplit,
     deleteWorkout,
     deleteExercise,
+    deleteSet,
     isModalOpen,
     setIsModalOpen,
     setLoading,

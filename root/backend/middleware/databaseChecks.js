@@ -44,4 +44,21 @@ const checkExerciseId = async (exercise_id, user_id) => {
   }
 };
 
-module.exports = { checkSplitId, checkWorkoutId, checkExerciseId };
+const checkTrackId = async (exercise_id, track_id, user_id) => {
+  try {
+    const trackId = await pool.query(
+      "SELECT * FROM track WHERE exercise_id = $1 AND track_id = $2 AND user_id = $3",
+      [exercise_id, track_id, user_id]
+    );
+    return checkTrackId.rows.length;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = {
+  checkSplitId,
+  checkWorkoutId,
+  checkExerciseId,
+  checkTrackId,
+};
