@@ -18,6 +18,10 @@ export const GlobalProvider = (props) => {
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [newTrackData, setNewTrackData] = useState("");
+
+  const [test, setTest] = useState([{ track_id: 326 }]);
+
   useEffect(() => {
     getCurrentUser();
   }, []);
@@ -228,8 +232,9 @@ export const GlobalProvider = (props) => {
         { exercise_id, workout_id, day },
         { withCredentials: true }
       )
-      .then(() => {
+      .then((data) => {
         getExercises(workout_id);
+        setTest((prevData) => [...prevData, data.data[0]]);
       })
       .catch((error) => {
         console.log(error);
@@ -379,6 +384,9 @@ export const GlobalProvider = (props) => {
     currentTrackData,
     setCurrentTrackData,
     addTrackData,
+    setTest,
+    test,
+    setNewTrackData,
   };
 
   return (

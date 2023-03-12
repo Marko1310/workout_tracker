@@ -19,7 +19,12 @@ const Exercise = ({ el, setTrackData }) => {
   const { currentTrackData } = useContext(GlobalContext);
   const { setCurrentTrackData } = useContext(GlobalContext);
 
-  const isTrackEmpty = el.trackdata[0].id === null;
+  const { setNewTrackData } = useContext(GlobalContext);
+  const { NewTrackData } = useContext(GlobalContext);
+  const { setTest } = useContext(GlobalContext);
+  const { test } = useContext(GlobalContext);
+
+  const isTrackEmpty = el.trackdata[0].track_id === null;
   const { id } = useParams();
 
   const handleNewSet = (e) => {
@@ -79,7 +84,6 @@ const Exercise = ({ el, setTrackData }) => {
 
   const handleChangeWeight = (e, track_id) => {
     console.log(track_id);
-    console.log(currentTrackData);
     const updateWeight = currentTrackData.map((el) => {
       if (el.track_id === track_id) {
         return { ...el, weight: e.target.value };
@@ -89,16 +93,43 @@ const Exercise = ({ el, setTrackData }) => {
     setCurrentTrackData(updateWeight);
   };
 
+  // const handleChangeReps = (e, track_id) => {
+  //   console.log(track_id);
+  //   const updateWeight = currentTrackData.map((el) => {
+  //     if (el.track_id === track_id) {
+  //       return { ...el, reps: e.target.value };
+  //     }
+  //     return el;
+  //   });
+  //   setCurrentTrackData(updateWeight);
+  // };
+
   const handleChangeReps = (e, track_id) => {
-    const updateWeight = currentTrackData.map((el) => {
-      console.log(el.track_id);
+    console.log(track_id);
+    const updateWeight = test.map((el) => {
       if (el.track_id === track_id) {
         return { ...el, reps: e.target.value };
       }
       return el;
     });
-    setCurrentTrackData(updateWeight);
+    setTest(updateWeight);
   };
+
+  // const handleChangeWeight = (e, track_id) => {
+  //   console.log(track_id);
+  //   const updateWeight = NewTrackData.map((el) => {
+  //     if (el.track_id === track_id) {
+  //       return { ...el, weight: e.target.value };
+  //     } else {
+  //       return {
+  //         track_id: track_id,
+  //         reps:
+  //       };
+  //     }
+  //     return el;
+  //   });
+  //   setNewTrackData(updateWeight);
+  // };
 
   return (
     <div className="exercise-container">

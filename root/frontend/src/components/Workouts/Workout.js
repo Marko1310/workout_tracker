@@ -37,7 +37,7 @@ const WorkoutSplit = () => {
     }
     getExercises(id);
     getCurrentWorkout(id);
-    getCurrentTrackData(id);
+    // getCurrentTrackData(id);
     // updateTrackData()
   }, [user, navigate]);
 
