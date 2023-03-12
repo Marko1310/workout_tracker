@@ -207,42 +207,31 @@ router.post(
 router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
-
     const sets = req.body;
-    console.log(sets);
-    const values = sets
-      .map((set) => {
-        return `(${set.exercise_id}, ${set.track_id}, ${set.weight}, ${set.reps})`;
-      })
-      .join(", ");
 
-    console.log(values);
+    for (const value of sets) {
+      const { exercise_id, track_id, weight, reps } = value;
 
-    // const sql = `UPDATE track
-    // SET weight = CASE
-    //   WHEN exercise_id = $1 AND track_id = $2 THEN $3
-    //   ELSE weight
-    // END`, [10];
+      const query = `
+        UPDATE track
+        SET
+        weight = CASE
+          WHEN exercise_id = ${exercise_id} AND track_id = ${track_id} THEN ${weight}
+          ELSE weight
+        END,
 
-    // `UPDATE track
-    // SET weight = new_values.weight, reps = new_values.reps
-    // FROM (VALUES ${values}) AS new_values(track_id, exercise_id, weight, reps) WHERE track.track_id = new_values.track_id AND track.exercise_id = new_values.exercise_id RETURNING track_id`,
-
-    const track = await pool.query(
-      `UPDATE track
-    SET weight = CASE
-      WHEN exercise_id = $1 AND track_id = $2 THEN $3
-      ELSE weight
-    END,
-    reps = CASE
-      WHEN exercise_id = $1 AND track_id = $2 THEN $4
-      ELSE reps
-    END`,
-      [41, 258, 200, 12]
-    );
-    res.json(track.rows);
+        reps = CASE
+          WHEN exercise_id = ${exercise_id} AND track_id = ${track_id} THEN ${reps}
+          ELSE reps
+        END
+        
+        WHERE exercise_id = ${exercise_id} AND track_id = ${track_id}
+      `;
+      await pool.query(query);
+    }
+    res.json({ success: true, updatedRows: sets });
   } catch (err) {
-    return res.status(500).send(err.message);
+    res.json(err);
   }
 });
 
