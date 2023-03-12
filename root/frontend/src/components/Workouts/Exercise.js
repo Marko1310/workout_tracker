@@ -81,7 +81,7 @@ const Exercise = ({ el, setTrackData }) => {
     console.log(track_id);
     console.log(currentTrackData);
     const updateWeight = currentTrackData.map((el) => {
-      if (el.id === track_id) {
+      if (el.track_id === track_id) {
         return { ...el, weight: e.target.value };
       }
       return el;
@@ -91,7 +91,8 @@ const Exercise = ({ el, setTrackData }) => {
 
   const handleChangeReps = (e, track_id) => {
     const updateWeight = currentTrackData.map((el) => {
-      if (el.id === track_id) {
+      console.log(el.track_id);
+      if (el.track_id === track_id) {
         return { ...el, reps: e.target.value };
       }
       return el;
@@ -123,7 +124,7 @@ const Exercise = ({ el, setTrackData }) => {
           return (
             <div
               parent-id={track.exercise_id}
-              key={track.id}
+              key={track.track_id}
               className="exercise"
             >
               <p className="set">{track.sets}</p>
@@ -131,7 +132,7 @@ const Exercise = ({ el, setTrackData }) => {
                 {track.weight} kg x {track.reps}
               </p>
               <input
-                onChange={(e) => handleChangeWeight(e, track.id)}
+                onChange={(e) => handleChangeWeight(e, track.track_id)}
                 className="exercise-forms"
                 type="text"
                 id="kg"
@@ -139,7 +140,7 @@ const Exercise = ({ el, setTrackData }) => {
                 placeholder="kg"
               ></input>
               <input
-                onChange={(e) => handleChangeReps(e, track.id)}
+                onChange={(e) => handleChangeReps(e, track.track_id)}
                 className="exercise-forms"
                 type="text"
                 id="reps"
@@ -149,7 +150,7 @@ const Exercise = ({ el, setTrackData }) => {
               {lastSet === track.sets && (
                 <p
                   onClick={(e) => {
-                    handleDeleteSet(e, id, el.exercise_id, track.id);
+                    handleDeleteSet(e, id, el.exercise_id, track.track_id);
                   }}
                   className="delete-set"
                 >

@@ -227,11 +227,11 @@ router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
         WHERE exercise_id = ${exercise_id} AND track_id = ${track_id}
       `;
       await pool.query(query);
-      await pool.query(
-        "UPDATE workouts SET day = day + 1 WHERE workout_id = $1",
-        [workout_id]
-      );
     }
+    await pool.query(
+      "UPDATE workouts SET day = day + 1 WHERE workout_id = $1",
+      [workout_id]
+    );
     res.json({ success: true, updatedRows: currentTrackData });
   } catch (err) {
     res.json(err);
