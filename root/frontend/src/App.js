@@ -50,7 +50,6 @@ function App() {
               {/* <Route path="test" element={<Timer />} /> */}
             </Routes>
           )}
-          <Particle />
         </div>
       </div>
     </Router>

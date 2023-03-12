@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
+import Particle from "./components/Particle/Particle";
 import reportWebVitals from "./reportWebVitals";
 
 import { GlobalProvider } from "./context/GlobalContext";
@@ -11,6 +12,7 @@ root.render(
   <React.StrictMode>
     <GlobalProvider>
       <App />
+      <Particle />
     </GlobalProvider>
   </React.StrictMode>
 );
