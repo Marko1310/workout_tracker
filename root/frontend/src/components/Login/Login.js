@@ -11,7 +11,7 @@ import { GlobalContext } from "../../context/GlobalContext";
 
 function Login() {
   // States
-  const { user, setUser } = useContext(GlobalContext);
+  const { user } = useContext(GlobalContext);
   const [form, setForm] = useState("login");
   const [input, setInput] = useState({
     name: "",
@@ -30,7 +30,7 @@ function Login() {
     if (user && navigate) {
       navigate("/dashboard");
     }
-  }, [user, navigate, getSplits]);
+  }, [user, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -20,6 +20,13 @@ export const GlobalProvider = (props) => {
     getCurrentUser();
   }, []);
 
+  let timeout;
+  const setLoadingTimeout = () => {
+    timeout = setTimeout(() => {
+      setLoading(true);
+    }, 1000);
+  };
+
   const getCurrentUser = () => {
     axios
       .get("http://localhost:8000/api/auth/current", {
@@ -70,8 +77,8 @@ export const GlobalProvider = (props) => {
         withCredentials: true,
       })
       .then((data) => {
-        console.log(data.data);
         setSplits(data.data);
+        clearTimeout(timeout);
         setLoading(false);
       })
       .catch((error) => {
@@ -87,6 +94,7 @@ export const GlobalProvider = (props) => {
       })
       .then((data) => {
         setWorkouts(data.data);
+        clearTimeout(timeout);
         setLoading(false);
       })
       .catch((error) => {
@@ -96,7 +104,6 @@ export const GlobalProvider = (props) => {
   };
 
   const getExercises = (workout_id) => {
-    setLoading(true);
     axios
       .get(
         `http://localhost:8000/api/auth/splits/workouts/workout/${workout_id}`,
@@ -106,6 +113,7 @@ export const GlobalProvider = (props) => {
       )
       .then((data) => {
         setExercises(data.data);
+        clearTimeout(timeout);
         setLoading(false);
       })
       .catch((error) => {
@@ -125,7 +133,6 @@ export const GlobalProvider = (props) => {
       .then((data) => {
         if (data) {
           setIsModalOpen(false);
-          setLoading(false);
           getSplits();
         }
       })
@@ -142,15 +149,9 @@ export const GlobalProvider = (props) => {
         { title, split_id },
         { withCredentials: true }
       )
-      .then((data) => {
-        if (data) {
-          getWorkouts(split_id);
-          setIsModalOpen(false);
-          setLoading(false);
-        } else {
-          setIsModalOpen(false);
-          setLoading(false);
-        }
+      .then(() => {
+        getWorkouts(split_id);
+        setIsModalOpen(false);
       })
       .catch((error) => {
         setError(error.response.data);
@@ -166,15 +167,9 @@ export const GlobalProvider = (props) => {
         { title, goal_sets, goal_reps, workout_id },
         { withCredentials: true }
       )
-      .then((data) => {
-        if (data) {
-          getExercises(workout_id);
-          setIsModalOpen(false);
-          setLoading(false);
-        } else {
-          setIsModalOpen(false);
-          setLoading(false);
-        }
+      .then(() => {
+        setIsModalOpen(false);
+        getExercises(workout_id);
       })
       .catch((error) => {
         setError(error.response.data);
@@ -191,7 +186,6 @@ export const GlobalProvider = (props) => {
       )
       .then(() => {
         getExercises(workout_id);
-        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -210,10 +204,8 @@ export const GlobalProvider = (props) => {
         "Content-Type": "application/json",
       },
     })
-      .then((response) => {
-        console.log(response.headers);
+      .then(() => {
         getSplits();
-        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -232,10 +224,8 @@ export const GlobalProvider = (props) => {
         "Content-Type": "application/json",
       },
     })
-      .then((response) => {
-        console.log(response.headers);
+      .then(() => {
         getWorkouts(split_id);
-        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -259,7 +249,6 @@ export const GlobalProvider = (props) => {
     })
       .then(() => {
         getExercises(workout_id);
-        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -284,7 +273,6 @@ export const GlobalProvider = (props) => {
     })
       .then(() => {
         getExercises(workout_id);
-        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -295,6 +283,7 @@ export const GlobalProvider = (props) => {
   const globalState = {
     user,
     setUser,
+    setLoadingTimeout,
     splits,
     setSplits,
     workouts,

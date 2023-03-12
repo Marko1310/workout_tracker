@@ -8,7 +8,7 @@ const NewExerciseModal = () => {
   const { isModalOpen } = useContext(GlobalContext);
   const { setIsModalOpen } = useContext(GlobalContext);
   const { addExercise } = useContext(GlobalContext);
-  const { setLoading } = useContext(GlobalContext);
+  const { setLoadingTimeout } = useContext(GlobalContext);
   const { error } = useContext(GlobalContext);
   const { id } = useParams();
 
@@ -18,7 +18,7 @@ const NewExerciseModal = () => {
 
   const handleNewExercise = (e) => {
     if (title && goal_sets && goal_reps) {
-      setLoading(true);
+      setLoadingTimeout();
     }
     addExercise(e, title, goal_sets, goal_reps, id);
   };

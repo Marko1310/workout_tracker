@@ -10,13 +10,13 @@ const NewWorkoutModal = () => {
   const { addWorkout } = useContext(GlobalContext);
   const { split_id } = useParams();
   const [title, setTitle] = useState("");
-  const { setLoading } = useContext(GlobalContext);
+  const { setLoadingTimeout } = useContext(GlobalContext);
   const { error } = useContext(GlobalContext);
 
   const handleNewWorkout = (e) => {
     e.preventDefault();
     if (title) {
-      setLoading(true);
+      setLoadingTimeout();
     }
     addWorkout(e, title, split_id);
   };

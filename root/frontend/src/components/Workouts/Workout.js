@@ -1,4 +1,6 @@
 import React, { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
 import Exercise from "./Exercise";
 import Scroll from "../Scroll/Scroll";
 import "./Workout.css";
@@ -13,6 +15,8 @@ const WorkoutSplit = () => {
   const { user } = useContext(GlobalContext);
   const { exercises } = useContext(GlobalContext);
   const { setError } = useContext(GlobalContext);
+  const { getExercises } = useContext(GlobalContext);
+  const { id } = useParams();
 
   const navigate = useNavigate();
 
@@ -20,6 +24,7 @@ const WorkoutSplit = () => {
     if (!user) {
       navigate("/");
     }
+    getExercises(id);
   }, [user, navigate]);
 
   const handleModal = () => {

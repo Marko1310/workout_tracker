@@ -17,8 +17,18 @@ const WorkoutGrid = () => {
   const { getWorkouts } = useContext(GlobalContext);
   const { deleteWorkout } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
+  const { getCurrentUser } = useContext(GlobalContext);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(user);
+    if (!user && navigate) {
+      navigate("/");
+    } else {
+      getWorkouts(split_id);
+    }
+  }, []);
 
   const changeRoute = function (id) {
     getExercises(id);
@@ -32,13 +42,6 @@ const WorkoutGrid = () => {
     }
     e.stopPropagation();
   };
-
-  useEffect(() => {
-    if (!user) {
-      navigate("/");
-    }
-    getWorkouts(split_id);
-  }, [user, navigate]);
 
   return (
     <>

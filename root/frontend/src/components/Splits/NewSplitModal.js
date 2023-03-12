@@ -9,13 +9,13 @@ const NewWorkoutSplit = () => {
   const [title, setTitle] = useState("");
   const [days, setDays] = useState("");
   const { addSplit } = useContext(GlobalContext);
-  const { setLoading } = useContext(GlobalContext);
+  const { setLoadingTimeout } = useContext(GlobalContext);
   const { error } = useContext(GlobalContext);
 
   const handleNewSplit = (e) => {
     e.preventDefault();
     if (title && days) {
-      setLoading(true);
+      setLoadingTimeout();
     }
     addSplit(e, title, days);
   };

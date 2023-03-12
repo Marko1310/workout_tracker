@@ -15,7 +15,15 @@ const WorkoutSplitGrid = () => {
   const navigate = useNavigate();
   const { getSplits } = useContext(GlobalContext);
   const { deleteSplit } = useContext(GlobalContext);
-  const { setLoading } = useContext(GlobalContext);
+  const { setLoadingTimeout } = useContext(GlobalContext);
+
+  useEffect(() => {
+    console.log(user);
+    if (!user) {
+      navigate("/");
+    }
+    getSplits();
+  }, [user, navigate]);
 
   const changeRoute = (id) => {
     getWorkouts(id);
@@ -25,17 +33,10 @@ const WorkoutSplitGrid = () => {
   const handleDelete = (e, split_id) => {
     if (window.confirm("Are you sure you want to delete this Workout Split?")) {
       deleteSplit(e, split_id);
-      setLoading(true);
+      setLoadingTimeout();
     }
     e.stopPropagation();
   };
-
-  useEffect(() => {
-    if (!user) {
-      navigate("/");
-    }
-    getSplits();
-  }, [user, navigate]);
 
   return (
     <>

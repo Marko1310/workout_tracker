@@ -1,19 +1,25 @@
+import { useEffect } from "react";
 import "./Exercise.css";
 import { GlobalContext } from "../../context/GlobalContext";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Exercise = ({ el }) => {
   const { addNewSet } = useContext(GlobalContext);
+  const { user } = useContext(GlobalContext);
+  const navigate = useNavigate();
+
   const { setLoading } = useContext(GlobalContext);
   const { deleteExercise } = useContext(GlobalContext);
   const { deleteSet } = useContext(GlobalContext);
+  const { setLoadingTimeout } = useContext(GlobalContext);
   const isTrackEmpty = el.sets_reps_weight[0].id === null;
   const { id } = useParams();
 
   const handleNewSet = (e) => {
     e.preventDefault();
-    setLoading(true);
+    setLoadingTimeout();
     addNewSet(el.exercise_id, id);
   };
 
@@ -24,14 +30,14 @@ const Exercise = ({ el }) => {
       )
     ) {
       deleteExercise(e, workout_id, exercise_id);
-      setLoading(true);
+      setLoadingTimeout();
     }
     e.stopPropagation();
   };
 
   const handleDeleteSet = (e, workout_id, exercise_id, track_id) => {
     deleteSet(e, workout_id, exercise_id, track_id);
-    setLoading(true);
+    setLoadingTimeout();
   };
 
   return (
