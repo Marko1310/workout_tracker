@@ -6,7 +6,7 @@ import Scroll from "../Scroll/Scroll";
 import "./Workout.css";
 import { GlobalContext } from "../../context/GlobalContext";
 import NewExerciseModal from "./NewExerciseModal";
-import Timer from "../Timer/Timer";
+// import Timer from "../Timer/Timer";
 import { useNavigate } from "react-router-dom";
 
 const WorkoutSplit = () => {
@@ -38,7 +38,8 @@ const WorkoutSplit = () => {
         <div className="container">
           <div className="description-container">
             {<p>{"Push"}</p>}
-            <Timer />
+            <p>Workout #1</p>
+            {/* <Timer /> */}
             <button className="buttonFinish">Finish</button>
             {/* <div>Notes</div> */}
           </div>

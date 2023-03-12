@@ -40,6 +40,11 @@ const Exercise = ({ el }) => {
     setLoadingTimeout();
   };
 
+  let lastSet = 0;
+  el.sets_reps_weight.map((el) => {
+    if (el.sets > lastSet) lastSet = el.sets;
+  });
+
   return (
     <div className="exercise-container">
       <div className="title-container">
@@ -85,14 +90,16 @@ const Exercise = ({ el }) => {
                 name="reps"
                 placeholder="reps"
               ></input>
-              <p
-                onClick={(e) => {
-                  handleDeleteSet(e, id, el.exercise_id, element.id);
-                }}
-                className="delete-set"
-              >
-                x
-              </p>
+              {lastSet === element.sets && (
+                <p
+                  onClick={(e) => {
+                    handleDeleteSet(e, id, el.exercise_id, element.id);
+                  }}
+                  className="delete-set"
+                >
+                  x
+                </p>
+              )}
             </div>
           );
         })}

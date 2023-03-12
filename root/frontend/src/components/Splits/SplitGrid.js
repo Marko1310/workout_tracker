@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../context/GlobalContext.js";
 
 import "./SplitGrid.css";
-import logo from "../../images/workout.png";
+import calendar from "../../images/calendar.png";
 
 const WorkoutSplitGrid = () => {
   const { isModalOpen } = useContext(GlobalContext);
@@ -57,7 +57,7 @@ const WorkoutSplitGrid = () => {
                     <div className="image-and-delete-container">
                       <img
                         className="workout-image"
-                        src={logo}
+                        src={calendar}
                         alt="Workout"
                       ></img>
                       <button
