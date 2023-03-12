@@ -169,31 +169,76 @@ router.post(
   }
 );
 
+// // @route   POST /api/split/workout/exercise/track
+// // @desc    Update exercise with weight and reps
+// // @access  Private
+// router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
+//   try {
+//     user_id = req.user.id;
+//     const date = new Date();
+//     const { set, exercise_id } = req.body;
+//     let { reps, weight } = req.body;
+
+//     if (!reps) reps = 0;
+//     if (!weight) weight = 0;
+
+//     const isValidExerciseId = await databaseCheck.checkExerciseId(
+//       exercise_id,
+//       user_id
+//     );
+
+//     if (isValidExerciseId === 0) {
+//       return res.status(400).send("Unathorized");
+//     }
+
+//     const track = await pool.query(
+//       "INSERT INTO track (set, weight, reps, date, exercise_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+//       [set, weight, reps, date, exercise_id, user_id]
+//     );
+//     res.json(track.rows);
+//   } catch (err) {
+//     return res.status(500).send(err.message);
+//   }
+// });
+
 // @route   POST /api/split/workout/exercise/track
 // @desc    Update exercise with weight and reps
 // @access  Private
 router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
-    const date = new Date();
-    const { set, exercise_id } = req.body;
-    let { reps, weight } = req.body;
 
-    if (!reps) reps = 0;
-    if (!weight) weight = 0;
+    const sets = req.body;
+    console.log(sets);
+    const values = sets
+      .map((set) => {
+        return `(${set.exercise_id}, ${set.track_id}, ${set.weight}, ${set.reps})`;
+      })
+      .join(", ");
 
-    const isValidExerciseId = await databaseCheck.checkExerciseId(
-      exercise_id,
-      user_id
-    );
+    console.log(values);
 
-    if (isValidExerciseId === 0) {
-      return res.status(400).send("Unathorized");
-    }
+    // const sql = `UPDATE track
+    // SET weight = CASE
+    //   WHEN exercise_id = $1 AND track_id = $2 THEN $3
+    //   ELSE weight
+    // END`, [10];
+
+    // `UPDATE track
+    // SET weight = new_values.weight, reps = new_values.reps
+    // FROM (VALUES ${values}) AS new_values(track_id, exercise_id, weight, reps) WHERE track.track_id = new_values.track_id AND track.exercise_id = new_values.exercise_id RETURNING track_id`,
 
     const track = await pool.query(
-      "INSERT INTO track (set, weight, reps, date, exercise_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-      [set, weight, reps, date, exercise_id, user_id]
+      `UPDATE track
+    SET weight = CASE
+      WHEN exercise_id = $1 AND track_id = $2 THEN $3
+      ELSE weight
+    END,
+    reps = CASE
+      WHEN exercise_id = $1 AND track_id = $2 THEN $4
+      ELSE reps
+    END`,
+      [41, 258, 200, 12]
     );
     res.json(track.rows);
   } catch (err) {
