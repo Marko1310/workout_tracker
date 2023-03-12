@@ -127,8 +127,7 @@ router.post(
     try {
       user_id = req.user.id;
       const date = new Date();
-      const { exercise_id, workout_id } = req.body;
-      console.log(exercise_id, workout_id);
+      const { exercise_id, workout_id, day } = req.body;
 
       const checkExerciseId = await pool.query(
         "SELECT * FROM exercises WHERE exercise_id = $1 AND user_id = $2",
@@ -147,14 +146,14 @@ router.post(
       if (lastSet.rows[0]) {
         let nextSet = lastSet.rows[0].set + 1;
         const insertSet = await pool.query(
-          "INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-          [nextSet, 0, 0, date, exercise_id, user_id, workout_id]
+          "INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id, workout_day) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+          [nextSet, 0, 0, date, exercise_id, user_id, workout_id, day]
         );
         res.json(insertSet.rows);
       } else {
         const insertSet = await pool.query(
-          "INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-          [1, 0, 0, date, exercise_id, user_id, workout_id]
+          "INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id, workout_day) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+          [1, 0, 0, date, exercise_id, user_id, workout_id, day]
         );
         res.json(insertSet.rows);
       }
@@ -202,16 +201,16 @@ router.post(
 // });
 
 // @route   POST /api/split/workout/exercise/track
-// @desc    Update exercise with weight and reps
+// @desc    Update exercise with weight and reps and update workout day
 // @access  Private
 router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
-    const sets = req.body;
+    const { workout_id, currentTrackData } = req.body;
 
-    for (const value of sets) {
+    for (const value of currentTrackData) {
       const { exercise_id, track_id, weight, reps } = value;
-
+      console.log(exercise_id, track_id, weight, reps);
       const query = `
         UPDATE track
         SET
@@ -228,8 +227,12 @@ router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
         WHERE exercise_id = ${exercise_id} AND track_id = ${track_id}
       `;
       await pool.query(query);
+      await pool.query(
+        "UPDATE workouts SET day = day + 1 WHERE workout_id = $1",
+        [workout_id]
+      );
     }
-    res.json({ success: true, updatedRows: sets });
+    res.json({ success: true, updatedRows: currentTrackData });
   } catch (err) {
     res.json(err);
   }

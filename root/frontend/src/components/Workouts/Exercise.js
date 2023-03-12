@@ -14,14 +14,18 @@ const Exercise = ({ el, setTrackData }) => {
   const { deleteExercise } = useContext(GlobalContext);
   const { deleteSet } = useContext(GlobalContext);
   const { setLoadingTimeout } = useContext(GlobalContext);
+  const { currentWorkout } = useContext(GlobalContext);
   const { getCurrentWorkout } = useContext(GlobalContext);
+  const { currentTrackData } = useContext(GlobalContext);
+  const { setCurrentTrackData } = useContext(GlobalContext);
+
   const isTrackEmpty = el.trackdata[0].id === null;
   const { id } = useParams();
 
   const handleNewSet = (e) => {
     e.preventDefault();
     setLoadingTimeout();
-    addNewSet(el.exercise_id, id);
+    addNewSet(el.exercise_id, id, currentWorkout.day);
   };
 
   const handleDeleteExercise = (e, workout_id, exercise_id) => {
@@ -73,31 +77,26 @@ const Exercise = ({ el, setTrackData }) => {
   //   });
   // };
 
-  const handleChangeData = (e, exercise_id, track_id) => {
-    setTrackData((prevData) => {
-      const existingId = prevData.findIndex(
-        (obj) => obj.exercise_id === exercise_id
-      );
-      if (existingId !== -1) {
-        const updateObject = {
-          ...prevData[existingId],
-          exercise_id: exercise_id,
-          weight: 0,
-          reps: e.target.value,
-          track_id: track_id,
-          day: "",
-        };
-        return [...prevData.slice(0, existingId), updateObject];
-      } else {
-        const newObject = {
-          exercise_id: exercise_id,
-          weight: 0,
-          reps: 0,
-          day: "currentWorkout.day",
-        };
-        return [...prevData, newObject];
+  const handleChangeWeight = (e, track_id) => {
+    console.log(track_id);
+    console.log(currentTrackData);
+    const updateWeight = currentTrackData.map((el) => {
+      if (el.id === track_id) {
+        return { ...el, weight: e.target.value };
       }
+      return el;
     });
+    setCurrentTrackData(updateWeight);
+  };
+
+  const handleChangeReps = (e, track_id) => {
+    const updateWeight = currentTrackData.map((el) => {
+      if (el.id === track_id) {
+        return { ...el, reps: e.target.value };
+      }
+      return el;
+    });
+    setCurrentTrackData(updateWeight);
   };
 
   return (
@@ -132,7 +131,7 @@ const Exercise = ({ el, setTrackData }) => {
                 {track.weight} kg x {track.reps}
               </p>
               <input
-                // onChange={(e) => handleChangeData(e, el.exercise_id, track.id)}
+                onChange={(e) => handleChangeWeight(e, track.id)}
                 className="exercise-forms"
                 type="text"
                 id="kg"
@@ -140,6 +139,7 @@ const Exercise = ({ el, setTrackData }) => {
                 placeholder="kg"
               ></input>
               <input
+                onChange={(e) => handleChangeReps(e, track.id)}
                 className="exercise-forms"
                 type="text"
                 id="reps"

@@ -18,8 +18,13 @@ const WorkoutSplit = () => {
   const { getExercises } = useContext(GlobalContext);
   const { currentWorkout } = useContext(GlobalContext);
   const { getCurrentWorkout } = useContext(GlobalContext);
+  const { setLoadingTimeout } = useContext(GlobalContext);
+
+  const { currentTrackData } = useContext(GlobalContext);
 
   const { getCurrentTrackData } = useContext(GlobalContext);
+
+  const { addTrackData } = useContext(GlobalContext);
 
   const { id } = useParams();
   const [trackData, setTrackData] = useState([]);
@@ -35,6 +40,12 @@ const WorkoutSplit = () => {
     getCurrentTrackData(id);
     // updateTrackData()
   }, [user, navigate]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoadingTimeout();
+    addTrackData(id);
+  };
 
   // const updateTrackData = (exercises) => {
   //   exercises.map((exercise) => {
@@ -106,7 +117,9 @@ const WorkoutSplit = () => {
             <button onClick={() => handleModal()} className="workoutBtn add">
               Add exercise
             </button>
-            <button className="workoutBtn">Save workout</button>
+            <button onClick={(e) => handleSubmit(e)} className="workoutBtn">
+              Save workout
+            </button>
           </div>
         </div>
       </div>

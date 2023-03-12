@@ -10,7 +10,7 @@ export const GlobalProvider = (props) => {
   const [splits, setSplits] = useState([]);
   const [workouts, setWorkouts] = useState([]);
   const [currentWorkout, setCurrentWorkout] = useState([]);
-  const [currentTrackData, setCurrentTrackData] = useState([]);
+  const [currentTrackData, setCurrentTrackData] = useState(null);
   const [exercises, setExercises] = useState([]);
   const [error, setError] = useState("");
   // const [prevSets, setPrevSets] = useState([]);
@@ -152,7 +152,11 @@ export const GlobalProvider = (props) => {
       )
       .then((data) => {
         setExercises(data.data);
-        console.log(data.data);
+        const newArray = [];
+        data.data.map((el) => {
+          el.trackdata.map((data) => newArray.push(data));
+        });
+        setCurrentTrackData(newArray);
         clearTimeout(timeout);
         setLoading(false);
       })
@@ -217,14 +221,33 @@ export const GlobalProvider = (props) => {
       });
   };
 
-  const addNewSet = (exercise_id, workout_id) => {
+  const addNewSet = (exercise_id, workout_id, day) => {
     axios
       .post(
         "http://localhost:8000/api/auth/split/workout/exercise/set/new",
-        { exercise_id, workout_id },
+        { exercise_id, workout_id, day },
         { withCredentials: true }
       )
       .then(() => {
+        getExercises(workout_id);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  const addTrackData = (workout_id) => {
+    console.log(workout_id);
+    console.log(currentTrackData);
+    axios
+      .post(
+        "http://localhost:8000/api/auth/split/workout/exercise/track",
+        { workout_id, currentTrackData },
+        { withCredentials: true }
+      )
+      .then((data) => {
+        console.log(data);
         getExercises(workout_id);
       })
       .catch((error) => {
@@ -354,6 +377,8 @@ export const GlobalProvider = (props) => {
     setError,
     currentWorkout,
     currentTrackData,
+    setCurrentTrackData,
+    addTrackData,
   };
 
   return (

@@ -109,7 +109,7 @@ router.get(
       // Get user exercises with tracking data from a given workout
       // importing track data into object to attach to every exercise
       const track_data = await pool.query(
-        "SELECT e.exercise_id, e.exercise_name, e.goal_sets, e.goal_reps, json_agg(json_build_object('id', t.track_id, 'sets', t.set, 'reps', t.reps, 'user_id', t.user_id, 'exercise_id', t.exercise_id, 'weight', t.weight, 'workout_day', t.workout_day, 'workout_id', t.workout_id) ORDER BY t.set) AS trackData FROM exercises e LEFT JOIN track t ON e.exercise_id = t.exercise_id WHERE e.workout_id = $1 GROUP BY e.exercise_id, e.exercise_name ORDER BY e.exercise_id;",
+        "SELECT e.exercise_id, e.exercise_name, e.goal_sets, e.goal_reps, json_agg(json_build_object('track_id', t.track_id, 'sets', t.set, 'reps', t.reps, 'user_id', t.user_id, 'exercise_id', t.exercise_id, 'weight', t.weight, 'workout_day', t.workout_day, 'workout_id', t.workout_id) ORDER BY t.set) AS trackData FROM exercises e LEFT JOIN track t ON e.exercise_id = t.exercise_id WHERE e.workout_id = $1 GROUP BY e.exercise_id, e.exercise_name ORDER BY e.exercise_id;",
         [workout_id]
       );
 
