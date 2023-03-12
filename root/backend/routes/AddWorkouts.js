@@ -127,8 +127,8 @@ router.post(
     try {
       user_id = req.user.id;
       const date = new Date();
-      const { exercise_id } = req.body;
-      console.log(exercise_id);
+      const { exercise_id, workout_id } = req.body;
+      console.log(exercise_id, workout_id);
 
       const checkExerciseId = await pool.query(
         "SELECT * FROM exercises WHERE exercise_id = $1 AND user_id = $2",
@@ -147,14 +147,14 @@ router.post(
       if (lastSet.rows[0]) {
         let nextSet = lastSet.rows[0].set + 1;
         const insertSet = await pool.query(
-          "INSERT INTO track (set, weight, reps, date, exercise_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-          [nextSet, 0, 0, date, exercise_id, user_id]
+          "INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+          [nextSet, 0, 0, date, exercise_id, user_id, workout_id]
         );
         res.json(insertSet.rows);
       } else {
         const insertSet = await pool.query(
-          "INSERT INTO track (set, weight, reps, date, exercise_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-          [1, 0, 0, date, exercise_id, user_id]
+          "INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+          [1, 0, 0, date, exercise_id, user_id, workout_id]
         );
         res.json(insertSet.rows);
       }

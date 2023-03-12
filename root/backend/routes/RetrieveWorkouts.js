@@ -42,7 +42,7 @@ router.get("/splits/workouts/:splitId", requiresAuth, async (req, res) => {
 
     // Get user workouts
     const workouts = await pool.query(
-      "SELECT w.workout_id, w.workout_name, w.date, array_agg(e.exercise_name) FROM workouts w LEFT JOIN exercises e ON e.workout_id = w.workout_id WHERE w.user_id = $1 AND w.split_id = $2 GROUP BY w.workout_id",
+      "SELECT w.workout_id, w.workout_name, w.date, w.day, array_agg(e.exercise_name) FROM workouts w LEFT JOIN exercises e ON e.workout_id = w.workout_id WHERE w.user_id = $1 AND w.split_id = $2 GROUP BY w.workout_id",
       [user_id, split_id]
       // "SELECT * FROM workouts WHERE user_id=$1 AND split_id = $2 ORDER BY date DESC",
     );
@@ -52,11 +52,53 @@ router.get("/splits/workouts/:splitId", requiresAuth, async (req, res) => {
   }
 });
 
-// @route   GET /api/splits/workouts/workout/:workoutId
+// @route   GET /api/splits/workout/:workoutId
+// @desc    get current workout
+// @access  Private
+router.get("/splits/workout/:workoutId", requiresAuth, async (req, res) => {
+  try {
+    user_id = req.user.id;
+    const workout_id = req.params.workoutId;
+
+    // Get user workouts
+    const workout = await pool.query(
+      "SELECT w.workout_id, w.workout_name, w.day FROM workouts w WHERE user_id = $1 AND workout_id = $2",
+      [user_id, workout_id]
+    );
+    res.json(workout.rows);
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
+});
+
+// @route   GET /api/splits/workout/trackData/:workoutId
+// @desc    get current track data for the workout
+// @access  Private
+router.get(
+  "/splits/workout/trackData/:workoutId",
+  requiresAuth,
+  async (req, res) => {
+    try {
+      user_id = req.user.id;
+      const workout_id = req.params.workoutId;
+
+      // Get user workouts
+      const trackData = await pool.query(
+        "SELECT * FROM track WHERE user_id = $1 AND workout_id = $2",
+        [user_id, workout_id]
+      );
+      res.json(trackData.rows);
+    } catch (err) {
+      return res.status(500).send(err.message);
+    }
+  }
+);
+
+// @route   GET /api/splits/workouts/exercises/:workoutId
 // @desc    get user workout
 // @access  Private
 router.get(
-  "/splits/workouts/workout/:workoutId",
+  "/splits/workouts/exercises/:workoutId",
   requiresAuth,
   async (req, res) => {
     try {
@@ -67,7 +109,7 @@ router.get(
       // Get user exercises with tracking data from a given workout
       // importing track data into object to attach to every exercise
       const track_data = await pool.query(
-        "SELECT e.exercise_id, e.exercise_name, e.goal_sets, e.goal_reps, json_agg(json_build_object('id', track_id, 'sets', t.set, 'reps', t.reps, 'weight', t.weight) ORDER BY t.set) AS sets_reps_weight FROM exercises e LEFT JOIN track t ON e.exercise_id = t.exercise_id WHERE e.workout_id = $1 GROUP BY e.exercise_id, e.exercise_name ORDER BY e.exercise_id;",
+        "SELECT e.exercise_id, e.exercise_name, e.goal_sets, e.goal_reps, json_agg(json_build_object('id', t.track_id, 'sets', t.set, 'reps', t.reps, 'user_id', t.user_id, 'exercise_id', t.exercise_id, 'weight', t.weight, 'workout_day', t.workout_day, 'workout_id', t.workout_id) ORDER BY t.set) AS trackData FROM exercises e LEFT JOIN track t ON e.exercise_id = t.exercise_id WHERE e.workout_id = $1 GROUP BY e.exercise_id, e.exercise_name ORDER BY e.exercise_id;",
         [workout_id]
       );
 

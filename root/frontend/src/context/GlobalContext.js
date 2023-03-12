@@ -9,6 +9,8 @@ export const GlobalProvider = (props) => {
   const [user, setUser] = useState(null);
   const [splits, setSplits] = useState([]);
   const [workouts, setWorkouts] = useState([]);
+  const [currentWorkout, setCurrentWorkout] = useState([]);
+  const [currentTrackData, setCurrentTrackData] = useState([]);
   const [exercises, setExercises] = useState([]);
   const [error, setError] = useState("");
   // const [prevSets, setPrevSets] = useState([]);
@@ -103,16 +105,54 @@ export const GlobalProvider = (props) => {
       });
   };
 
+  const getCurrentWorkout = (workout_id) => {
+    axios
+      .get(`http://localhost:8000/api/auth/splits/workout/${workout_id}`, {
+        withCredentials: true,
+      })
+      .then((data) => {
+        console.log(data.data[0]);
+        setCurrentWorkout(data.data[0]);
+        clearTimeout(timeout);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  const getCurrentTrackData = (workout_id) => {
+    axios
+      .get(
+        `http://localhost:8000/api/auth/splits/workout/trackData/${workout_id}`,
+        {
+          withCredentials: true,
+        }
+      )
+      .then((data) => {
+        console.log(data.data);
+        setCurrentTrackData(data.data);
+        clearTimeout(timeout);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
   const getExercises = (workout_id) => {
     axios
       .get(
-        `http://localhost:8000/api/auth/splits/workouts/workout/${workout_id}`,
+        `http://localhost:8000/api/auth/splits/workouts/exercises/${workout_id}`,
         {
           withCredentials: true,
         }
       )
       .then((data) => {
         setExercises(data.data);
+        console.log(data.data);
         clearTimeout(timeout);
         setLoading(false);
       })
@@ -181,7 +221,7 @@ export const GlobalProvider = (props) => {
     axios
       .post(
         "http://localhost:8000/api/auth/split/workout/exercise/set/new",
-        { exercise_id },
+        { exercise_id, workout_id },
         { withCredentials: true }
       )
       .then(() => {
@@ -258,6 +298,7 @@ export const GlobalProvider = (props) => {
 
   const deleteSet = (e, workout_id, exercise_id, track_id) => {
     e.preventDefault();
+    console.log(e, workout_id, exercise_id, track_id);
 
     fetch("http://localhost:8000/api/auth/split/workout/exercise/set/delete", {
       method: "DELETE",
@@ -294,6 +335,8 @@ export const GlobalProvider = (props) => {
     logout,
     getSplits,
     getWorkouts,
+    getCurrentWorkout,
+    getCurrentTrackData,
     getExercises,
     loading,
     addSplit,
@@ -309,6 +352,8 @@ export const GlobalProvider = (props) => {
     setLoading,
     error,
     setError,
+    currentWorkout,
+    currentTrackData,
   };
 
   return (

@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const Exercise = ({ el }) => {
+const Exercise = ({ el, setTrackData }) => {
   const { addNewSet } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
   const navigate = useNavigate();
@@ -14,7 +14,8 @@ const Exercise = ({ el }) => {
   const { deleteExercise } = useContext(GlobalContext);
   const { deleteSet } = useContext(GlobalContext);
   const { setLoadingTimeout } = useContext(GlobalContext);
-  const isTrackEmpty = el.sets_reps_weight[0].id === null;
+  const { getCurrentWorkout } = useContext(GlobalContext);
+  const isTrackEmpty = el.trackdata[0].id === null;
   const { id } = useParams();
 
   const handleNewSet = (e) => {
@@ -41,9 +42,63 @@ const Exercise = ({ el }) => {
   };
 
   let lastSet = 0;
-  el.sets_reps_weight.map((el) => {
+  el.trackdata.map((el) => {
     if (el.sets > lastSet) lastSet = el.sets;
   });
+
+  // const handleChangeData = (e, exercise_id, track_id) => {
+  //   setTrackData((prevData) => {
+  //     const existingId = prevData.findIndex(
+  //       (obj) => obj.exercise_id === exercise_id
+  //     );
+  //     if (existingId !== -1) {
+  //       const updateObject = {
+  //         ...prevData[existingId],
+  //         exercise_id: exercise_id,
+  //         weight: 0,
+  //         reps: e.target.value,
+  //         track_id: track_id,
+  //         day: "",
+  //       };
+  //       return [...prevData.slice(0, existingId), updateObject];
+  //     } else {
+  //       const newObject = {
+  //         exercise_id: exercise_id,
+  //         weight: 0,
+  //         reps: 0,
+  //         day: "currentWorkout.day",
+  //       };
+  //       return [...prevData, newObject];
+  //     }
+  //   });
+  // };
+
+  const handleChangeData = (e, exercise_id, track_id) => {
+    setTrackData((prevData) => {
+      const existingId = prevData.findIndex(
+        (obj) => obj.exercise_id === exercise_id
+      );
+      if (existingId !== -1) {
+        const updateObject = {
+          ...prevData[existingId],
+          exercise_id: exercise_id,
+          weight: 0,
+          reps: e.target.value,
+          track_id: track_id,
+          day: "",
+        };
+        return [...prevData.slice(0, existingId), updateObject];
+      } else {
+        const newObject = {
+          exercise_id: exercise_id,
+          weight: 0,
+          reps: 0,
+          day: "currentWorkout.day",
+        };
+        return [...prevData, newObject];
+      }
+    });
+  };
 
   return (
     <div className="exercise-container">
@@ -65,18 +120,19 @@ const Exercise = ({ el }) => {
         <p className="exercise-navbar-title">Reps</p>
       </div>
       {!isTrackEmpty &&
-        el.sets_reps_weight.map((element) => {
+        el.trackdata.map((track) => {
           return (
             <div
-              parent-id={element.exercise_id}
-              key={element.id}
+              parent-id={track.exercise_id}
+              key={track.id}
               className="exercise"
             >
-              <p className="set">{element.sets}</p>
+              <p className="set">{track.sets}</p>
               <p className="previous">
-                {element.weight} kg x {element.reps}
+                {track.weight} kg x {track.reps}
               </p>
               <input
+                // onChange={(e) => handleChangeData(e, el.exercise_id, track.id)}
                 className="exercise-forms"
                 type="text"
                 id="kg"
@@ -90,10 +146,10 @@ const Exercise = ({ el }) => {
                 name="reps"
                 placeholder="reps"
               ></input>
-              {lastSet === element.sets && (
+              {lastSet === track.sets && (
                 <p
                   onClick={(e) => {
-                    handleDeleteSet(e, id, el.exercise_id, element.id);
+                    handleDeleteSet(e, id, el.exercise_id, track.id);
                   }}
                   className="delete-set"
                 >

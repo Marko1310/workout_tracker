@@ -17,7 +17,7 @@ const WorkoutGrid = () => {
   const { getWorkouts } = useContext(GlobalContext);
   const { deleteWorkout } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
-  const { getCurrentUser } = useContext(GlobalContext);
+  const { getCurrentWorkout } = useContext(GlobalContext);
 
   const navigate = useNavigate();
 
@@ -32,6 +32,7 @@ const WorkoutGrid = () => {
 
   const changeRoute = function (id) {
     getExercises(id);
+    getCurrentWorkout(id);
     navigate(`/workout/${id}`);
   };
 

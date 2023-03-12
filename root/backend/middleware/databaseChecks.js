@@ -50,7 +50,7 @@ const checkTrackId = async (exercise_id, track_id, user_id) => {
       "SELECT * FROM track WHERE exercise_id = $1 AND track_id = $2 AND user_id = $3",
       [exercise_id, track_id, user_id]
     );
-    return checkTrackId.rows.length;
+    return trackId.rows.length;
   } catch (err) {
     console.log(err);
   }
