@@ -40,8 +40,9 @@ const WorkoutGrid = () => {
   }, []);
 
   const changeRoute = function (id) {
-    getExercises(id);
     getExercises2(id);
+
+    getExercises(id);
     getCurrentWorkout(id);
     navigate(`/workout/${id}`);
   };

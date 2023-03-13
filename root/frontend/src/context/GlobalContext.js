@@ -11,16 +11,12 @@ export const GlobalProvider = (props) => {
   const [workouts, setWorkouts] = useState([]);
   const [currentWorkout, setCurrentWorkout] = useState([]);
   const [currentTrackData, setCurrentTrackData] = useState(null);
+  const [prevTrackData, setPrevTrackData] = useState(null);
   const [exercises, setExercises] = useState([]);
   const [error, setError] = useState("");
-  // const [prevSets, setPrevSets] = useState([]);
-  // const [prevReps, setPrevReps] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [newTrackData, setNewTrackData] = useState("");
-
-  const [test, setTest] = useState(null);
 
   useEffect(() => {
     getCurrentUser();
@@ -134,7 +130,7 @@ export const GlobalProvider = (props) => {
         }
       )
       .then((data) => {
-        setCurrentTrackData(data.data);
+        // setCurrentTrackData(data.data);
         clearTimeout(timeout);
         setLoading(false);
       })
@@ -154,12 +150,12 @@ export const GlobalProvider = (props) => {
       )
       .then((data) => {
         setExercises(data.data);
-        const newArray = [];
-        data.data.map((el) => {
-          el.trackdata.map((data) => newArray.push(data));
-        });
-        setCurrentTrackData(newArray);
-        // setTest(newArray);
+        // const newArray = [];
+        // data.data.map((el) => {
+        //   el.trackdata.map((data) => newArray.push(data));
+        // });
+        // console.log(newArray);
+        // setCurrentTrackData(newArray);
         clearTimeout(timeout);
         setLoading(false);
       })
@@ -182,7 +178,7 @@ export const GlobalProvider = (props) => {
         data.data.map((el) => {
           el.trackdata.map((data) => newArray.push(data));
         });
-        setTest(newArray);
+        setCurrentTrackData(newArray);
         clearTimeout(timeout);
         setLoading(false);
       })
@@ -257,7 +253,7 @@ export const GlobalProvider = (props) => {
       .then((data) => {
         console.log(data.data[0]);
         getExercises(workout_id);
-        setTest((prevData) => [...prevData, data.data[0]]);
+        setCurrentTrackData((prevData) => [...prevData, data.data[0]]);
       })
       .catch((error) => {
         console.log(error);
@@ -266,10 +262,11 @@ export const GlobalProvider = (props) => {
   };
 
   const addTrackData = (workout_id) => {
+    console.log(currentTrackData);
     axios
       .post(
         "http://localhost:8000/api/auth/split/workout/exercise/track",
-        { workout_id, test },
+        { workout_id, currentTrackData },
         { withCredentials: true }
       )
       .then((data) => {
@@ -362,8 +359,10 @@ export const GlobalProvider = (props) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data[0].track_id);
-        const newArray = test.filter((el) => el.track_id !== data[0].track_id);
-        setTest(newArray);
+        const newArray = currentTrackData.filter(
+          (el) => el.track_id !== data[0].track_id
+        );
+        setCurrentTrackData(newArray);
         getExercises(workout_id);
       })
       .catch((error) => {
@@ -404,11 +403,11 @@ export const GlobalProvider = (props) => {
     error,
     setError,
     currentWorkout,
-    currentTrackData,
-    setCurrentTrackData,
+    // currentTrackData,
+    // setCurrentTrackData,
     addTrackData,
-    setTest,
-    test,
+    setCurrentTrackData,
+    currentTrackData,
     setNewTrackData,
     getExercises2,
   };

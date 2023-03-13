@@ -224,38 +224,62 @@ router.post(
 //   }
 // });
 
+////////////////////////////////////////////////////
 // @route   POST /api/split/workout/exercise/track
 // @desc    Update exercise with weight and reps
 // @access  Private
+// router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
+//   try {
+//     user_id = req.user.id;
+//     const { currentTrackData } = req.body;
+//     // console.log(currentTrackData);
+
+//     for (const value of currentTrackData) {
+//       const { exercise_id, track_id, workout_day, weight, reps } = value;
+//       const query = `
+//         UPDATE track
+//         SET
+//         weight = CASE
+//           WHEN exercise_id = ${exercise_id} AND track_id = ${track_id} THEN ${weight}
+//           ELSE weight
+//         END,
+
+//         reps = CASE
+//           WHEN exercise_id = ${exercise_id} AND track_id = ${track_id} THEN ${reps}
+//           ELSE reps
+//         END
+
+//         WHERE exercise_id = ${exercise_id} AND track_id = ${track_id} AND workout_day = ${workout_day}
+//       `;
+//       await pool.query(query);
+//     }
+//     res.json({ success: true, updatedRows: currentTrackData });
+//   } catch (err) {
+//     res.json(err);
+//   }
+// });
+////////////////////////////////////////////////////
+
 router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
-    const { test } = req.body;
-    console.log(test);
+    const { currentTrackData } = req.body;
+    console.log(currentTrackData);
 
-    for (const value of test) {
-      const { exercise_id, track_id, workout_day, weight, reps } = value;
-      console.log(workout_day);
-      const query = `
-        UPDATE track
-        SET
-        weight = CASE
-          WHEN exercise_id = ${exercise_id} AND track_id = ${track_id} THEN ${weight}
-          ELSE weight
-        END,
+    const queryValues = currentTrackData
+      .map((data) => {
+        return `(${data.sets}, ${data.reps}, ${data.weight}, ${data.user_id}, ${data.exercise_id}, ${data.workout_day}, ${data.workout_id})`;
+      })
+      .join(",");
+    console.log(queryValues);
 
-        reps = CASE
-          WHEN exercise_id = ${exercise_id} AND track_id = ${track_id} THEN ${reps}
-          ELSE reps
-        END
-        
-        WHERE exercise_id = ${exercise_id} AND track_id = ${track_id} AND workout_day = ${workout_day} 
-      `;
-      await pool.query(query);
-    }
-    res.json({ success: true, updatedRows: test });
+    const query = `
+          INSERT INTO track (set, reps, weight, user_id, exercise_id, workout_day, workout_id) VALUES ${queryValues}`;
+    await pool.query(query);
+
+    res.json({ success: true, updatedRows: currentTrackData });
   } catch (err) {
-    res.json(err);
+    return res.status(500).send(err.message);
   }
 });
 
