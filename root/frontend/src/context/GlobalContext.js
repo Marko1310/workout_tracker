@@ -11,12 +11,10 @@ export const GlobalProvider = (props) => {
   const [workouts, setWorkouts] = useState([]);
   const [currentWorkout, setCurrentWorkout] = useState([]);
   const [currentTrackData, setCurrentTrackData] = useState(null);
-  const [prevTrackData, setPrevTrackData] = useState(null);
-  const [exercises, setExercises] = useState([]);
+  const [prevTrackData, setPrevTrackData] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newTrackData, setNewTrackData] = useState("");
 
   useEffect(() => {
     getCurrentUser();
@@ -29,6 +27,7 @@ export const GlobalProvider = (props) => {
     }, 1000);
   };
 
+  ///////////////////////////// USER ////////////////////////////
   const getCurrentUser = () => {
     axios
       .get("http://localhost:8000/api/auth/current", {
@@ -72,6 +71,8 @@ export const GlobalProvider = (props) => {
         console.log(error);
       });
   };
+
+  ///////////////////////////// RETRIEVE DATA ////////////////////////////
 
   const getSplits = () => {
     axios
@@ -121,26 +122,26 @@ export const GlobalProvider = (props) => {
       });
   };
 
-  const getCurrentTrackData = (workout_id) => {
-    axios
-      .get(
-        `http://localhost:8000/api/auth/splits/workout/trackData/${workout_id}`,
-        {
-          withCredentials: true,
-        }
-      )
-      .then((data) => {
-        // setCurrentTrackData(data.data);
-        clearTimeout(timeout);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+  // const getCurrentTrackData = (workout_id) => {
+  //   axios
+  //     .get(
+  //       `http://localhost:8000/api/auth/splits/workout/trackData/${workout_id}`,
+  //       {
+  //         withCredentials: true,
+  //       }
+  //     )
+  //     .then((data) => {
+  //       // setCurrentTrackData(data.data);
+  //       clearTimeout(timeout);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // };
 
-  const getExercises = (workout_id) => {
+  const getPrevTrackData = (workout_id) => {
     axios
       .get(
         `http://localhost:8000/api/auth/splits/workouts/exercises/${workout_id}`,
@@ -149,13 +150,7 @@ export const GlobalProvider = (props) => {
         }
       )
       .then((data) => {
-        setExercises(data.data);
-        // const newArray = [];
-        // data.data.map((el) => {
-        //   el.trackdata.map((data) => newArray.push(data));
-        // });
-        // console.log(newArray);
-        // setCurrentTrackData(newArray);
+        setPrevTrackData(data.data);
         clearTimeout(timeout);
         setLoading(false);
       })
@@ -165,7 +160,7 @@ export const GlobalProvider = (props) => {
       });
   };
 
-  const getExercises2 = (workout_id) => {
+  const getCurrentTrackData = (workout_id) => {
     axios
       .get(
         `http://localhost:8000/api/auth/splits/workouts/exercises/data/${workout_id}`,
@@ -187,6 +182,8 @@ export const GlobalProvider = (props) => {
         setLoading(false);
       });
   };
+
+  ///////////////////////////// ADD DATA ////////////////////////////
 
   const addSplit = (e, title, days) => {
     e.preventDefault();
@@ -235,7 +232,7 @@ export const GlobalProvider = (props) => {
       )
       .then(() => {
         setIsModalOpen(false);
-        getExercises(workout_id);
+        getPrevTrackData(workout_id);
       })
       .catch((error) => {
         setError(error.response.data);
@@ -252,7 +249,7 @@ export const GlobalProvider = (props) => {
       )
       .then((data) => {
         console.log(data.data[0]);
-        getExercises(workout_id);
+        getPrevTrackData(workout_id);
         setCurrentTrackData((prevData) => [...prevData, data.data[0]]);
       })
       .catch((error) => {
@@ -270,13 +267,15 @@ export const GlobalProvider = (props) => {
         { withCredentials: true }
       )
       .then((data) => {
-        getExercises(workout_id);
+        getPrevTrackData(workout_id);
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
       });
   };
+
+  ///////////////////////////// DELETE DATA ////////////////////////////
 
   const deleteSplit = (e, split_id) => {
     e.preventDefault();
@@ -333,7 +332,7 @@ export const GlobalProvider = (props) => {
       },
     })
       .then(() => {
-        getExercises(workout_id);
+        getPrevTrackData(workout_id);
       })
       .catch((error) => {
         console.log(error);
@@ -363,7 +362,7 @@ export const GlobalProvider = (props) => {
           (el) => el.track_id !== data[0].track_id
         );
         setCurrentTrackData(newArray);
-        getExercises(workout_id);
+        getPrevTrackData(workout_id);
       })
       .catch((error) => {
         console.log(error);
@@ -379,15 +378,14 @@ export const GlobalProvider = (props) => {
     setSplits,
     workouts,
     setWorkouts,
-    exercises,
-    setExercises,
+    prevTrackData,
     getCurrentUser,
     logout,
     getSplits,
     getWorkouts,
     getCurrentWorkout,
     getCurrentTrackData,
-    getExercises,
+    getPrevTrackData,
     loading,
     addSplit,
     addWorkout,
@@ -403,13 +401,9 @@ export const GlobalProvider = (props) => {
     error,
     setError,
     currentWorkout,
-    // currentTrackData,
-    // setCurrentTrackData,
     addTrackData,
     setCurrentTrackData,
     currentTrackData,
-    setNewTrackData,
-    getExercises2,
   };
 
   return (

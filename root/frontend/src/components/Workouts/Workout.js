@@ -17,9 +17,8 @@ const WorkoutSplit = () => {
   const { isModalOpen } = useContext(GlobalContext);
   const { setIsModalOpen } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
-  const { exercises } = useContext(GlobalContext);
+  const { prevTrackData } = useContext(GlobalContext);
   const { setError } = useContext(GlobalContext);
-  const { getExercises } = useContext(GlobalContext);
   const { currentWorkout } = useContext(GlobalContext);
   const { getCurrentWorkout } = useContext(GlobalContext);
   const { setLoadingTimeout } = useContext(GlobalContext);
@@ -106,7 +105,7 @@ const WorkoutSplit = () => {
             {/* <div>Notes</div> */}
           </div>
           {/* <Scroll> */}
-          {exercises.map((el) => {
+          {prevTrackData.map((el) => {
             return (
               <Exercise
                 key={el.exercise_id}

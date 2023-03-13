@@ -20,14 +20,14 @@ const WorkoutGrid = () => {
   const { isModalOpen } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
   const { workouts } = useContext(GlobalContext);
-  const { getExercises } = useContext(GlobalContext);
+  const { getPrevTrackData } = useContext(GlobalContext);
   const { split_id } = useParams();
   const { getWorkouts } = useContext(GlobalContext);
   const { deleteWorkout } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
   const { getCurrentWorkout } = useContext(GlobalContext);
 
-  const { getExercises2 } = useContext(GlobalContext);
+  const { getCurrentTrackData } = useContext(GlobalContext);
 
   const navigate = useNavigate();
 
@@ -40,9 +40,8 @@ const WorkoutGrid = () => {
   }, []);
 
   const changeRoute = function (id) {
-    getExercises2(id);
-
-    getExercises(id);
+    getCurrentTrackData(id);
+    getPrevTrackData(id);
     getCurrentWorkout(id);
     navigate(`/workout/${id}`);
   };
