@@ -115,7 +115,6 @@ export const GlobalProvider = (props) => {
         withCredentials: true,
       })
       .then((data) => {
-        console.log(data.data[0]);
         setCurrentWorkout(data.data[0]);
         clearTimeout(timeout);
         setLoading(false);
@@ -135,7 +134,6 @@ export const GlobalProvider = (props) => {
         }
       )
       .then((data) => {
-        console.log(data.data);
         setCurrentTrackData(data.data);
         clearTimeout(timeout);
         setLoading(false);
@@ -243,8 +241,6 @@ export const GlobalProvider = (props) => {
   };
 
   const addTrackData = (workout_id) => {
-    console.log(workout_id);
-    console.log(currentTrackData);
     axios
       .post(
         "http://localhost:8000/api/auth/split/workout/exercise/track",
@@ -252,7 +248,6 @@ export const GlobalProvider = (props) => {
         { withCredentials: true }
       )
       .then((data) => {
-        console.log(data);
         getExercises(workout_id);
       })
       .catch((error) => {
@@ -326,7 +321,6 @@ export const GlobalProvider = (props) => {
 
   const deleteSet = (e, workout_id, exercise_id, track_id) => {
     e.preventDefault();
-    console.log(e, workout_id, exercise_id, track_id);
 
     fetch("http://localhost:8000/api/auth/split/workout/exercise/set/delete", {
       method: "DELETE",

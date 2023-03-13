@@ -104,7 +104,6 @@ router.get(
     try {
       user_id = req.user.id;
       const workout_id = req.params.workoutId;
-      console.log(workout_id);
 
       // Get user exercises with tracking data from a given workout
       // importing track data into object to attach to every exercise

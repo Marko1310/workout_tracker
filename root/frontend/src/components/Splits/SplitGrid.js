@@ -18,7 +18,6 @@ const WorkoutSplitGrid = () => {
   const { setLoadingTimeout } = useContext(GlobalContext);
 
   useEffect(() => {
-    console.log(user);
     if (!user) {
       navigate("/");
     }

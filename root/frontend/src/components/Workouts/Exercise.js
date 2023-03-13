@@ -83,7 +83,6 @@ const Exercise = ({ el, setTrackData }) => {
   // };
 
   const handleChangeWeight = (e, track_id) => {
-    console.log(track_id);
     const updateWeight = currentTrackData.map((el) => {
       if (el.track_id === track_id) {
         return { ...el, weight: e.target.value };
@@ -105,7 +104,6 @@ const Exercise = ({ el, setTrackData }) => {
   // };
 
   const handleChangeReps = (e, track_id) => {
-    console.log(track_id);
     const updateWeight = test.map((el) => {
       if (el.track_id === track_id) {
         return { ...el, reps: e.target.value };

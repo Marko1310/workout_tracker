@@ -210,7 +210,6 @@ router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
 
     for (const value of currentTrackData) {
       const { exercise_id, track_id, weight, reps } = value;
-      console.log(exercise_id, track_id, weight, reps);
       const query = `
         UPDATE track
         SET
