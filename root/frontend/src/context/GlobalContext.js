@@ -5,13 +5,14 @@ import React, { createContext, useEffect, useState } from "react";
 export const GlobalContext = createContext();
 
 //provider component
+
 export const GlobalProvider = (props) => {
+  const [prevTrackData, setPrevTrackData] = useState([]);
+  const [currentTrackData, setCurrentTrackData] = useState(null);
   const [user, setUser] = useState(null);
   const [splits, setSplits] = useState([]);
   const [workouts, setWorkouts] = useState([]);
   const [currentWorkout, setCurrentWorkout] = useState([]);
-  const [currentTrackData, setCurrentTrackData] = useState(null);
-  const [prevTrackData, setPrevTrackData] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -143,7 +144,7 @@ export const GlobalProvider = (props) => {
   const getPrevTrackData = (workout_id) => {
     axios
       .get(
-        `http://localhost:8000/api/auth/splits/workouts/exercises/${workout_id}`,
+        `http://localhost:8000/api/auth/splits/workouts/exercises/prevData/${workout_id}`,
         {
           withCredentials: true,
         }
@@ -162,7 +163,7 @@ export const GlobalProvider = (props) => {
   const getCurrentTrackData = (workout_id) => {
     axios
       .get(
-        `http://localhost:8000/api/auth/splits/workouts/exercises/data/${workout_id}`,
+        `http://localhost:8000/api/auth/splits/workouts/exercises/currentData/${workout_id}`,
         {
           withCredentials: true,
         }

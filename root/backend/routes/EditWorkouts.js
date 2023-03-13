@@ -45,6 +45,8 @@ router.delete("/split/workout/delete", requiresAuth, async (req, res) => {
     user_id = req.user.id;
     const { split_id, workout_id } = req.body;
 
+    console.log(split_id, workout_id);
+
     const isValidSplitId = await databaseCheck.checkSplitId(split_id, user_id);
     if (isValidSplitId === 0) {
       return res.status(400).send("Unathorized");

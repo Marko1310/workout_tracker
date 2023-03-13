@@ -129,6 +129,8 @@ router.post(
       const date = new Date();
       const { exercise_id, workout_id, day } = req.body;
 
+      console.log(day);
+
       const checkExerciseId = await pool.query(
         "SELECT * FROM exercises WHERE exercise_id = $1 AND user_id = $2",
         [exercise_id, user_id]
@@ -145,12 +147,13 @@ router.post(
       console.log(currentWorkoutDay.rows[0].day);
 
       const lastSet = await pool.query(
-        "SELECT set FROM track WHERE exercise_id = $1 AND user_id = $2 AND workout_day = $3 ORDER BY date DESC LIMIT 1;",
-        [exercise_id, user_id, currentWorkoutDay.rows[0].day]
+        "SELECT MAX(set) FROM track WHERE exercise_id = $1 AND user_id = $2 AND workout_day = $3;",
+        [exercise_id, user_id, day]
       );
+      console.log(lastSet.rows[0].max);
 
-      if (lastSet.rows[0]) {
-        let nextSet = lastSet.rows[0].set + 1;
+      if (lastSet.rows[0].max) {
+        let nextSet = lastSet.rows[0].max + 1;
         const insertSet = await pool.query(
           "INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id, workout_day) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
           [
@@ -268,7 +271,8 @@ router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
 
     const queryValues = currentTrackData
       .map((data) => {
-        return `(${data.sets}, ${data.reps}, ${data.weight}, ${data.user_id}, ${data.exercise_id}, ${data.workout_day}, ${data.workout_id})`;
+        const nextDay = data.workout_day + 1;
+        return `(${data.set}, ${data.reps}, ${data.weight}, ${data.user_id}, ${data.exercise_id}, ${nextDay}, ${data.workout_id})`;
       })
       .join(",");
     console.log(queryValues);

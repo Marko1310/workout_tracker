@@ -94,11 +94,51 @@ router.get(
   }
 );
 
-// @route   GET /api/splits/workouts/exercises/:workoutId
-// @desc    get user workout
+// // @route   GET /api/splits/workouts/exercises/:workoutId
+// // @desc    get user workout
+// // @access  Private
+// router.get(
+//   "/splits/workouts/exercises/:workoutId",
+//   requiresAuth,
+//   async (req, res) => {
+//     try {
+//       user_id = req.user.id;
+//       const workout_id = req.params.workoutId;
+
+//       const currentWorkoutDay = await pool.query(
+//         "SELECT day FROM workouts WHERE workout_id = $1",
+//         [workout_id]
+//       );
+
+//       // let previousDay;
+//       // if (currentWorkoutDay.rows[0].day === 0) {
+//       //   previousDay = currentWorkoutDay.rows[0].day;
+//       // } else {
+//       const previousDay = currentWorkoutDay.rows[0].day;
+//       // }
+
+//       console.log(previousDay);
+
+//       // Get user exercises with tracking data from a given workout
+//       // importing track data into object to attach to every exercise
+//       // filter track data by workout day
+//       const track_data = await pool.query(
+//         "SELECT e.exercise_id, e.exercise_name, e.goal_sets, e.goal_reps, json_agg( json_build_object('track_id', t.track_id, 'set', t.set, 'reps', t.reps, 'user_id', t.user_id, 'exercise_id', t.exercise_id, 'weight', t.weight, 'workout_day', t.workout_day, 'workout_id', t.workout_id) ORDER BY t.set) AS trackData FROM exercises e LEFT JOIN track t ON e.exercise_id = t.exercise_id AND t.workout_day = $1 WHERE e.workout_id = $2 GROUP BY e.exercise_id, e.exercise_name, e.goal_sets, e.goal_reps ORDER BY e.exercise_id;",
+//         [previousDay, workout_id]
+//       );
+
+//       res.json(track_data.rows);
+//     } catch (err) {
+//       return res.status(500).send(err.message);
+//     }
+//   }
+// );
+
+// @route   GET /api/splits/workouts/exercises/prevData/:workoutId
+// @desc    get user previous workout
 // @access  Private
 router.get(
-  "/splits/workouts/exercises/:workoutId",
+  "/splits/workouts/exercises/prevData/:workoutId",
   requiresAuth,
   async (req, res) => {
     try {
@@ -110,20 +150,12 @@ router.get(
         [workout_id]
       );
 
-      let previousDay;
-      if (currentWorkoutDay.rows[0].day === 0) {
-        console.log("aaaa");
-        previousDay = currentWorkoutDay.rows[0].day;
-      } else {
-        previousDay = currentWorkoutDay.rows[0].day - 1;
-      }
-
       // Get user exercises with tracking data from a given workout
       // importing track data into object to attach to every exercise
       // filter track data by workout day
       const track_data = await pool.query(
-        "SELECT e.exercise_id, e.exercise_name, e.goal_sets, e.goal_reps, json_agg( json_build_object('track_id', t.track_id, 'sets', t.set, 'reps', t.reps, 'user_id', t.user_id, 'exercise_id', t.exercise_id, 'weight', t.weight, 'workout_day', t.workout_day, 'workout_id', t.workout_id) ORDER BY t.set) AS trackData FROM exercises e LEFT JOIN track t ON e.exercise_id = t.exercise_id AND t.workout_day = $1 WHERE e.workout_id = $2 GROUP BY e.exercise_id, e.exercise_name, e.goal_sets, e.goal_reps ORDER BY e.exercise_id;",
-        [previousDay, workout_id]
+        "SELECT e.exercise_id, e.exercise_name, e.goal_sets, e.goal_reps, json_agg( json_build_object('track_id', t.track_id, 'set', t.set, 'reps', t.reps, 'user_id', t.user_id, 'exercise_id', t.exercise_id, 'weight', t.weight, 'workout_day', t.workout_day, 'workout_id', t.workout_id) ORDER BY t.set) AS trackData FROM exercises e LEFT JOIN track t ON e.exercise_id = t.exercise_id AND t.workout_day = $1 WHERE e.workout_id = $2 GROUP BY e.exercise_id, e.exercise_name, e.goal_sets, e.goal_reps ORDER BY e.exercise_id;",
+        [currentWorkoutDay.rows[0].day, workout_id]
       );
 
       res.json(track_data.rows);
@@ -133,11 +165,11 @@ router.get(
   }
 );
 
-// @route   GET /api/splits/workouts/exercises/:workoutId
-// @desc    get user workout
+// @route   GET /api/splits/workouts/exercises/currentData/:workoutId
+// @desc    get user current workout
 // @access  Private
 router.get(
-  "/splits/workouts/exercises/data/:workoutId",
+  "/splits/workouts/exercises/currentData/:workoutId",
   requiresAuth,
   async (req, res) => {
     try {
@@ -148,13 +180,12 @@ router.get(
         "SELECT day FROM workouts WHERE workout_id = $1",
         [workout_id]
       );
-      console.log(currentWorkoutDay.rows[0].day);
 
       // Get user exercises with tracking data from a given workout
       // importing track data into object to attach to every exercise
       // filter track data by workout day
       const track_data = await pool.query(
-        "SELECT e.exercise_id, e.exercise_name, e.goal_sets, e.goal_reps, json_agg( json_build_object('track_id', t.track_id, 'sets', t.set, 'reps', t.reps, 'user_id', t.user_id, 'exercise_id', t.exercise_id, 'weight', t.weight, 'workout_day', t.workout_day, 'workout_id', t.workout_id) ORDER BY t.set) AS trackData FROM exercises e LEFT JOIN track t ON e.exercise_id = t.exercise_id AND t.workout_day = $1 WHERE e.workout_id = $2 GROUP BY e.exercise_id, e.exercise_name, e.goal_sets, e.goal_reps ORDER BY e.exercise_id;",
+        "SELECT e.exercise_id, json_agg( json_build_object('track_id', t.track_id, 'set', t.set, 'reps', 0, 'user_id', t.user_id, 'exercise_id', t.exercise_id, 'weight', 0, 'workout_day', t.workout_day, 'workout_id', t.workout_id) ORDER BY t.set) AS trackData FROM exercises e LEFT JOIN track t ON e.exercise_id = t.exercise_id AND t.workout_day = $1 WHERE e.workout_id = $2 GROUP BY e.exercise_id ORDER BY e.exercise_id;",
         [currentWorkoutDay.rows[0].day, workout_id]
       );
 

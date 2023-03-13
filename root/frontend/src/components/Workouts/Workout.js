@@ -31,10 +31,6 @@ const WorkoutSplit = () => {
     if (!user) {
       navigate("/");
     }
-    // getExercises(id);
-    // getCurrentWorkout(id);
-    // getCurrentTrackData(id);
-    // updateTrackData()
   }, [user, navigate]);
 
   const handleSubmit = (e) => {

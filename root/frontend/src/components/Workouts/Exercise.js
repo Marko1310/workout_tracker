@@ -60,7 +60,6 @@ const Exercise = ({ el }) => {
 
   // update state with reps
   const handleChangeReps = (e, track_id) => {
-    console.log(e.target.value);
     const updateReps = currentTrackData.map((el) => {
       if (el.track_id === track_id) {
         return { ...el, reps: e.target.value };
@@ -76,8 +75,9 @@ const Exercise = ({ el }) => {
   // disable deleting sets in between, only last one
   let lastSet = 0;
   el.trackdata.map((el) => {
-    if (el.sets > lastSet) lastSet = el.sets;
+    if (el.set > lastSet) lastSet = el.set;
   });
+  console.log(lastSet);
 
   return (
     <div className="exercise-container">
@@ -106,7 +106,7 @@ const Exercise = ({ el }) => {
               key={track.track_id}
               className="exercise"
             >
-              <p className="set">{track.sets}</p>
+              <p className="set">{track.set}</p>
               <p className="previous">
                 {track.weight} kg x {track.reps}
               </p>
@@ -126,7 +126,7 @@ const Exercise = ({ el }) => {
                 name="reps"
                 placeholder="reps"
               ></input>
-              {lastSet === track.sets && (
+              {lastSet === track.set && (
                 <p
                   onClick={(e) => {
                     handleDeleteSet(e, id, el.exercise_id, track.track_id);
