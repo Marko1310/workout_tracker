@@ -1,7 +1,6 @@
 // React
-import { useContext } from "react";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { useFetcher, useParams } from "react-router-dom";
 
 // css
 import "./Exercise.css";
@@ -17,7 +16,6 @@ const Exercise = ({ el }) => {
   const { currentWorkout } = useContext(GlobalContext);
   const { currentTrackData, setCurrentTrackData } = useContext(GlobalContext);
 
-  // extract workout_id
   const { id } = useParams();
 
   // add new set
@@ -77,7 +75,6 @@ const Exercise = ({ el }) => {
   el.trackdata.map((el) => {
     if (el.set > lastSet) lastSet = el.set;
   });
-  console.log(lastSet);
 
   return (
     <div className="exercise-container">
@@ -111,7 +108,9 @@ const Exercise = ({ el }) => {
                 {track.weight} kg x {track.reps}
               </p>
               <input
-                onChange={(e) => handleChangeWeight(e, track.track_id)}
+                onChange={(e) => {
+                  handleChangeWeight(e, track.track_id);
+                }}
                 className="exercise-forms"
                 type="text"
                 id="kg"
