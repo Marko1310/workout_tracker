@@ -138,22 +138,46 @@ router.post(
         return res.status(400).send("Unathorized");
       }
 
+      const currentWorkoutDay = await pool.query(
+        "SELECT day FROM workouts WHERE workout_id = $1",
+        [workout_id]
+      );
+      console.log(currentWorkoutDay.rows[0].day);
+
       const lastSet = await pool.query(
-        "SELECT set FROM track WHERE exercise_id = $1 AND user_id = $2 ORDER BY date DESC LIMIT 1;",
-        [exercise_id, user_id]
+        "SELECT set FROM track WHERE exercise_id = $1 AND user_id = $2 AND workout_day = $3 ORDER BY date DESC LIMIT 1;",
+        [exercise_id, user_id, currentWorkoutDay.rows[0].day]
       );
 
       if (lastSet.rows[0]) {
         let nextSet = lastSet.rows[0].set + 1;
         const insertSet = await pool.query(
           "INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id, workout_day) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
-          [nextSet, 0, 0, date, exercise_id, user_id, workout_id, day]
+          [
+            nextSet,
+            0,
+            0,
+            date,
+            exercise_id,
+            user_id,
+            workout_id,
+            currentWorkoutDay.rows[0].day,
+          ]
         );
         res.json(insertSet.rows);
       } else {
         const insertSet = await pool.query(
           "INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id, workout_day) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
-          [1, 0, 0, date, exercise_id, user_id, workout_id, day]
+          [
+            1,
+            0,
+            0,
+            date,
+            exercise_id,
+            user_id,
+            workout_id,
+            currentWorkoutDay.rows[0].day,
+          ]
         );
         res.json(insertSet.rows);
       }
