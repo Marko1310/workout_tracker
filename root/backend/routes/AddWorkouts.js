@@ -225,7 +225,7 @@ router.post(
 // });
 
 // @route   POST /api/split/workout/exercise/track
-// @desc    Update exercise with weight and reps and update workout day
+// @desc    Update exercise with weight and reps
 // @access  Private
 router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
   try {
@@ -251,10 +251,6 @@ router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
       `;
       await pool.query(query);
     }
-    await pool.query(
-      "UPDATE workouts SET day = day + 1 WHERE workout_id = $1",
-      [workout_id]
-    );
     res.json({ success: true, updatedRows: currentTrackData });
   } catch (err) {
     res.json(err);

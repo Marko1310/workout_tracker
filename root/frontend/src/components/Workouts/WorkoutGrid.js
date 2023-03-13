@@ -19,6 +19,8 @@ const WorkoutGrid = () => {
   const { setLoading } = useContext(GlobalContext);
   const { getCurrentWorkout } = useContext(GlobalContext);
 
+  const { getExercises2 } = useContext(GlobalContext);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,6 +33,7 @@ const WorkoutGrid = () => {
 
   const changeRoute = function (id) {
     getExercises(id);
+    getExercises2(id);
     getCurrentWorkout(id);
     navigate(`/workout/${id}`);
   };

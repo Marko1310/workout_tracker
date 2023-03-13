@@ -20,7 +20,7 @@ export const GlobalProvider = (props) => {
 
   const [newTrackData, setNewTrackData] = useState("");
 
-  const [test, setTest] = useState([{ track_id: 326 }]);
+  const [test, setTest] = useState(null);
 
   useEffect(() => {
     getCurrentUser();
@@ -159,6 +159,30 @@ export const GlobalProvider = (props) => {
           el.trackdata.map((data) => newArray.push(data));
         });
         setCurrentTrackData(newArray);
+        // setTest(newArray);
+        clearTimeout(timeout);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  const getExercises2 = (workout_id) => {
+    axios
+      .get(
+        `http://localhost:8000/api/auth/splits/workouts/exercises/data/${workout_id}`,
+        {
+          withCredentials: true,
+        }
+      )
+      .then((data) => {
+        const newArray = [];
+        data.data.map((el) => {
+          el.trackdata.map((data) => newArray.push(data));
+        });
+        setTest(newArray);
         clearTimeout(timeout);
         setLoading(false);
       })
@@ -231,6 +255,7 @@ export const GlobalProvider = (props) => {
         { withCredentials: true }
       )
       .then((data) => {
+        console.log(data.data[0]);
         getExercises(workout_id);
         setTest((prevData) => [...prevData, data.data[0]]);
       })
@@ -334,7 +359,11 @@ export const GlobalProvider = (props) => {
         "Content-Type": "application/json",
       },
     })
-      .then(() => {
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data[0].track_id);
+        const newArray = test.filter((el) => el.track_id !== data[0].track_id);
+        setTest(newArray);
         getExercises(workout_id);
       })
       .catch((error) => {
@@ -381,6 +410,7 @@ export const GlobalProvider = (props) => {
     setTest,
     test,
     setNewTrackData,
+    getExercises2,
   };
 
   return (
