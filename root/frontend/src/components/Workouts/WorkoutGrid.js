@@ -19,17 +19,17 @@ import logo from "../../images/workout.png";
 const WorkoutGrid = () => {
   const { isModalOpen } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
-  const { workouts } = useContext(GlobalContext);
+  const { workouts, getWorkouts } = useContext(GlobalContext);
   const { getPrevTrackData } = useContext(GlobalContext);
-  const { split_id } = useParams();
-  const { getWorkouts } = useContext(GlobalContext);
   const { deleteWorkout } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
   const { getCurrentWorkout } = useContext(GlobalContext);
-
   const { getCurrentTrackData } = useContext(GlobalContext);
 
   const navigate = useNavigate();
+
+  // extract split_id
+  const { split_id } = useParams();
 
   useEffect(() => {
     if (!user && navigate) {
@@ -39,6 +39,10 @@ const WorkoutGrid = () => {
     }
   }, []);
 
+  // When card clicked -> change route:
+  // 1. get current workout
+  // 2. update previous track
+  // 3. update new track data
   const changeRoute = function (id) {
     getCurrentTrackData(id);
     getPrevTrackData(id);
@@ -46,6 +50,7 @@ const WorkoutGrid = () => {
     navigate(`/workout/${id}`);
   };
 
+  // Delete workout
   const handleDelete = (e, split_id, workout_id) => {
     if (window.confirm("Are you sure you want to delete this Workout?")) {
       deleteWorkout(e, split_id, workout_id);

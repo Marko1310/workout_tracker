@@ -9,29 +9,31 @@ import "./Exercise.css";
 // Context
 import { GlobalContext } from "../../context/GlobalContext";
 
-const Exercise = ({ el, setTrackData }) => {
+const Exercise = ({ el }) => {
   const { addNewSet } = useContext(GlobalContext);
-  const { user } = useContext(GlobalContext);
-  const navigate = useNavigate();
-
-  const { setLoading } = useContext(GlobalContext);
   const { deleteExercise } = useContext(GlobalContext);
   const { deleteSet } = useContext(GlobalContext);
   const { setLoadingTimeout } = useContext(GlobalContext);
   const { currentWorkout } = useContext(GlobalContext);
-  const { getCurrentWorkout } = useContext(GlobalContext);
-  const { currentTrackData } = useContext(GlobalContext);
-  const { setCurrentTrackData } = useContext(GlobalContext);
+  const { currentTrackData, setCurrentTrackData } = useContext(GlobalContext);
 
-  const isTrackEmpty = el.trackdata[0].track_id === null;
+  // extract workout_id
   const { id } = useParams();
 
+  // add new set
   const handleNewSet = (e) => {
     e.preventDefault();
     setLoadingTimeout();
     addNewSet(el.exercise_id, id, currentWorkout.day);
   };
 
+  // delete set
+  const handleDeleteSet = (e, workout_id, exercise_id, track_id) => {
+    deleteSet(e, workout_id, exercise_id, track_id);
+    setLoadingTimeout();
+  };
+
+  // delete exercise
   const handleDeleteExercise = (e, workout_id, exercise_id) => {
     if (
       window.confirm(
@@ -44,43 +46,7 @@ const Exercise = ({ el, setTrackData }) => {
     e.stopPropagation();
   };
 
-  const handleDeleteSet = (e, workout_id, exercise_id, track_id) => {
-    deleteSet(e, workout_id, exercise_id, track_id);
-    setLoadingTimeout();
-  };
-
-  let lastSet = 0;
-  el.trackdata.map((el) => {
-    if (el.sets > lastSet) lastSet = el.sets;
-  });
-
-  // const handleChangeData = (e, exercise_id, track_id) => {
-  //   setTrackData((prevData) => {
-  //     const existingId = prevData.findIndex(
-  //       (obj) => obj.exercise_id === exercise_id
-  //     );
-  //     if (existingId !== -1) {
-  //       const updateObject = {
-  //         ...prevData[existingId],
-  //         exercise_id: exercise_id,
-  //         weight: 0,
-  //         reps: e.target.value,
-  //         track_id: track_id,
-  //         day: "",
-  //       };
-  //       return [...prevData.slice(0, existingId), updateObject];
-  //     } else {
-  //       const newObject = {
-  //         exercise_id: exercise_id,
-  //         weight: 0,
-  //         reps: 0,
-  //         day: "currentWorkout.day",
-  //       };
-  //       return [...prevData, newObject];
-  //     }
-  //   });
-  // };
-
+  // update state with weight
   const handleChangeWeight = (e, track_id) => {
     const updateWeight = currentTrackData.map((el) => {
       console.log("aaa");
@@ -92,6 +58,7 @@ const Exercise = ({ el, setTrackData }) => {
     setCurrentTrackData(updateWeight);
   };
 
+  // update state with reps
   const handleChangeReps = (e, track_id) => {
     console.log(e.target.value);
     const updateReps = currentTrackData.map((el) => {
@@ -102,6 +69,15 @@ const Exercise = ({ el, setTrackData }) => {
     });
     setCurrentTrackData(updateReps);
   };
+
+  // if no data -> don't render empty list item
+  const isTrackEmpty = el.trackdata[0].track_id === null;
+
+  // disable deleting sets in between, only last one
+  let lastSet = 0;
+  el.trackdata.map((el) => {
+    if (el.sets > lastSet) lastSet = el.sets;
+  });
 
   return (
     <div className="exercise-container">

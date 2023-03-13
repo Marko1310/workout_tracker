@@ -14,23 +14,16 @@ import "./Workout.css";
 import { GlobalContext } from "../../context/GlobalContext";
 
 const WorkoutSplit = () => {
-  const { isModalOpen } = useContext(GlobalContext);
-  const { setIsModalOpen } = useContext(GlobalContext);
+  const { isModalOpen, setIsModalOpen } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
   const { prevTrackData } = useContext(GlobalContext);
   const { setError } = useContext(GlobalContext);
   const { currentWorkout } = useContext(GlobalContext);
-  const { getCurrentWorkout } = useContext(GlobalContext);
   const { setLoadingTimeout } = useContext(GlobalContext);
-
-  const { currentTrackData } = useContext(GlobalContext);
-
-  const { getCurrentTrackData } = useContext(GlobalContext);
-
   const { addTrackData } = useContext(GlobalContext);
 
+  // Extract workout_id
   const { id } = useParams();
-  const [trackData, setTrackData] = useState([]);
 
   const navigate = useNavigate();
 
@@ -50,44 +43,6 @@ const WorkoutSplit = () => {
     addTrackData(id);
   };
 
-  // const updateTrackData = (exercises) => {
-  //   exercises.map((exercise) => {
-  //     setTrackData((prevData) => {
-  //       const existingId = prevData.findIndex((obj) => obj.id === exercise_id);
-  //       if (existingId !== -1) {
-  //         const updateObject = {
-  //           ...prevData[existingId],
-  //           exercise_id: exercise.exercise_id,
-  //           weight: 0,
-  //           reps: 0,
-  //           day: currentWorkout.day,
-  //         };
-  //         return [...prevData.slice(0, existingId), updateObject];
-  //       } else {
-  //         const newObject = {
-  //           exercise_id: exercise.exercise_id,
-  //           weight: 0,
-  //           reps: 0,
-  //           day: currentWorkout.day,
-  //         };
-  //         return [...prevData, newObject];
-  //       }
-  //     });
-  //   });
-  // };
-
-  // [
-  //   ...prevData,
-  //   {
-  //     exercise_id: exercise.exercise_id,
-  //     weight: 0,
-  //     reps: 0,
-  //     day: currentWorkout.day,
-  //   },
-  // ]
-
-  // updateTrackData();
-
   const handleModal = () => {
     setError("");
     setIsModalOpen((setIsModalOpen) => !setIsModalOpen);
@@ -106,13 +61,7 @@ const WorkoutSplit = () => {
           </div>
           {/* <Scroll> */}
           {prevTrackData.map((el) => {
-            return (
-              <Exercise
-                key={el.exercise_id}
-                el={el}
-                setTrackData={setTrackData}
-              />
-            );
+            return <Exercise key={el.exercise_id} el={el} />;
           })}
           {/* </Scroll> */}
 

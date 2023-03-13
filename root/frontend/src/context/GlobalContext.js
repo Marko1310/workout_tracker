@@ -73,7 +73,6 @@ export const GlobalProvider = (props) => {
   };
 
   ///////////////////////////// RETRIEVE DATA ////////////////////////////
-
   const getSplits = () => {
     axios
       .get("http://localhost:8000/api/auth/splits/current", {
@@ -184,7 +183,6 @@ export const GlobalProvider = (props) => {
   };
 
   ///////////////////////////// ADD DATA ////////////////////////////
-
   const addSplit = (e, title, days) => {
     e.preventDefault();
     axios
@@ -276,7 +274,6 @@ export const GlobalProvider = (props) => {
   };
 
   ///////////////////////////// DELETE DATA ////////////////////////////
-
   const deleteSplit = (e, split_id) => {
     e.preventDefault();
 
