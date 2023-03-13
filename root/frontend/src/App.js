@@ -7,7 +7,6 @@ import { ThreeDots } from "react-loader-spinner";
 import "./index.css";
 
 // Components
-import Particle from "./components/Particle/Particle.js";
 import Navigation from "./components/Navigation/Navigation";
 import Login from "./components/Login/Login";
 import Workout from "./components/Workouts/Workout";

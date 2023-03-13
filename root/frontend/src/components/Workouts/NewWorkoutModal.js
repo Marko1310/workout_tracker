@@ -1,7 +1,11 @@
+// React
 import React, { useContext, useState } from "react";
-import { GlobalContext } from "../../context/GlobalContext";
 import { useParams } from "react-router-dom";
 
+// Context
+import { GlobalContext } from "../../context/GlobalContext";
+
+// css
 import "./NewWorkoutModal.css";
 
 const NewWorkoutModal = () => {

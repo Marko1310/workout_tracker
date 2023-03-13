@@ -269,7 +269,7 @@ export const GlobalProvider = (props) => {
     axios
       .post(
         "http://localhost:8000/api/auth/split/workout/exercise/track",
-        { workout_id, currentTrackData },
+        { workout_id, test },
         { withCredentials: true }
       )
       .then((data) => {

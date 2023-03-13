@@ -1,13 +1,17 @@
+// React
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
-import Exercise from "./Exercise";
-import Scroll from "../Scroll/Scroll";
-import "./Workout.css";
-import { GlobalContext } from "../../context/GlobalContext";
-import NewExerciseModal from "./NewExerciseModal";
-// import Timer from "../Timer/Timer";
 import { useNavigate } from "react-router-dom";
+
+// Components
+import Exercise from "./Exercise";
+import NewExerciseModal from "./NewExerciseModal";
+
+// css
+import "./Workout.css";
+
+// Context
+import { GlobalContext } from "../../context/GlobalContext";
 
 const WorkoutSplit = () => {
   const { isModalOpen } = useContext(GlobalContext);

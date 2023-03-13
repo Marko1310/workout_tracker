@@ -1,12 +1,15 @@
-import "./AddSplitBtn.css";
+// React
 import { useContext } from "react";
 
+// css
+import "./AddSplitBtn.css";
 import addLogo from "../../images/plus-circle.png";
+
+// Context
 import { GlobalContext } from "../../context/GlobalContext";
 
 const AddNewWorkoutBtn = () => {
-  const { isModalOpen } = useContext(GlobalContext);
-  const { setIsModalOpen } = useContext(GlobalContext);
+  const { isModalOpen, setIsModalOpen } = useContext(GlobalContext);
 
   return (
     <div className={`addNewWorkout-container ${isModalOpen ? `blurred` : ""}`}>

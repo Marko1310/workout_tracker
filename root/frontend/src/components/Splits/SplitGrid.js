@@ -1,10 +1,20 @@
+// React
 import React, { useContext, useEffect } from "react";
+
+// Components
 import AddSplitBtn from "./AddSplitBtn";
 import NewSplit from "./NewSplitModal.js";
+
+// Components
 import { useNavigate } from "react-router-dom";
+
+// Context
 import { GlobalContext } from "../../context/GlobalContext.js";
 
+// css
 import "./SplitGrid.css";
+
+// image
 import calendar from "../../images/calendar.png";
 
 const WorkoutSplitGrid = () => {
@@ -12,10 +22,11 @@ const WorkoutSplitGrid = () => {
   const { user } = useContext(GlobalContext);
   const { splits } = useContext(GlobalContext);
   const { getWorkouts } = useContext(GlobalContext);
-  const navigate = useNavigate();
   const { getSplits } = useContext(GlobalContext);
   const { deleteSplit } = useContext(GlobalContext);
   const { setLoadingTimeout } = useContext(GlobalContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!user) {

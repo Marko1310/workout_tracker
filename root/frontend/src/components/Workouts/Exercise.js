@@ -1,9 +1,13 @@
-import { useEffect } from "react";
-import "./Exercise.css";
-import { GlobalContext } from "../../context/GlobalContext";
+// React
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+
+// css
+import "./Exercise.css";
+
+// Context
+import { GlobalContext } from "../../context/GlobalContext";
 
 const Exercise = ({ el, setTrackData }) => {
   const { addNewSet } = useContext(GlobalContext);

@@ -1,12 +1,17 @@
-import "./AddWorkoutBtn.css";
+// React
 import { useContext } from "react";
 
-import addLogo from "../../images/plus-circle.png";
+// css
+import "./AddWorkoutBtn.css";
+
+// Context
 import { GlobalContext } from "../../context/GlobalContext";
 
+// Image
+import addLogo from "../../images/plus-circle.png";
+
 const AddWorkoutBtn = () => {
-  const { isModalOpen } = useContext(GlobalContext);
-  const { setIsModalOpen } = useContext(GlobalContext);
+  const { isModalOpen, setIsModalOpen } = useContext(GlobalContext);
   const { setError } = useContext(GlobalContext);
 
   const handleModal = () => {

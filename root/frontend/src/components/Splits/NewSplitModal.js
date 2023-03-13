@@ -1,13 +1,20 @@
+// React
 import React, { useContext, useState } from "react";
+
+// Context
 import { GlobalContext } from "../../context/GlobalContext";
 
+// css
 import "./NewSplitModal.css";
 
 const NewWorkoutSplit = () => {
-  const { isModalOpen } = useContext(GlobalContext);
-  const { setIsModalOpen } = useContext(GlobalContext);
+  // component state
   const [title, setTitle] = useState("");
   const [days, setDays] = useState("");
+
+  // Context
+  const { isModalOpen } = useContext(GlobalContext);
+  const { setIsModalOpen } = useContext(GlobalContext);
   const { addSplit } = useContext(GlobalContext);
   const { setLoadingTimeout } = useContext(GlobalContext);
   const { error } = useContext(GlobalContext);

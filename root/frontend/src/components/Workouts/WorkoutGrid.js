@@ -1,11 +1,19 @@
+// React
 import React, { useContext, useEffect } from "react";
-import NewWorkoutModal from "./NewWorkoutModal.js";
-import AddWorkoutBtn from "./AddWorkoutBtn.js";
 import { useNavigate } from "react-router-dom";
-import { GlobalContext } from "../../context/GlobalContext.js";
 import { useParams } from "react-router-dom";
 
+// Components
+import NewWorkoutModal from "./NewWorkoutModal.js";
+import AddWorkoutBtn from "./AddWorkoutBtn.js";
+
+// Context
+import { GlobalContext } from "../../context/GlobalContext.js";
+
+// css
 import "./WorkoutGrid.css";
+
+// Image
 import logo from "../../images/workout.png";
 
 const WorkoutGrid = () => {
