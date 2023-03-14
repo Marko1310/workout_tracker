@@ -155,7 +155,6 @@ router.delete(
   }
 );
 
-///////////////////////////////////
 // @route   POST /api/split/workout/editDay
 // @desc    update workout day
 // @access  Private
@@ -181,6 +180,5 @@ router.post("/split/workout/editDay", requiresAuth, async (req, res) => {
     return res.status(500).send(err.message);
   }
 });
-///////////////////////////////////
 
 module.exports = router;

@@ -8,7 +8,7 @@ import { GlobalContext } from "../../context/GlobalContext";
 // css
 import "./NewExerciseModal.css";
 
-const NewExerciseModal = () => {
+const NewExerciseModal = ({ successMsg }) => {
   const { isModalOpen } = useContext(GlobalContext);
   const { setIsModalOpen } = useContext(GlobalContext);
   const { addExercise } = useContext(GlobalContext);
@@ -28,7 +28,11 @@ const NewExerciseModal = () => {
   };
 
   return (
-    <div className={`newExercise-container ${isModalOpen ? "show" : ""}`}>
+    <div
+      className={`newExercise-container ${
+        isModalOpen && !successMsg ? "show" : ""
+      }`}
+    >
       <p className="newExercise-title">Add new exercise</p>
       <form onSubmit={(e) => handleNewExercise(e)}>
         <label htmlFor="title">Title of the exercise</label>

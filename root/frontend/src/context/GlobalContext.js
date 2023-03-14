@@ -122,25 +122,6 @@ export const GlobalProvider = (props) => {
       });
   };
 
-  // const getCurrentTrackData = (workout_id) => {
-  //   axios
-  //     .get(
-  //       `http://localhost:8000/api/auth/splits/workout/trackData/${workout_id}`,
-  //       {
-  //         withCredentials: true,
-  //       }
-  //     )
-  //     .then((data) => {
-  //       // setCurrentTrackData(data.data);
-  //       clearTimeout(timeout);
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       setLoading(false);
-  //     });
-  // };
-
   const getPrevTrackData = (workout_id) => {
     axios
       .get(
@@ -257,20 +238,34 @@ export const GlobalProvider = (props) => {
       });
   };
 
-  const addTrackData = (workout_id) => {
-    console.log(currentTrackData);
-    axios
-      .post(
+  const addTrackData = async (workout_id) => {
+    try {
+      const response = axios.post(
         "http://localhost:8000/api/auth/split/workout/exercise/track",
         { workout_id, currentTrackData },
         { withCredentials: true }
+      );
+      getPrevTrackData(workout_id);
+      return response;
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      throw error;
+    }
+  };
+
+  const updateWorkoutDay = (workout_id) => {
+    axios
+      .post(
+        "http://localhost:8000/api/auth/split/workout/editDay",
+        { workout_id },
+        { withCredentials: true }
       )
       .then((data) => {
-        getPrevTrackData(workout_id);
+        console.log(data);
       })
       .catch((error) => {
         console.log(error);
-        setLoading(false);
       });
   };
 
@@ -329,8 +324,13 @@ export const GlobalProvider = (props) => {
         "Content-Type": "application/json",
       },
     })
-      .then(() => {
+      .then((res) => res.json())
+      .then((data) => {
         getPrevTrackData(workout_id);
+        const newArray = currentTrackData.filter(
+          (el) => el.exercise_id !== data[0].exercise_id
+        );
+        setCurrentTrackData(newArray);
       })
       .catch((error) => {
         console.log(error);
@@ -402,6 +402,7 @@ export const GlobalProvider = (props) => {
     addTrackData,
     setCurrentTrackData,
     currentTrackData,
+    updateWorkoutDay,
   };
 
   return (

@@ -112,7 +112,7 @@ const Exercise = ({ el }) => {
                   handleChangeWeight(e, track.track_id);
                 }}
                 className="exercise-forms"
-                type="text"
+                type="number"
                 id="kg"
                 name="kg"
                 placeholder="kg"
@@ -120,7 +120,7 @@ const Exercise = ({ el }) => {
               <input
                 onChange={(e) => handleChangeReps(e, track.track_id)}
                 className="exercise-forms"
-                type="text"
+                type="number"
                 id="reps"
                 name="reps"
                 placeholder="reps"

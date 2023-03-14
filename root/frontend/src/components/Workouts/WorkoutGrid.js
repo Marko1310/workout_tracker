@@ -41,12 +41,13 @@ const WorkoutGrid = () => {
 
   // When card clicked -> change route:
   // 1. get current workout
-  // 2. update previous track
-  // 3. update new track data
+  // 2. update workout day +1
+  // 3. get previous track
+  // 4. get new track data
   const changeRoute = function (id) {
+    getCurrentWorkout(id);
     getCurrentTrackData(id);
     getPrevTrackData(id);
-    getCurrentWorkout(id);
     navigate(`/workout/${id}`);
   };
 
