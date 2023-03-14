@@ -5,6 +5,7 @@ import React, { createContext, useEffect, useState } from "react";
 export const GlobalContext = createContext();
 
 const API_URL = "https://workouttracker-server.onrender.com";
+// const API_URL = "http://localhost:8000";
 
 //provider component
 export const GlobalProvider = (props) => {
