@@ -25,6 +25,14 @@ app.use("/api/auth", addWorkoutRoute);
 app.use("/api/auth", retrieveWorkoutRoute);
 app.use("/api/auth", editWorkoutRoute);
 
+app.get("/", async (req, res) => {
+  try {
+    return res.status(200).json("Hello server");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
