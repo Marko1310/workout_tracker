@@ -117,7 +117,7 @@ router.post("/login", async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      domain: "workouttracker-server.onrender.com ",
+      domain: "workouttracker-be21.onrender.com",
     });
 
     // return everything except the password
