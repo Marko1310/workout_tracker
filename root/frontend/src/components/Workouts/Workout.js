@@ -40,7 +40,8 @@ const WorkoutSplit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoadingTimeout();
+    setIsModalOpen(true);
+
     addTrackData(id)
       .then((response) => {
         if (response) {
@@ -61,7 +62,6 @@ const WorkoutSplit = () => {
   };
 
   const success = () => {
-    setIsModalOpen(true);
     setTimeout(() => {
       setIsModalOpen(false);
       navigate("/");
@@ -104,7 +104,7 @@ const WorkoutSplit = () => {
         </div>
       </div>
       <Message successMsg={sucessMsg} />
-      <NewExerciseModal successMsg={sucessMsg} />
+      {/* <NewExerciseModal successMsg={sucessMsg} /> */}
     </div>
   );
 };

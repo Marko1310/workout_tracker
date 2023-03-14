@@ -246,10 +246,10 @@ export const GlobalProvider = (props) => {
         { withCredentials: true }
       );
       getPrevTrackData(workout_id);
+
       return response;
     } catch (error) {
       console.log(error);
-      setLoading(false);
       throw error;
     }
   };
