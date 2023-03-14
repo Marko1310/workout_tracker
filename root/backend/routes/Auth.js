@@ -67,7 +67,7 @@ router.post("/register", async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      domain: "https://workouttracker-be21.onrender.com",
+      domain: "onrender.com",
     });
 
     const userCredentials = {
