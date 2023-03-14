@@ -67,7 +67,7 @@ router.post("/register", async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      domain: "onrender.com",
+      domain: "workouttracker-be21.onrender.com",
     });
 
     const userCredentials = {
@@ -117,7 +117,7 @@ router.post("/login", async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      domain: "onrender.com",
+      domain: "workouttracker-server.onrender.com ",
     });
 
     // return everything except the password
