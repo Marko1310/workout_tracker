@@ -1,6 +1,6 @@
 // React
-import { useContext, useEffect } from "react";
-import { useFetcher, useParams } from "react-router-dom";
+import { useContext } from "react";
+import { useParams } from "react-router-dom";
 
 // css
 import "./Exercise.css";
@@ -47,7 +47,6 @@ const Exercise = ({ el }) => {
   // update state with weight
   const handleChangeWeight = (e, track_id) => {
     const updateWeight = currentTrackData.map((el) => {
-      console.log("aaa");
       if (el.track_id === track_id) {
         return { ...el, weight: e.target.value };
       }

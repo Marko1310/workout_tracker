@@ -235,7 +235,6 @@ export const GlobalProvider = (props) => {
         { withCredentials: true }
       )
       .then((data) => {
-        console.log(data.data[0]);
         getPrevTrackData(workout_id);
         setCurrentTrackData((prevData) => [...prevData, data.data[0]]);
       })
@@ -362,7 +361,6 @@ export const GlobalProvider = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data[0].track_id);
         const newArray = currentTrackData.filter(
           (el) => el.track_id !== data[0].track_id
         );

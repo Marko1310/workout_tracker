@@ -1,5 +1,5 @@
 // React
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -60,7 +60,6 @@ function Login() {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log(res);
         getCurrentUser();
         clearTimeout(timeout);
         setLoading(false);
