@@ -121,7 +121,7 @@ router.post("/login", async (req, res) => {
       email: user.rows[0].email,
     };
     res.json({ user: userCredentials, token: token });
-  } catch {
+  } catch (err) {
     res.status(500).send(err.message);
   }
 });
