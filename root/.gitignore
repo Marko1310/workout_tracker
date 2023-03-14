@@ -1,6 +1,5 @@
 /backend/.env
-/frontend/.env3
-/backend/.env2
+/backend/text
 /backend/node_modules
 /frontend/node_modules
 /node_modules
