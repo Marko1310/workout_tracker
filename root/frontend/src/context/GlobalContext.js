@@ -4,8 +4,9 @@ import React, { createContext, useEffect, useState } from "react";
 //create context
 export const GlobalContext = createContext();
 
-//provider component
+const API_URL = "http://localhost:8000";
 
+//provider component
 export const GlobalProvider = (props) => {
   const [form, setForm] = useState("login");
   const [input, setInput] = useState({
@@ -38,7 +39,7 @@ export const GlobalProvider = (props) => {
   ///////////////////////////// USER ////////////////////////////
   const getCurrentUser = () => {
     axios
-      .get("http://localhost:8000/api/auth/current", {
+      .get(`${API_URL}/api/auth/current`, {
         withCredentials: true,
       })
       .then((user) => {
@@ -47,7 +48,7 @@ export const GlobalProvider = (props) => {
         } else {
           setUser(user.data);
           axios
-            .get("http://localhost:8000/api/auth/splits/current", {
+            .get(`${API_URL}/api/auth/splits/current`, {
               withCredentials: true,
             })
             .then(() => {
@@ -65,7 +66,7 @@ export const GlobalProvider = (props) => {
 
   const logout = () => {
     axios
-      .get("http://localhost:8000/api/auth/logout", {
+      .get(`${API_URL}/api/auth/logout`, {
         withCredentials: true,
       })
       .then(() => {
@@ -83,7 +84,7 @@ export const GlobalProvider = (props) => {
   ///////////////////////////// RETRIEVE DATA ////////////////////////////
   const getSplits = () => {
     axios
-      .get("http://localhost:8000/api/auth/splits/current", {
+      .get(`${API_URL}/api/auth/splits/current`, {
         withCredentials: true,
       })
       .then((data) => {
@@ -99,7 +100,7 @@ export const GlobalProvider = (props) => {
 
   const getWorkouts = (split_id) => {
     axios
-      .get(`http://localhost:8000/api/auth/splits/workouts/${split_id}`, {
+      .get(`${API_URL}/api/auth/splits/workouts/${split_id}`, {
         withCredentials: true,
       })
       .then((data) => {
@@ -115,7 +116,7 @@ export const GlobalProvider = (props) => {
 
   const getCurrentWorkout = (workout_id) => {
     axios
-      .get(`http://localhost:8000/api/auth/splits/workout/${workout_id}`, {
+      .get(`${API_URL}/api/auth/splits/workout/${workout_id}`, {
         withCredentials: true,
       })
       .then((data) => {
@@ -132,7 +133,7 @@ export const GlobalProvider = (props) => {
   const getPrevTrackData = (workout_id) => {
     axios
       .get(
-        `http://localhost:8000/api/auth/splits/workouts/exercises/prevData/${workout_id}`,
+        `${API_URL}/api/auth/splits/workouts/exercises/prevData/${workout_id}`,
         {
           withCredentials: true,
         }
@@ -151,7 +152,7 @@ export const GlobalProvider = (props) => {
   const getCurrentTrackData = (workout_id) => {
     axios
       .get(
-        `http://localhost:8000/api/auth/splits/workouts/exercises/currentData/${workout_id}`,
+        `${API_URL}/api/auth/splits/workouts/exercises/currentData/${workout_id}`,
         {
           withCredentials: true,
         }
@@ -176,7 +177,7 @@ export const GlobalProvider = (props) => {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:8000/api/auth/split/new",
+        `${API_URL}/api/auth/split/new`,
         { title, days },
         { withCredentials: true }
       )
@@ -195,7 +196,7 @@ export const GlobalProvider = (props) => {
   const addWorkout = (e, title, split_id) => {
     axios
       .post(
-        "http://localhost:8000/api/auth/split/workout/new",
+        `${API_URL}/api/auth/split/workout/new`,
         { title, split_id },
         { withCredentials: true }
       )
@@ -213,7 +214,7 @@ export const GlobalProvider = (props) => {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:8000/api/auth/split/workout/exercise/new",
+        `${API_URL}/api/auth/split/workout/exercise/new`,
         { title, goal_sets, goal_reps, workout_id },
         { withCredentials: true }
       )
@@ -230,7 +231,7 @@ export const GlobalProvider = (props) => {
   const addNewSet = (exercise_id, workout_id, day) => {
     axios
       .post(
-        "http://localhost:8000/api/auth/split/workout/exercise/set/new",
+        `${API_URL}/api/auth/split/workout/exercise/set/new`,
         { exercise_id, workout_id, day },
         { withCredentials: true }
       )
@@ -247,7 +248,7 @@ export const GlobalProvider = (props) => {
   const addTrackData = async (workout_id) => {
     try {
       const response = axios.post(
-        "http://localhost:8000/api/auth/split/workout/exercise/track",
+        `${API_URL}/api/auth/split/workout/exercise/track`,
         { workout_id, currentTrackData },
         { withCredentials: true }
       );
@@ -263,7 +264,7 @@ export const GlobalProvider = (props) => {
   const updateWorkoutDay = (workout_id) => {
     axios
       .post(
-        "http://localhost:8000/api/auth/split/workout/editDay",
+        `${API_URL}/api/auth/split/workout/editDay`,
         { workout_id },
         { withCredentials: true }
       )
@@ -279,7 +280,7 @@ export const GlobalProvider = (props) => {
   const deleteSplit = (e, split_id) => {
     e.preventDefault();
 
-    fetch("http://localhost:8000/api/auth/split/delete", {
+    fetch(`${API_URL}/api/auth/split/delete`, {
       method: "DELETE",
       credentials: "include", // include cookies in the request
       body: JSON.stringify({ split_id: split_id }),
@@ -299,7 +300,7 @@ export const GlobalProvider = (props) => {
   const deleteWorkout = (e, split_id, workout_id) => {
     e.preventDefault();
 
-    fetch("http://localhost:8000/api/auth/split/workout/delete", {
+    fetch(`${API_URL}/api/auth/split/workout/delete`, {
       method: "DELETE",
       credentials: "include", // include cookies in the request
       body: JSON.stringify({ split_id: split_id, workout_id: workout_id }),
@@ -319,7 +320,7 @@ export const GlobalProvider = (props) => {
   const deleteExercise = (e, workout_id, exercise_id) => {
     e.preventDefault();
 
-    fetch("http://localhost:8000/api/auth/split/workout/exercise/delete", {
+    fetch(`${API_URL}/api/auth/split/workout/exercise/delete`, {
       method: "DELETE",
       credentials: "include", // include cookies in the request
       body: JSON.stringify({
@@ -347,7 +348,7 @@ export const GlobalProvider = (props) => {
   const deleteSet = (e, workout_id, exercise_id, track_id) => {
     e.preventDefault();
 
-    fetch("http://localhost:8000/api/auth/split/workout/exercise/set/delete", {
+    fetch(`${API_URL}/api/auth/split/workout/exercise/set/delete`, {
       method: "DELETE",
       credentials: "include", // include cookies in the request
       body: JSON.stringify({

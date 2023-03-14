@@ -9,6 +9,8 @@ import "./Login.css";
 // Context
 import { GlobalContext } from "../../context/GlobalContext";
 
+const API_URL = "http://localhost:8000";
+
 function Login() {
   // States
   const { user } = useContext(GlobalContext);
@@ -54,8 +56,8 @@ function Login() {
     axios
       .post(
         form === "signup"
-          ? "http://localhost:8000/api/auth/register"
-          : "http://localhost:8000/api/auth/login",
+          ? `${API_URL}/api/auth/register`
+          : `${API_URL}/api/auth/login`,
         data,
         { withCredentials: true }
       )
