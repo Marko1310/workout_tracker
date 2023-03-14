@@ -160,6 +160,8 @@ function Login() {
           <p className="error">{errors.password}</p>
         )}
         {errors && form === "login" && <p className="error">{errors.error}</p>}
+        {errors && form === "signup" && <p className="error">{errors.error}</p>}
+
         <button className="login-button">
           {form === "login" ? "Login" : "Register"}
         </button>

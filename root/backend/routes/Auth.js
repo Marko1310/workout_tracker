@@ -31,7 +31,7 @@ router.post("/register", async (req, res) => {
     if (existingEmail.rows.length !== 0) {
       return res
         .status(400)
-        .json({ error: "There is already a user with this email" });
+        .json({ existing: "There is already a user with this email" });
     }
     // check the proper name
     if (name === "") {
@@ -65,6 +65,7 @@ router.post("/register", async (req, res) => {
     res.cookie("access-token", token, {
       expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       httpOnly: true,
+      secure: true,
     });
 
     const userCredentials = {
