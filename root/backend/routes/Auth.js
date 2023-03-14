@@ -64,9 +64,10 @@ router.post("/register", async (req, res) => {
 
     res.cookie("access-token", token, {
       expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-      httpOnly: false,
+      httpOnly: true,
       secure: true,
       sameSite: "none",
+      domain: "https://workouttracker-be21.onrender.com",
     });
 
     const userCredentials = {

@@ -7,7 +7,12 @@ const cookieParser = require("cookie-parser");
 
 app.use(cookieParser());
 
-app.use(cors({ credentials: true, origin: true }));
+app.use(
+  cors({
+    credentials: true,
+    origin: "https://workouttracker-be21.onrender.com",
+  })
+);
 
 // import routes
 const authRoute = require("./routes/Auth");
