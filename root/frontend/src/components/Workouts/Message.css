@@ -41,10 +41,10 @@
   align-items: center;
 }
 
-.success {
+.success-image {
   height: 5rem;
 }
 
-.error {
+.error-image {
   height: 5rem;
 }

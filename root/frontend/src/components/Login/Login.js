@@ -12,16 +12,11 @@ import { GlobalContext } from "../../context/GlobalContext";
 function Login() {
   // States
   const { user } = useContext(GlobalContext);
-  const [form, setForm] = useState("login");
-  const [input, setInput] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-  const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState({});
+  const { input, setInput } = useContext(GlobalContext);
+  const { form, setForm } = useContext(GlobalContext);
+  const { setLoading } = useContext(GlobalContext);
   const { getCurrentUser } = useContext(GlobalContext);
-  const { getSplits } = useContext(GlobalContext);
+  const { errors, setErrors } = useContext(GlobalContext);
 
   // Routing
   const navigate = useNavigate();
@@ -32,10 +27,16 @@ function Login() {
     }
   }, [user, navigate]);
 
+  let timeout;
+  const setLoadingTimeout = () => {
+    timeout = setTimeout(() => {
+      setLoading(true);
+    }, 1000);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-
+    setLoadingTimeout();
     let data = {};
 
     if (form === "signup") {
@@ -50,7 +51,6 @@ function Login() {
         password: input.password,
       };
     }
-
     axios
       .post(
         form === "signup"
@@ -59,12 +59,17 @@ function Login() {
         data,
         { withCredentials: true }
       )
-      .then(() => {
+      .then((res) => {
+        console.log(res);
         getCurrentUser();
+        clearTimeout(timeout);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
         setErrors(error.response.data);
+        clearTimeout(timeout);
+        setLoading(false);
       });
   };
 
@@ -110,6 +115,7 @@ function Login() {
               id="fname"
               name="fname"
               placeholder="Name"
+              value={input.name}
             ></input>
             {errors.name && form === "signup" && (
               <p className="error">{errors.name}</p>
@@ -130,6 +136,7 @@ function Login() {
           id="email"
           name="email"
           placeholder="Email"
+          value={input.email}
         ></input>
         {errors.email && form === "signup" && (
           <p className="error">{errors.email}</p>
@@ -146,12 +153,13 @@ function Login() {
           className="login-forms"
           type="password"
           placeholder="Password"
+          value={input.password}
         ></input>
         {errors.password && form === "signup" && (
           <p className="error">{errors.password}</p>
         )}
         {errors && form === "login" && <p className="error">{errors.error}</p>}
-        <button type="submit" className="login-button">
+        <button className="login-button">
           {form === "login" ? "Login" : "Register"}
         </button>
         {form === "login" && (

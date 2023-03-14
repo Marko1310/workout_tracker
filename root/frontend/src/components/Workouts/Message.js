@@ -20,13 +20,13 @@ const NewExerciseModal = ({ successMsg }) => {
     >
       {successMsg === "success" && (
         <div className="success-images-container">
-          <img className="success" src={success} alt="success"></img>
+          <img className="success-image" src={success} alt="success"></img>
           <p className="message-title">Workout saved</p>
         </div>
       )}
       {successMsg === "error" && (
         <div className="success-images-container">
-          <img className="success" src={errorImg} alt="error"></img>
+          <img className="error-image" src={errorImg} alt="error"></img>
           <p className="message-title">Error</p>
         </div>
       )}

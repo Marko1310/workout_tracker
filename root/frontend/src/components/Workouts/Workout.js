@@ -20,7 +20,6 @@ const WorkoutSplit = () => {
   const { prevTrackData } = useContext(GlobalContext);
   const { setError } = useContext(GlobalContext);
   const { currentWorkout } = useContext(GlobalContext);
-  const { setLoadingTimeout } = useContext(GlobalContext);
   const { addTrackData } = useContext(GlobalContext);
   const { updateWorkoutDay } = useContext(GlobalContext);
 
@@ -40,17 +39,17 @@ const WorkoutSplit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsModalOpen(true);
 
     addTrackData(id)
       .then((response) => {
         if (response) {
           setSuccessMsg("success");
+          setIsModalOpen(true);
           success();
           updateWorkoutDay(id);
         }
       })
-      .catch((err) => {
+      .catch(() => {
         setSuccessMsg("error");
         success();
       });
@@ -104,7 +103,7 @@ const WorkoutSplit = () => {
         </div>
       </div>
       <Message successMsg={sucessMsg} />
-      {/* <NewExerciseModal successMsg={sucessMsg} /> */}
+      <NewExerciseModal successMsg={sucessMsg} />
     </div>
   );
 };

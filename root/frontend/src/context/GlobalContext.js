@@ -7,6 +7,12 @@ export const GlobalContext = createContext();
 //provider component
 
 export const GlobalProvider = (props) => {
+  const [form, setForm] = useState("login");
+  const [input, setInput] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
   const [prevTrackData, setPrevTrackData] = useState([]);
   const [currentTrackData, setCurrentTrackData] = useState(null);
   const [user, setUser] = useState(null);
@@ -16,6 +22,7 @@ export const GlobalProvider = (props) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     getCurrentUser();
@@ -37,16 +44,13 @@ export const GlobalProvider = (props) => {
       .then((user) => {
         if (!user) {
           setUser(null);
-          setLoading(false);
         } else {
-          setLoading(true);
           setUser(user.data);
           axios
             .get("http://localhost:8000/api/auth/splits/current", {
               withCredentials: true,
             })
-            .then((data) => {
-              setSplits(data.data);
+            .then(() => {
               setLoading(false);
             })
             .catch((error) => {
@@ -56,7 +60,6 @@ export const GlobalProvider = (props) => {
       })
       .catch((error) => {
         console.log(error);
-        setLoading(false);
       });
   };
 
@@ -403,6 +406,13 @@ export const GlobalProvider = (props) => {
     setCurrentTrackData,
     currentTrackData,
     updateWorkoutDay,
+    timeout,
+    errors,
+    setErrors,
+    form,
+    setForm,
+    input,
+    setInput,
   };
 
   return (

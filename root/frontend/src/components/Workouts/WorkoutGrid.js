@@ -88,9 +88,8 @@ const WorkoutGrid = () => {
                   </div>
 
                   <div className="exercise-card">
-                    <li className="exercise-card-title">
-                      {el.workout_name} day:
-                    </li>
+                    <li className="exercise-card-title">{el.workout_name}</li>
+                    <p>Exercises: </p>
                     {el.array_agg.map((name) => {
                       return <li> - {name}</li>;
                     })}
