@@ -67,7 +67,7 @@ router.post("/register", async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      domain: "onrender.com",
+      // domain: "onrender.com",
     });
 
     const userCredentials = {
@@ -117,7 +117,7 @@ router.post("/login", async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      domain: "onrender.com",
+      // domain: "onrender.com",
     });
 
     // return everything except the password
