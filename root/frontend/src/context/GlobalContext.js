@@ -70,9 +70,13 @@ export const GlobalProvider = (props) => {
       })
       .then(() => {
         setUser(null);
+        clearTimeout(timeout);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        clearTimeout(timeout);
+        setLoading(false);
       });
   };
 
