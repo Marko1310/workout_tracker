@@ -3,15 +3,7 @@ const router = express.Router();
 const { Pool } = require("pg");
 const requiresAuth = require("../middleware/permission");
 const databaseCheck = require("../middleware/databaseChecks");
-
-const pool = new Pool({
-  host: process.env.HOST,
-  port: process.env.DB_PORT,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE,
-  ssl: true,
-});
+const pool = require("../databse/db");
 
 //      ADDING DATA     //
 ///////////////////////////////

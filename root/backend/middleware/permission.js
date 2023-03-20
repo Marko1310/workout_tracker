@@ -1,13 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { Pool } = require("pg");
-const pool = new Pool({
-  host: process.env.HOST,
-  port: process.env.DB_PORT,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE,
-  ssl: true,
-});
+const pool = require("../databse/db");
 
 // get JWT token from the request and check is it is valid
 const requiresAuth = async (req, res, next) => {
