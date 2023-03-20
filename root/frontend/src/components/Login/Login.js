@@ -9,8 +9,8 @@ import "./Login.css";
 // Context
 import { GlobalContext } from "../../context/GlobalContext";
 
-// const API_URL = "https://workouttracker-server.onrender.com";
-const API_URL = "http://localhost:8000";
+const API_URL = "https://workouttracker-server.onrender.com";
+// const API_URL = "http://localhost:8000";
 
 function Login() {
   // States
