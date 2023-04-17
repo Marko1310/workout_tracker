@@ -35,4 +35,4 @@ Add exercises to each workout day.
 Track sets and reps for each exercise.  
 
 ## Credits
-This application was created by Marko Cabo.
+This application was created by Marko Čabo.
