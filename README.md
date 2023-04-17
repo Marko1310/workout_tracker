@@ -26,7 +26,7 @@ The application has a minimalistic style to keep the focus on the content and fu
 ## Usage
 To use the application, follow these steps:
 
-Go to the application's URL in your web browser.  
+Go to the https://workouttracker-be21.onrender.com in your web browser.  
 Register for an account with your name, email, and password.  
 Log in with your email and password.  
 Create a workout split.  
